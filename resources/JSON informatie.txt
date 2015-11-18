@@ -1,6 +1,8 @@
-Naam
+VoorNaam
+AchterNaam
 Geslacht
 Leeftijd
+Email
 Opleiding (huidige, vorige)
 Geinterresseerde vakken
 Locatie
