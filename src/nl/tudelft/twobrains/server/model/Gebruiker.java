@@ -7,33 +7,22 @@ import org.json.simple.JSONObject;
  */
 public class Gebruiker {
 
-    private final String voornaam;
-    private final String achternaam;
+    private final JSONObject gebruiker;
     private final String email;
-    private final String wacthwoord;
-    private final String leeftijd;
-    private final String geslacht;
-    private final String foto;
-    private final String locatie;
-    private final String[] vakken;
-    private final String opleiding;
 
-    public Gebruiker(final String voornaam, final String achternaam, final String email, final String wachtwoord, final String leeftijd,
-                     final String geslacht, final String foto, final String locatie, final String[] vakken, final String opleiding) {
-        this.voornaam = voornaam;
-        this.achternaam = achternaam;
+
+    public Gebruiker(final String email, final JSONObject gebruiker) {
+        this.gebruiker = gebruiker;
         this.email = email;
-        this.wacthwoord = wachtwoord;
-        this.leeftijd = leeftijd;
-        this.geslacht = geslacht;
-        this.foto = foto;
-        this.locatie = locatie;
-        this.vakken = vakken;
-        this.opleiding = opleiding;
     }
 
-    //TODO: Write implementation
-    public static Gebruiker parse(final JSONObject object, final String email;) {
-        return null;
+    public String getEmail() {
+        return email;
     }
+
+    public JSONObject getJSONObject() {
+        return gebruiker;
+    }
+
+
 }

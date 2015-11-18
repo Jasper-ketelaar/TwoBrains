@@ -1,6 +1,7 @@
 package nl.tudelft.twobrains.server;
 
 import nl.tudelft.twobrains.server.model.Database;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -30,11 +31,20 @@ public class Server {
 
         final Server server = new Server(defaultPort);
 
+
         try {
             final URL resource = Server.class.getResource("resources/database.json");
-            Database.parse(resource.getFile());
+            final Database db = Database.parse(resource.getFile());
+            db.write(resource.getFile());
+            server.close();
         } catch (final IOException e) {
             e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void close() throws IOException {
+        server.close();
     }
 }

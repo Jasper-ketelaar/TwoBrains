@@ -4,39 +4,47 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by jasperketelaar on 11/18/15.
  */
 public class Database {
 
-    private final ArrayList<Gebruiker> gebruikers;
+    private final HashMap<String, Gebruiker> gebruikers = new HashMap<>();
 
-    public Database(final ArrayList<Gebruiker> gebruikers) {
-        this.gebruikers = gebruikers;
+    private final JSONObject database;
+
+
+    public Database(final JSONObject database) {
+        this.database = database;
     }
 
-    public static Database parse(final String file) throws FileNotFoundException {
+    public static Database parse(final String file) throws IOException, ParseException {
         final JSONParser parser = new JSONParser();
         final FileReader reader = new FileReader(file);
-        final ArrayList<Gebruiker> gebruikers = new ArrayList<>();
-        try {
-            final JSONObject obj = (JSONObject) parser.parse(reader);
-            for (final Object key : obj.keySet()) {
-                gebruikers.add(Gebruiker.parse((JSONObject) obj.get(key), (String) key));
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+        return new Database((JSONObject) parser.parse(reader));
+    }
+
+    public Gebruiker getGebruiker(final String email) {
+        if (gebruikers.containsKey(email)) {
+            return gebruikers.get(email);
+        } else {
+            return new Gebruiker(email, (JSONObject) database.get(email));
         }
+    }
 
+    public void add(final Gebruiker gebruiker) {
+        database.put(gebruiker.getEmail(), gebruiker.getJSONObject());
+    }
 
-        return null;
+    public void write(final String file) throws IOException {
+        final FileWriter writer = new FileWriter(file);
+        writer.write(database.toJSONString().replaceAll("\\{", "{\n").replaceAll("}", "}\n"));
+        writer.close();
     }
 }
