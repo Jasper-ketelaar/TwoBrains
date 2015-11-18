@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="720.0" prefWidth="548.0">
+         <children>
+            <ImageView fitHeight="549.0" fitWidth="528.0" pickOnBounds="true" preserveRatio="true" />
+            <HBox prefHeight="176.0" prefWidth="533.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="267.0" text="Yes">
+                     <font>
+                        <Font size="80.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="266.0" text="No">
+                     <font>
+                        <Font size="80.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <TextArea prefHeight="720.0" prefWidth="763.0" />
+   </children>
+</HBox>
