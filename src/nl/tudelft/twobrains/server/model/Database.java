@@ -26,7 +26,7 @@ public class Database {
         final FileReader reader = new FileReader(file);
         try {
             final JSONObject obj = (JSONObject) parser.parse(reader);
-            System.out.println(obj.size());
+            System.out.println(obj.get("kvanzeijl@hotmail.com"));
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
