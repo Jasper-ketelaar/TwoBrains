@@ -1,77 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="100.0" prefWidth="1280.0">
+      <HBox prefHeight="187.0" prefWidth="600.0">
          <children>
-            <Label layoutX="567.0" layoutY="22.0" text="Matches">
-               <font>
-                  <Font size="39.0" />
-               </font>
-            </Label>
-            <TextField layoutX="946.0" layoutY="35.0" promptText="Name" />
-            <Button layoutX="1145.0" layoutY="35.0" mnemonicParsing="false" text="Search" />
-            <Slider layoutX="1257.0" layoutY="100.0" orientation="VERTICAL" prefHeight="620.0" />
-         </children>
-      </Pane>
-      <HBox layoutX="10.0" layoutY="110.0" prefHeight="155.0" prefWidth="200.0">
-         <children>
-            <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
+            <ImageView fitHeight="200.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="50.0" top="40.0" />
+               </HBox.margin>
                <image>
                   <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
                </image>
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
             </ImageView>
-            <TextArea prefHeight="155.0" prefWidth="1040.0" text="Naam: Scarlet&#10;Leeftijd: 30?&#10;Locatie: Delft" />
+            <ImageView fitHeight="200.0" fitWidth="220.0" layoutX="60.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="60.0" top="40.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
+               </image>
+            </ImageView>
          </children>
       </HBox>
-      <HBox prefHeight="155.0" prefWidth="200.0">
+      <Label text="Jij en [MatchName] hebben een match">
+         <VBox.margin>
+            <Insets left="170.0" top="40.0" />
+         </VBox.margin>
+      </Label>
+      <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
-               </image>
+            <Button mnemonicParsing="false" text="To Matches">
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets left="200.0" top="20.0" />
                </HBox.margin>
-            </ImageView>
-            <TextArea prefHeight="155.0" prefWidth="1040.0" text="Naam: Scarlet&#10;Leeftijd: 30?&#10;Locatie: Delft" />
-         </children>
-      </HBox>
-      <HBox prefHeight="155.0" prefWidth="200.0">
-         <children>
-            <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
-               </image>
+            </Button>
+            <Button mnemonicParsing="false" text="Close">
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets left="30.0" top="20.0" />
                </HBox.margin>
-            </ImageView>
-            <TextArea prefHeight="155.0" prefWidth="1040.0" text="Naam: Scarlet&#10;Leeftijd: 30?&#10;Locatie: Delft" />
-         </children>
-      </HBox>
-      <HBox prefHeight="155.0" prefWidth="200.0">
-         <children>
-            <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
-               </image>
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </ImageView>
-            <TextArea prefHeight="155.0" prefWidth="1040.0" text="Naam: Scarlet&#10;Leeftijd: 30?&#10;Locatie: Delft" />
+            </Button>
          </children>
       </HBox>
    </children>
