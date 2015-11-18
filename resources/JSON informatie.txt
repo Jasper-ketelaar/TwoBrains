@@ -3,6 +3,7 @@ AchterNaam
 Geslacht
 Leeftijd
 Email
+Wachtwoord
 Opleiding (huidige, vorige)
 Geinterresseerde vakken
 Locatie
