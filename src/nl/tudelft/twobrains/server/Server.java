@@ -1,7 +1,10 @@
 package nl.tudelft.twobrains.server;
 
+import nl.tudelft.twobrains.server.model.Database;
+
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.URL;
 
 /**
  * Created by jasperketelaar on 11/18/15.
@@ -26,5 +29,12 @@ public class Server {
         }
 
         final Server server = new Server(defaultPort);
+
+        try {
+            final URL resource = Server.class.getResource("resources/database.json");
+            Database.parse(resource.getFile());
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
     }
 }
