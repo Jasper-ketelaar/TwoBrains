@@ -1,0 +1,7 @@
+Naam
+Geslacht
+Leeftijd
+Opleiding (huidige, vorige)
+Geinterresseerde vakken
+Locatie
+Foto (opslaan op server)
