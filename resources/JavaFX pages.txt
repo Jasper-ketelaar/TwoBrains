@@ -1,6 +1,6 @@
-Login
-Sign Up
-Match page (match pop up)
+Login                               [Budi]
+Sign Up                             [Koen]
+Match page (match pop up)           [Bernard]
 Matched page (communication)
-Profile page (pop ups for editing)
-Settings page
+Profile page (pop ups for editing)  [Budi]
+Settings page                       [Koen]
