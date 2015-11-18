@@ -1,0 +1,3 @@
+Image (headshot, JSON)
+Button (two: yes/no)
+Textfield (Rest of JSON)

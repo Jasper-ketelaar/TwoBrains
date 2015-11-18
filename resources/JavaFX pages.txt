@@ -1,0 +1,6 @@
+Login
+Sign Up
+Match page (match pop up)
+Matched page (communication)
+Profile page (pop ups for editing)
+Settings page
