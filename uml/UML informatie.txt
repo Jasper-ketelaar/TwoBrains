@@ -1,0 +1,6 @@
+Voor UML gebruiken we Astah, hier te downloaden:
+http://astah.net/download
+
+Scroll naar beneden en klik op de download knop voor Astah community versie. 
+
+Het UML bestand genaamd sample.asta is een voorbeeld gemaakt uit een deel van onze huidige code.
