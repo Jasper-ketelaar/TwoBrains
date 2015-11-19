@@ -6,9 +6,6 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.Socket;
 
-/**
- * Created by jasperketelaar on 11/18/15.
- */
 public class TwoBrains extends Application {
 
     public static void main(final String[] args) {
