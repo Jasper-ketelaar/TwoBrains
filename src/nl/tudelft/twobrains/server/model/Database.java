@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Database extends HashMap<String, Gebruiker> {
 
@@ -52,11 +53,7 @@ public class Database extends HashMap<String, Gebruiker> {
 
     public ArrayList<Gebruiker> filter(final Predicate<Gebruiker> predicate) {
         final ArrayList<Gebruiker> gebruikers = new ArrayList<>();
-        for (final Gebruiker gebruiker : this.values()) {
-            if (predicate.test(gebruiker)) {
-                gebruikers.add(gebruiker);
-            }
-        }
+        gebruikers.addAll(values().stream().filter(predicate).collect(Collectors.toList()));
         return gebruikers;
     }
 

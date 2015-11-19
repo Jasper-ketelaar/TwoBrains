@@ -2,7 +2,6 @@ package nl.tudelft.twobrains.server.model;
 
 import org.json.simple.JSONObject;
 
-import java.text.ParseException;
 import java.util.InputMismatchException;
 
 /**
@@ -17,6 +16,27 @@ public class Gebruiker {
     public Gebruiker(final String email, final JSONObject gebruiker) {
         this.gebruiker = gebruiker;
         this.email = email;
+    }
+
+    public static Gebruiker parse(final Object[] data) {
+        if (data.length != 10) {
+            throw new InputMismatchException("Een gebruiker heeft 10 attributen nodig");
+        } else {
+            final String email = data[0].toString();
+
+            final JSONObject gebruiker = new JSONObject();
+            gebruiker.put("Voornaam", data[1]);
+            gebruiker.put("Achternaam", data[2]);
+            gebruiker.put("Geslacht", data[3]);
+            gebruiker.put("Leeftijd", data[4]);
+            gebruiker.put("Wachtwoord", data[5]);
+            gebruiker.put("Opleiding", data[6]);
+            gebruiker.put("Vakken", data[7]);
+            gebruiker.put("Locatie", data[8]);
+            gebruiker.put("Foto", data[9]);
+
+            return new Gebruiker(email, gebruiker);
+        }
     }
 
     public String getEmail() {
@@ -41,27 +61,6 @@ public class Gebruiker {
 
     protected JSONObject getJSONObject() {
         return gebruiker;
-    }
-
-    public static Gebruiker parse(final Object[] data) {
-        if (data.length != 10) {
-            throw new InputMismatchException("Een gebruiker heeft 10 attributen nodig");
-        } else {
-            final String email = data[0].toString();
-            
-            final JSONObject gebruiker = new JSONObject();
-            gebruiker.put("Voornaam", data[1]);
-            gebruiker.put("Achternaam", data[2]);
-            gebruiker.put("Geslacht", data[3]);
-            gebruiker.put("Leeftijd", data[4]);
-            gebruiker.put("Wachtwoord", data[5]);
-            gebruiker.put("Opleiding", data[6]);
-            gebruiker.put("Vakken", data[7]);
-            gebruiker.put("Locatie", data[8]);
-            gebruiker.put("Foto", data[9]);
-
-            return new Gebruiker(email, gebruiker);
-        }
     }
 
     @Override
