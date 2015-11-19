@@ -30,10 +30,6 @@ public class Database extends HashMap<String, Gebruiker> {
         return new Database((JSONObject) parser.parse(reader));
     }
 
-    public boolean contains(final String email) {
-        return database.containsKey(email);
-    }
-
     public Gebruiker[] getAlleGebruikers() {
         final Collection<Gebruiker> gebruikers = this.values();
         return gebruikers.toArray(new Gebruiker[gebruikers.size()]);
