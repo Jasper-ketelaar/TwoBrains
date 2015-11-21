@@ -6,9 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.*;
-import java.net.Socket;
-
 //TODO: Javadoc comments
 public class TwoBrains extends Application {
 
@@ -26,7 +23,7 @@ public class TwoBrains extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        final Parent loader = FXMLLoader.load(getClass().getResource("view/AllMatchPage.fxml"));
+        final Parent loader = FXMLLoader.load(getClass().getResource("view/match/AllMatchPage.fxml"));
         final Scene scene = new Scene(loader);
         primaryStage.setScene(scene);
         primaryStage.show();
