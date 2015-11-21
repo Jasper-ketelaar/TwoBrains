@@ -7,6 +7,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+//TODO: Javadoc comments
 public class GebruikerHandler extends Thread {
 
     private final Socket socket;

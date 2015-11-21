@@ -6,6 +6,7 @@ import java.util.InputMismatchException;
 
 /**
  * TODO: Voor alle attributen een getter maken.
+ * TODO: Javadoc comments
  */
 public class Gebruiker {
 
