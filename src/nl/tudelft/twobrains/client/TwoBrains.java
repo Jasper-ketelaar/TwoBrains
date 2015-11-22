@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import nl.tudelft.twobrains.server.Server;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -36,9 +37,13 @@ public class TwoBrains extends Application {
             final BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageB));
             System.out.println("image = " + image);
 
-            output.writeUTF("IMAGE");
+            final JFrame frame = new JFrame();
+            frame.getContentPane().add(new JLabel(new ImageIcon(image)));
+            frame.pack();
 
-            while(true);
+            frame.setVisible(true);
+
+
 
         } catch (IOException e) {
             e.printStackTrace();

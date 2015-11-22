@@ -5,11 +5,9 @@ import nl.tudelft.twobrains.server.Server;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -62,24 +60,22 @@ public class GebruikerHandler extends Thread {
 
     public void sendImage(final String email) {
         try {
-            final BufferedImage image = ImageIO.read(getClass().getResource("../resources/images/" + email + ".jpg"));
-
+            final File file = getFile(email);
+            final BufferedImage image = ImageIO.read(file);
+            final String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length());
+            System.out.println(ext);
             System.out.println("image = " + image);
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", baos);
+            ImageIO.write(image, ext, baos);
 
             final byte[] size = ByteBuffer.allocate(4).putInt(baos.size()).array();
             socket.getOutputStream().write(size);
-            System.out.println("X");
             socket.getOutputStream().write(baos.toByteArray());
-            System.out.println("X");
             socket.getOutputStream().flush();
-            System.out.println("X");
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
                     try {
-                        System.out.println("X");
                         baos.close();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -90,6 +86,20 @@ public class GebruikerHandler extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private File getFile(final String email) {
+        try {
+            final File file = new File(getClass().getResource("../resources/images").toURI());
+            for (final File child : file.listFiles()) {
+                if (child.getName().contains(email)) {
+                    return child;
+                }
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
