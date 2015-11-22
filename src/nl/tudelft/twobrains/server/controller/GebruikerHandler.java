@@ -58,9 +58,9 @@ public class GebruikerHandler extends Thread {
 
     }
 
-    public void sendImage(final String email) {
+    public void sendImage(final String fileName) {
         try {
-            final File file = getFile(email);
+            final File file = getFile(fileName);
             final BufferedImage image = ImageIO.read(file);
             final String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length());
             System.out.println(ext);

@@ -35,7 +35,6 @@ public class TwoBrains extends Application {
             final byte[] imageB = new byte[size];
             inputStream.read(imageB);
             final BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageB));
-            System.out.println("image = " + image);
 
             final JFrame frame = new JFrame();
             frame.getContentPane().add(new JLabel(new ImageIcon(image)));
