@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class GebruikerTest extends TestCase {
     private final JSONObject database;
+    private String email;
 
     public GebruikerTest(JSONObject database) {
         this.database = database;
