@@ -19,6 +19,55 @@ public class Gebruiker {
         this.data = data;
     }
 
+    public String getAttribuut(String attribuut)
+    {
+        return data.get(attribuut).toString();
+    }
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public String getVoornaam()
+    {
+        return getAttribuut("Voornaam");
+    }
+
+    public String getAchternaam()
+    {
+        return getAttribuut("Achternaam");
+    }
+
+    public String getGeslacht()
+    {
+        return getAttribuut("Geslacht");
+    }
+
+    public String getLeeftijd()
+    {
+        return getAttribuut("Leeftijd");
+    }
+
+    public String getWachtwoord()
+    {
+        return getAttribuut("Wachtwoord");
+    }
+
+    public String getOpleiding()
+    {
+        return getAttribuut("Opleiding");
+    }
+
+    public String getVakken()
+    {
+        return getAttribuut("Vakken");
+    }
+
+    public String getLocatie()
+    {
+        return getAttribuut("Locatie");
+    }
+
     public TwoBrainsSocket getConnection() {
         return connection;
     }

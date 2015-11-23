@@ -7,4 +7,4 @@ Wachtwoord
 Opleiding (huidige, vorige)
 Geinterresseerde vakken
 Locatie
-Foto (opslaan op server)
+Foto (opslaan op server)G
