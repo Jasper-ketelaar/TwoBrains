@@ -1,6 +1,7 @@
 package nl.tudelft.twobrains.server;
 
-import nl.tudelft.twobrains.server.controller.GebruikerHandler;
+import nl.tudelft.twobrains.server.controller.EventHandler;
+import nl.tudelft.twobrains.server.controller.client.GebruikerHandler;
 import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.parser.ParseException;
 
@@ -15,6 +16,7 @@ public class Server {
     private final ServerSocket server;
 
     private Database database;
+    private EventHandler handler;
 
     public Server(final int port) throws IOException {
         this.server = new ServerSocket(port);
@@ -53,8 +55,8 @@ public class Server {
         while (true) {
             try {
                 final Socket accept = server.accept();
-                final Thread thread = new GebruikerHandler(accept, this);
-                thread.start();
+                this.handler = new EventHandler(accept, this);
+                handler.start();
             } catch (IOException e) {
                 e.printStackTrace();
             }

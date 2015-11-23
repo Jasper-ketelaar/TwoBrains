@@ -1,7 +1,9 @@
-package nl.tudelft.twobrains.server.controller;
+package nl.tudelft.twobrains.server.controller.client;
 
 import nl.tudelft.twobrains.server.Server;
 import nl.tudelft.twobrains.server.model.Gebruiker;
+import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
+import nl.tudelft.twobrains.server.model.listeners.client.ClientListener;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -14,7 +16,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 //TODO: Javadoc comments
-public class GebruikerHandler extends Thread {
+public class GebruikerHandler implements ClientListener {
+
+    private Gebruiker gebruiker;
 
     private final Socket socket;
     private final DataInputStream input;
@@ -28,6 +32,14 @@ public class GebruikerHandler extends Thread {
         this.server = server;
     }
 
+    public boolean isConnected() {
+        return gebruiker != null;
+    }
+
+    public Gebruiker getGebruiker() {
+        return this.gebruiker;
+    }
+
     //TODO: Implementatie schrijven
     private void handle(final String input) {
         try {
@@ -39,6 +51,7 @@ public class GebruikerHandler extends Thread {
                         final String wachtwoord = gebruiker.getWachtwoord();
                         if (wachtwoord.equals(split[2])) {
                             output.writeUTF("Succes:" + gebruiker.getJSONString());
+                            this.gebruiker = gebruiker;
                         } else {
                             output.writeUTF("Wachtwoord is verkeerd");
                         }
@@ -118,21 +131,10 @@ public class GebruikerHandler extends Thread {
         return null;
     }
 
+
+
     @Override
-    public void run() {
-        while (!socket.isClosed()) {
-            try {
-                handle(input.readUTF());
-            } catch (SocketException e) {
-                try {
-                    socket.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                System.out.println("Client disconnected");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public void onClientEvent(ClientEvent evt) {
+
     }
 }

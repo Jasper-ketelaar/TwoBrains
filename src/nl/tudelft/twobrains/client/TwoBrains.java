@@ -28,8 +28,6 @@ import java.io.IOException;
 public class TwoBrains extends Application {
 
     public static void main(final String[] args) {
-
-
         launch(args);
     }
 
