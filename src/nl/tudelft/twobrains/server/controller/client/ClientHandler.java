@@ -1,6 +1,7 @@
-package nl.tudelft.twobrains.server.controller;
+package nl.tudelft.twobrains.server.controller.client;
 
 import nl.tudelft.twobrains.server.Server;
+import nl.tudelft.twobrains.server.model.Database;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientListener;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by jasperketelaar on 11/23/15.
  */
-public class EventHandler extends Thread {
+public class ClientHandler extends Thread {
 
 
     private final ArrayList<ClientListener> listeners = new ArrayList<>();
@@ -22,13 +23,13 @@ public class EventHandler extends Thread {
     private final Socket socket;
     private final DataInputStream input;
     private final DataOutputStream output;
-    private final Server server;
+    private final Database database;
 
-    public EventHandler(final Socket socket, final Server server) throws IOException {
+    public ClientHandler(final Socket socket, final Database database) throws IOException {
+        this.database = database;
         this.socket = socket;
         this.input = new DataInputStream(socket.getInputStream());
         this.output = new DataOutputStream(socket.getOutputStream());
-        this.server = server;
     }
 
     @Override
@@ -39,7 +40,7 @@ public class EventHandler extends Thread {
                 final String[] split = input.split(";:");
                 final ClientEvent evt = new ClientEvent(split[0], split[1]);
                 for (final ClientListener listener : listeners) {
-                    listener.onClientEvent(evt);
+                    listener.onClientEvent(evt, output, database);
                 }
             } catch (SocketException e) {
                 try {

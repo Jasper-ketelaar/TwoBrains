@@ -39,7 +39,7 @@ public class TwoBrains extends Application {
         final TwoBrainsSocket user = new TwoBrainsSocket("127.0.0.1", 4444);
 
         final String email = "ibuddyh@gmail.com";
-        user.getOutputStream().writeUTF("LOGIN:" + email + ":000000");
+        user.getOutputStream().writeUTF("Login:;" + email + ":000000");
         final String response = user.getInputStream().readUTF();
         if (response.contains("Succes")) {
             final JSONParser parser = new JSONParser();
