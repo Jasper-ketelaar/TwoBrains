@@ -1,6 +1,10 @@
 package nl.tudelft.twobrains.server.model;
 
+
+import javafx.scene.Parent;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.util.InputMismatchException;
 
@@ -19,25 +23,15 @@ public class Gebruiker {
         this.email = email;
     }
 
-    public static Gebruiker parse(final Object[] data) {
-        if (data.length != 10) {
-            throw new InputMismatchException("Een gebruiker heeft 10 attributen nodig");
-        } else {
-            final String email = data[0].toString();
-
-            final JSONObject gebruiker = new JSONObject();
-            gebruiker.put("Voornaam", data[1]);
-            gebruiker.put("Achternaam", data[2]);
-            gebruiker.put("Geslacht", data[3]);
-            gebruiker.put("Leeftijd", data[4]);
-            gebruiker.put("Wachtwoord", data[5]);
-            gebruiker.put("Opleiding", data[6]);
-            gebruiker.put("Vakken", data[7]);
-            gebruiker.put("Locatie", data[8]);
-            gebruiker.put("Foto", data[9]);
-
-            return new Gebruiker(email, gebruiker);
+    public static Gebruiker parse(final String email, final String data) {
+        final JSONParser parser = new JSONParser();
+        try {
+            final JSONObject obj = (JSONObject) parser.parse(data);
+            return new Gebruiker(email, obj);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     public String getEmail() {
@@ -54,6 +48,10 @@ public class Gebruiker {
 
     public String getWachtwoord() {
         return getAttribuut("Wachtwoord");
+    }
+
+    public String getJSONString() {
+        return getJSONObject().toJSONString();
     }
 
     private String getAttribuut(final String attribuut) {

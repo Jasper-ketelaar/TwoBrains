@@ -1,6 +1,7 @@
 package nl.tudelft.twobrains.client.model;
 
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
+import org.json.simple.JSONObject;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -9,11 +10,13 @@ import java.io.IOException;
 public class Gebruiker {
 
     private final String email;
-    private TwoBrainsSocket connection;
-    private BufferedImage image;
+    private final JSONObject data;
 
-    public Gebruiker(final String email) {
+    private TwoBrainsSocket connection;
+
+    public Gebruiker(final String email, final JSONObject data) {
         this.email = email;
+        this.data = data;
     }
 
     public TwoBrainsSocket getConnection() {

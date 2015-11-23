@@ -15,16 +15,13 @@ public class TwoBrainsSocket extends Socket {
 
     private final HashMap<String, BufferedImage> images = new HashMap<>();
 
-    private DataInputStream input;
-    private DataOutputStream output;
+    private final DataInputStream input;
+    private final DataOutputStream output;
 
-    public TwoBrainsSocket() {
-        try {
-            this.input = new DataInputStream(super.getInputStream());
-            this.output = new DataOutputStream(super.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public TwoBrainsSocket(final String ip, final int port) throws IOException {
+        super(ip, port);
+        this.input = new DataInputStream(super.getInputStream());
+        this.output = new DataOutputStream(super.getOutputStream());
     }
 
     @Override
@@ -49,10 +46,14 @@ public class TwoBrainsSocket extends Socket {
                 final byte[] imageB = new byte[size];
                 input.read(imageB);
                 final BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageB));
+
+                images.put(file, image);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         return images.get(file);
     }
+
+
 }

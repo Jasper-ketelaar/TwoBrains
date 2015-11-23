@@ -1,12 +1,13 @@
 package nl.tudelft.twobrains.server.controller;
 
 import nl.tudelft.twobrains.server.Server;
+import nl.tudelft.twobrains.server.model.Gebruiker;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.util.Timer;
@@ -29,31 +30,46 @@ public class GebruikerHandler extends Thread {
 
     //TODO: Implementatie schrijven
     private void handle(final String input) {
-        final String[] split = input.split(":");
-        switch (split[0]) {
-            case "LOGIN":
-                if (server.getDatabase().containsKey(split[1])) {
-                    System.out.println("Login request: " + input + " succesvol");
-                } else {
-                    System.err.println("Deze user bestaat niet");
-                }
-                break;
+        try {
+            final String[] split = input.split(":");
+            switch (split[0]) {
+                case "LOGIN":
+                    if (server.getDatabase().containsKey(split[1])) {
+                        final Gebruiker gebruiker = server.getDatabase().get(split[1]);
+                        final String wachtwoord = gebruiker.getWachtwoord();
+                        if (wachtwoord.equals(split[2])) {
+                            output.writeUTF("Succes:" + gebruiker.getJSONString());
+                        } else {
+                            output.writeUTF("Wachtwoord is verkeerd");
+                        }
+                    } else {
+                        System.err.println("Deze user bestaat niet");
+                    }
+                    break;
 
-            case "REGISTREER":
-                final String email = split[1];
-                if (server.getDatabase().containsKey(email)) {
-                    System.err.print("Dit email adress bestaat al");
-                } else {
-                    //TODO: Nieuwe gebruiker aanmaken
+                case "REGISTREER":
+                    final String email = split[1].replaceAll("\"", "");
+                    if (server.getDatabase().containsKey(email)) {
+                    /*try {
+                        output.writeUTF("Dit email adres is al in gebruik");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }*/
+                    } else {
+                        final String data = input.replace("REGISTREER:" + email + ":", "");
+                        final Gebruiker gebruiker = Gebruiker.parse(email, data);
+                        server.getDatabase().add(gebruiker);
+                        System.out.println(gebruiker);
+                    }
+                    break;
 
-                }
-                break;
+                case "IMAGE":
+                    sendImage(split[1]);
+                    break;
 
-            case "IMAGE":
-                sendImage(split[1]);
-
-                break;
-
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -107,6 +123,13 @@ public class GebruikerHandler extends Thread {
         while (!socket.isClosed()) {
             try {
                 handle(input.readUTF());
+            } catch (SocketException e) {
+                try {
+                    socket.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                System.out.println("Client disconnected");
             } catch (IOException e) {
                 e.printStackTrace();
             }

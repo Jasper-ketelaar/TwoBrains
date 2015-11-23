@@ -22,63 +22,27 @@
       </Pane>
       <Pane prefHeight="622.0" prefWidth="1280.0">
          <children>
-            <ScrollBar layoutX="1257.0" layoutY="6.0" orientation="VERTICAL" prefHeight="610.0" />
-            <VBox prefHeight="621.0" prefWidth="1256.0">
-               <children>
-                  <HBox prefHeight="155.0" prefWidth="200.0">
+            <ScrollPane prefViewportHeight="621.0" prefViewportWidth="1256.0">
+               <content>
+                  <VBox prefHeight="621.0" prefWidth="1256.0">
                      <children>
-                        <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <TextArea prefHeight="155.0" prefWidth="1040.0" text="JSON info" />
+                        <HBox prefHeight="155.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <TextArea prefHeight="155.0" prefWidth="1040.0" text="JSON info" />
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
-                  <HBox prefHeight="155.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <TextArea prefHeight="155.0" prefWidth="1040.0" text="JSON info" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="155.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <TextArea prefHeight="155.0" prefWidth="1040.0" text="JSON info" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="155.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <TextArea prefHeight="155.0" prefWidth="1040.0" text="JSON info" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </children>
       </Pane>
    </children>
