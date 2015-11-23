@@ -9,7 +9,7 @@ import org.json.simple.parser.ParseException;
 import java.util.InputMismatchException;
 
 /**
- * TODO: Voor alle attributen een getter maken.
+ *
  * TODO: Javadoc comments
  */
 public class Gebruiker {
@@ -50,6 +50,30 @@ public class Gebruiker {
         return getAttribuut("Wachtwoord");
     }
 
+    public String getGeslacht(){
+        return getAttribuut("Geslacht");
+    }
+
+    public String getLeeftijd(){
+        return getAttribuut("Leeftijd");
+    }
+
+    public String getOpleiding(){
+        return getAttribuut("Opleiding");
+    }
+
+    public String getVakken() {
+        return getAttribuut("Vakken");
+
+    }
+
+    public String getLocatie(){
+        return getAttribuut("Locatie");
+    }
+
+    public String getFoto(){
+        return getAttribuut("Foto");
+    }
     public String getJSONString() {
         return getJSONObject().toJSONString();
     }
