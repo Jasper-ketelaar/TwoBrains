@@ -37,9 +37,10 @@ public class TwoBrainsSocket extends Socket {
     public BufferedImage getImage(final String file) {
         if (!images.containsKey(file)) {
             try {
-                output.writeUTF("IMAGE:" + file);
+                output.writeUTF("Image:;" + file);
                 final byte[] sizeB = new byte[4];
                 input.read(sizeB);
+                System.out.println("TEST");
 
                 final int size = ByteBuffer.wrap(sizeB).asIntBuffer().get();
 

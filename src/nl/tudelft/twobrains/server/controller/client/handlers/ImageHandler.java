@@ -20,9 +20,14 @@ import java.util.TimerTask;
  * Created by jasperketelaar on 11/23/15.
  */
 public class ImageHandler implements ClientListener {
+
     @Override
     public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Database database) {
-
+        if (evt.getEvent().equals("Image")) {
+            final String fileName = evt.getArguments();
+            System.out.println(fileName);
+            sendImage(fileName, responseStream);
+        }
     }
 
     private File getFile(final String email) {

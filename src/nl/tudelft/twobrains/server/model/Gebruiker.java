@@ -80,4 +80,9 @@ public class Gebruiker {
         return builder.toString();
     }
 
+    //TODO: Implementatie schrijven
+    public boolean matches() {
+        return false;
+    }
+
 }

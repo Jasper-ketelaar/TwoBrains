@@ -1,18 +1,12 @@
 package nl.tudelft.twobrains.client;
 
 import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import nl.tudelft.twobrains.client.model.Gebruiker;
@@ -20,9 +14,6 @@ import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 import nl.tudelft.twobrains.client.view.match.comp.UserBox;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 //TODO: Javadoc comments
 public class TwoBrains extends Application {
@@ -41,6 +32,7 @@ public class TwoBrains extends Application {
         final String email = "ibuddyh@gmail.com";
         user.getOutputStream().writeUTF("Login:;" + email + ":000000");
         final String response = user.getInputStream().readUTF();
+        System.out.println(response);
         if (response.contains("Succes")) {
             final JSONParser parser = new JSONParser();
             final String json = response.replace("Succes:", "");
@@ -48,7 +40,7 @@ public class TwoBrains extends Application {
             final Gebruiker gebruiker = new Gebruiker(email, (JSONObject) parser.parse(json));
             gebruiker.setConnection(user);
             final UserBox userBox = new UserBox(gebruiker);
-            ((VBox)((ScrollPane) scrollPane).getContent()).getChildren().addAll(new Separator(), userBox);
+            ((VBox) ((ScrollPane) scrollPane).getContent()).getChildren().addAll(new Separator(), userBox);
         }
 
         final Scene scene = new Scene(loader);
