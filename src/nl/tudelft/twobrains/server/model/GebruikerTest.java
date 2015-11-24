@@ -10,6 +10,7 @@ public class GebruikerTest extends TestCase {
     private String email;
 
     public GebruikerTest(JSONObject database) {
+       // Database db = Database.parse("database");
         this.database = database;
     }
 

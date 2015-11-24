@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<HBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="609.0" prefWidth="330.0">
+         <children>
+            <Pane layoutX="90.0" layoutY="21.0" prefHeight="679.0" prefWidth="480.0">
+               <children>
+                  <Button layoutX="292.0" layoutY="610.0" mnemonicParsing="false" text="Sing up" textOverrun="CLIP" />
+                  <Label layoutX="18.0" layoutY="229.0" text="Vooraam:" />
+                  <Label layoutX="207.0" layoutY="229.0" text="Achteraam:" />
+                  <TextField layoutX="14.0" layoutY="250.0" prefHeight="31.0" prefWidth="173.0" promptText="Voornaam" />
+                  <TextField layoutX="203.0" layoutY="250.0" prefHeight="31.0" prefWidth="173.0" promptText="Achternaam" />
+                  <Label layoutX="15.0" layoutY="49.0" text="Email:" />
+                  <TextField layoutX="11.0" layoutY="70.0" prefHeight="31.0" prefWidth="217.0" promptText="example@example.com" />
+                  <Label layoutX="15.0" layoutY="117.0" text="Wachtwoord:" />
+                  <PasswordField layoutX="11.0" layoutY="138.0" promptText="Wachtwoord" />
+                  <Label layoutX="14.0" layoutY="302.0" text="Geslacht" />
+                  <RadioButton layoutX="119.0" layoutY="302.0" mnemonicParsing="false" text="Man" />
+                  <RadioButton layoutX="223.0" layoutY="302.0" mnemonicParsing="false" text="Vrouw" />
+                  <Label layoutX="15.0" layoutY="343.0" text="Geboortedatum" />
+                  <Label layoutX="18.0" layoutY="367.0" text="Dag" />
+                  <Label layoutX="122.0" layoutY="367.0" text="Maand" />
+                  <Label layoutX="256.0" layoutY="367.0" text="Jaar" />
+                  <ComboBox layoutX="16.0" layoutY="394.0" prefHeight="31.0" prefWidth="70.0" promptText="1" />
+                  <ComboBox layoutX="110.0" layoutY="394.0" prefHeight="31.0" prefWidth="115.0" promptText="Januari" />
+                  <ComboBox layoutX="247.0" layoutY="394.0" prefHeight="31.0" prefWidth="95.0" promptText="0000" />
+                  <Label layoutX="13.0" layoutY="437.0" text="Locatie" />
+                  <TextField layoutX="16.0" layoutY="458.0" prefHeight="31.0" prefWidth="250.0" promptText="Locatie" />
+                  <Label layoutX="16.0" layoutY="502.0" text="Opleiding" />
+                  <TextField layoutX="16.0" layoutY="523.0" prefHeight="31.0" prefWidth="250.0" promptText="Opleiding" />
+                  <Label layoutX="17.0" layoutY="565.0" text="Vakken:" />
+                  <TextField layoutX="16.0" layoutY="586.0" prefHeight="31.0" prefWidth="250.0" promptText="Vakken" />
+                  <Label layoutX="15.0" layoutY="194.0" text="Persoonlijke gegevens">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="14.0" text="Inlog gegevens">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane prefHeight="628.0" prefWidth="606.0">
+         <children>
+            <ImageView fitHeight="377.0" fitWidth="511.0" layoutX="248.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Pictures/Saved%20Pictures/samenwerken.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</HBox>
