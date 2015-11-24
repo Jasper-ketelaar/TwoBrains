@@ -19,44 +19,40 @@
             <TextField layoutX="953.0" layoutY="37.0" prefHeight="26.0" prefWidth="294.0" promptText="Filter" />
          </children>
       </Pane>
-      <Pane>
-         <children>
-            <ScrollPane layoutX="7.0" prefHeight="609.0" prefViewportHeight="621.0" prefViewportWidth="1256.0" prefWidth="1265.0">
-               <content>
-                  <VBox>
+      <ScrollPane prefHeight="609.0" prefViewportHeight="621.0" prefViewportWidth="1256.0" prefWidth="1259.0">
+         <content>
+            <VBox>
+               <children>
+                  <HBox prefHeight="155.0" prefWidth="200.0">
                      <children>
-                        <HBox prefHeight="155.0" prefWidth="200.0">
+                        <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Pane prefHeight="155.0" prefWidth="1079.0">
                            <children>
-                              <ImageView fitHeight="155.0" fitWidth="200.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../../../../Pictures/Camera%20Roll/BN-BY925_mag041_OZ_20140318165119.jpg" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Pane prefHeight="155.0" prefWidth="1079.0">
-                                 <children>
-                                    <Label alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="20.0" prefWidth="579.0" text="Budi Han">
-                                       <font>
-                                          <Font name="Verdana" size="36.0" />
-                                       </font>
-                                    </Label>
-                                    <ListView layoutX="632.0" layoutY="6.0" prefHeight="147.0" prefWidth="409.0" />
-                                    <TextArea editable="false" layoutX="20.0" layoutY="80.0" prefHeight="65.0" prefWidth="576.0" text="Budi is een man van 21 jaar oud die informatica in Delft studeert. &#10;Om contant op te nemen met budi stuur een mail naar: ibuddy@gmail.com&#10;">
-                                       <font>
-                                          <Font name="Verdana" size="16.0" />
-                                       </font>
-                                    </TextArea>
-                                 </children>
-                              </Pane>
+                              <Label alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="20.0" prefWidth="579.0" text="Budi Han">
+                                 <font>
+                                    <Font name="Verdana" size="36.0" />
+                                 </font>
+                              </Label>
+                              <ListView layoutX="632.0" layoutY="6.0" prefHeight="147.0" prefWidth="409.0" />
+                              <TextArea editable="false" layoutX="20.0" layoutY="80.0" prefHeight="65.0" prefWidth="576.0" text="Budi is een man van 21 jaar oud die informatica in Delft studeert. &#10;Om contant op te nemen met budi stuur een mail naar: ibuddy@gmail.com&#10;">
+                                 <font>
+                                    <Font name="Verdana" size="16.0" />
+                                 </font>
+                              </TextArea>
                            </children>
-                        </HBox>
+                        </Pane>
                      </children>
-                  </VBox>
-               </content>
-            </ScrollPane>
-         </children>
-      </Pane>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
    </children>
 </VBox>

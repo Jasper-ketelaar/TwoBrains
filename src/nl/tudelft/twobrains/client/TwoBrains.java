@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 //TODO: Javadoc comments
+//TODO: Change resource locations to system.home/.TwoBrains
 public class TwoBrains extends Application {
 
     public static void main(final String[] args) {
@@ -26,14 +27,14 @@ public class TwoBrains extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         final Parent loader = FXMLLoader.load(getClass().getResource("view/match/matchpage.fxml"));
-        final Node scrollPane = ((Parent) loader.getChildrenUnmodifiable().get(1)).getChildrenUnmodifiable().get(0);
-
+        final Node scrollPane = loader.getChildrenUnmodifiable().get(1);
         final TwoBrainsSocket user = new TwoBrainsSocket("127.0.0.1", 4444);
 
         final String email = "ibuddyh@gmail.com";
         user.getOutputStream().writeUTF("Login:;" + email + ":000000");
         final String response = user.getInputStream().readUTF();
-        System.out.println(response);
+        setUserAgentStylesheet(STYLESHEET_MODENA);
+
         if (response.contains("Succes")) {
             final JSONParser parser = new JSONParser();
             final String json = response.replace("Succes:", "");

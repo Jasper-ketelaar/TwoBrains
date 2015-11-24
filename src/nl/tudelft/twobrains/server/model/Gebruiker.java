@@ -1,15 +1,11 @@
 package nl.tudelft.twobrains.server.model;
 
 
-import javafx.scene.Parent;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.util.InputMismatchException;
-
 /**
- *
  * TODO: Javadoc comments
  */
 public class Gebruiker {
@@ -50,30 +46,26 @@ public class Gebruiker {
         return getAttribuut("Wachtwoord");
     }
 
-    public String getGeslacht(){
+    public String getGeslacht() {
         return getAttribuut("Geslacht");
     }
 
-    public String getLeeftijd(){
+    public String getLeeftijd() {
         return getAttribuut("Leeftijd");
     }
 
-    public String getOpleiding(){
+    public String getOpleiding() {
         return getAttribuut("Opleiding");
     }
 
-    public String getVakken() {
-        return getAttribuut("Vakken");
-
+    public String[] getVakken() {
+        return getAttribuut("Vakken").split(",");
     }
 
-    public String getLocatie(){
+    public String getLocatie() {
         return getAttribuut("Locatie");
     }
 
-    public String getFoto(){
-        return getAttribuut("Foto");
-    }
     public String getJSONString() {
         return getJSONObject().toJSONString();
     }
