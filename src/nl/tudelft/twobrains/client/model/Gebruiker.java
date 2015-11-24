@@ -19,52 +19,43 @@ public class Gebruiker {
         this.data = data;
     }
 
-    public String getAttribuut(String attribuut)
-    {
+    public String getAttribuut(String attribuut) {
         return data.get(attribuut).toString();
     }
-    public String getEmail()
-    {
+
+    public String getEmail() {
         return email;
     }
 
-    public String getVoornaam()
-    {
+    public String getVoornaam() {
         return getAttribuut("Voornaam");
     }
 
-    public String getAchternaam()
-    {
+    public String getAchternaam() {
         return getAttribuut("Achternaam");
     }
 
-    public String getGeslacht()
-    {
+    public String getGeslacht() {
         return getAttribuut("Geslacht");
     }
 
-    public String getLeeftijd()
-    {
+    public String getLeeftijd() {
         return getAttribuut("Leeftijd");
     }
 
-    public String getWachtwoord()
-    {
+    public String getWachtwoord() {
         return getAttribuut("Wachtwoord");
     }
 
-    public String getOpleiding()
-    {
+    public String getOpleiding() {
         return getAttribuut("Opleiding");
     }
 
-    public String getVakken()
-    {
-        return getAttribuut("Vakken");
+    public String[] getVakken() {
+        return getAttribuut("Vakken").split(",");
     }
 
-    public String getLocatie()
-    {
+    public String getLocatie() {
         return getAttribuut("Locatie");
     }
 

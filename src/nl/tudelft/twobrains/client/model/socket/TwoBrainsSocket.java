@@ -1,5 +1,9 @@
 package nl.tudelft.twobrains.client.model.socket;
 
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.image.ImageView;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -55,6 +59,4 @@ public class TwoBrainsSocket extends Socket {
         }
         return images.get(file);
     }
-
-
 }

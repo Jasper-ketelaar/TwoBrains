@@ -2,6 +2,7 @@ package nl.tudelft.twobrains.client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ public class TwoBrains extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        final Parent loader = FXMLLoader.load(getClass().getResource("view/match/matches.fxml"));
+        final Parent loader = FXMLLoader.load(getClass().getResource("view/match/matchpage.fxml"));
         final Node scrollPane = ((Parent) loader.getChildrenUnmodifiable().get(1)).getChildrenUnmodifiable().get(0);
 
         final TwoBrainsSocket user = new TwoBrainsSocket("127.0.0.1", 4444);
@@ -39,8 +40,14 @@ public class TwoBrains extends Application {
 
             final Gebruiker gebruiker = new Gebruiker(email, (JSONObject) parser.parse(json));
             gebruiker.setConnection(user);
+
+            final Separator separator = new Separator();
+            separator.setMaxSize(1265.0, 3.0);
+            separator.setPadding(new Insets(15.0));
+
             final UserBox userBox = new UserBox(gebruiker);
-            ((VBox) ((ScrollPane) scrollPane).getContent()).getChildren().addAll(new Separator(), userBox);
+
+            ((VBox) ((ScrollPane) scrollPane).getContent()).getChildren().addAll(separator, userBox);
         }
 
         final Scene scene = new Scene(loader);
