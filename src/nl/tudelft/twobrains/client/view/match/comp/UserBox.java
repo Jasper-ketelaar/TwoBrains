@@ -34,7 +34,7 @@ public class UserBox extends HBox {
         final Insets insets = new Insets(0, 0, 0, 5);
 
         final Label email = new Label("E-mail adress:");
-        
+
         email.setPadding(insets);
 
         final Label voornaam = new Label("Voornaam:");

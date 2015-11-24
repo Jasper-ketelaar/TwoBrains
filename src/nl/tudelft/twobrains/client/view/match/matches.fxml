@@ -36,7 +36,21 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <TextArea prefHeight="155.0" prefWidth="1040.0" text="JSON info" />
+                              <Pane prefHeight="155.0" prefWidth="1079.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="20.0" prefWidth="579.0" text="Budi Han">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <ListView layoutX="632.0" layoutY="6.0" prefHeight="147.0" prefWidth="409.0" />
+                                    <TextArea editable="false" layoutX="20.0" layoutY="80.0" prefHeight="65.0" prefWidth="576.0" text="Budi is een man van 21 jaar oud die informatica in Delft studeert. &#10;Om contant op te nemen met budi stuur een mail naar: ibuddy@gmail.com&#10;">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </TextArea>
+                                 </children>
+                              </Pane>
                            </children>
                         </HBox>
                      </children>

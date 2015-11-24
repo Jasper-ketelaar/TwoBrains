@@ -24,7 +24,7 @@ public class TwoBrains extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        final Parent loader = FXMLLoader.load(getClass().getResource("view/match/AllMatchPage.fxml"));
+        final Parent loader = FXMLLoader.load(getClass().getResource("view/match/matches.fxml"));
         final Node scrollPane = ((Parent) loader.getChildrenUnmodifiable().get(1)).getChildrenUnmodifiable().get(0);
 
         final TwoBrainsSocket user = new TwoBrainsSocket("127.0.0.1", 4444);
