@@ -3,7 +3,9 @@ JavaDocs:
     Server                              [Bernard]
 
 Test:
-    Client                              [Leroy]
+    Client  Gebruiker                   [Leroy]
+    Client TwoBrainsSocket              [Leroy]
+
     Server                              [Koen]
 
 JavaFX Pages:
