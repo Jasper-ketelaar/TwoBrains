@@ -63,9 +63,12 @@ public class TwoBrains extends Application {
         return this.registerScene;
     }
 
+    public Scene getLoginScene() {
+        return this.loginScene;
+    }
+
     public void show(final Scene scene) {
         this.stage.setScene(scene);
-  //      final FadeTransition ft = new FadeTransition(Duration.millis(800), this.stage)
         this.stage.centerOnScreen();
     }
 

@@ -22,9 +22,9 @@ public class Server {
     public Server(final int port) throws IOException {
         this.server = new ServerSocket(port);
         try {
-            final URL resource = Server.class.getResource("resources/database.json");
-            this.database = Database.parse(resource.getFile());
-            this.database.write(resource.getFile()); //only for Writer test
+            final String file = System.getProperty("user.home") + "./TwoBrains/database.json";
+            this.database = Database.parse(file);
+            this.database.write(file); //only for Writer test
         } catch (final IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
