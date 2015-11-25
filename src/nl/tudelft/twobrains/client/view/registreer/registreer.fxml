@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -12,25 +14,24 @@
          <children>
             <Pane layoutX="90.0" layoutY="21.0" prefHeight="679.0" prefWidth="480.0">
                <children>
-                  <Button layoutX="292.0" layoutY="610.0" mnemonicParsing="false" text="Registreer" textOverrun="CLIP" />
-                  <Label layoutX="18.0" layoutY="229.0" text="Vooraam:" />
+                  <Button layoutX="15.0" layoutY="622.0" mnemonicParsing="false" onAction="#register" prefHeight="26.0" prefWidth="250.0" text="Registreer" textOverrun="CLIP" />
+                  <Label layoutX="15.0" layoutY="229.0" text="Vooraam:" />
                   <Label layoutX="207.0" layoutY="229.0" text="Achteraam:" />
-                  <TextField layoutX="14.0" layoutY="250.0" prefHeight="31.0" prefWidth="173.0" promptText="Voornaam" />
-                  <TextField layoutX="203.0" layoutY="250.0" prefHeight="31.0" prefWidth="173.0" promptText="Achternaam" />
+                  <TextField fx:id="voornaam" layoutX="11.0" layoutY="250.0" prefHeight="31.0" prefWidth="173.0" promptText="Voornaam" />
+                  <TextField fx:id="achternaam" layoutX="203.0" layoutY="250.0" prefHeight="31.0" prefWidth="173.0" promptText="Achternaam" />
                   <Label layoutX="15.0" layoutY="49.0" text="Email:" />
-                  <TextField layoutX="11.0" layoutY="70.0" prefHeight="31.0" prefWidth="217.0" promptText="voorbeeld@voorbeeld.com" />
+                  <TextField fx:id="email" layoutX="11.0" layoutY="70.0" prefHeight="31.0" prefWidth="217.0" promptText="voorbeeld@voorbeeld.com" />
                   <Label layoutX="15.0" layoutY="117.0" text="Wachtwoord:" />
-                  <PasswordField layoutX="11.0" layoutY="138.0" promptText="Wachtwoord" />
-                  <Label layoutX="14.0" layoutY="302.0" text="Geslacht" />
-                  <RadioButton layoutX="119.0" layoutY="302.0" mnemonicParsing="false" text="Man" />
-                  <RadioButton layoutX="223.0" layoutY="302.0" mnemonicParsing="false" text="Vrouw" />
+                  <PasswordField fx:id="wachtwoord" layoutX="11.0" layoutY="138.0" prefHeight="31.0" prefWidth="211.0" promptText="Wachtwoord" />
+                  <Label layoutX="15.0" layoutY="302.0" text="Geslacht" />
+                  <RadioButton fx:id="man" layoutX="119.0" layoutY="302.0" mnemonicParsing="false" text="Man">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="geslacht" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="vrouw" layoutX="223.0" layoutY="302.0" mnemonicParsing="false" text="Vrouw" toggleGroup="$geslacht" />
                   <Label layoutX="15.0" layoutY="343.0" text="Geboortedatum" />
-                  <Label layoutX="13.0" layoutY="437.0" text="Locatie" />
-                  <TextField layoutX="16.0" layoutY="458.0" prefHeight="31.0" prefWidth="250.0" promptText="Locatie" />
-                  <Label layoutX="16.0" layoutY="502.0" text="Opleiding" />
-                  <TextField layoutX="16.0" layoutY="523.0" prefHeight="31.0" prefWidth="250.0" promptText="Opleiding" />
-                  <Label layoutX="17.0" layoutY="565.0" text="Vakken:" />
-                  <TextField layoutX="16.0" layoutY="586.0" prefHeight="31.0" prefWidth="250.0" promptText="Vakken" />
+                  <Label layoutX="15.0" layoutY="408.0" text="Locatie" />
+                  <TextField fx:id="locatie" layoutX="11.0" layoutY="432.0" prefHeight="31.0" prefWidth="250.0" promptText="Locatie" />
                   <Label layoutX="15.0" layoutY="194.0" text="Persoonlijke gegevens">
                      <font>
                         <Font size="24.0" />
@@ -41,20 +42,30 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <DatePicker layoutX="15.0" layoutY="377.0" />
+                  <DatePicker fx:id="geboorte" layoutX="11.0" layoutY="366.0" />
+                  <TextField fx:id="opleiding" layoutX="11.0" layoutY="502.0" prefHeight="31.0" prefWidth="250.0" promptText="Opleiding" />
+                  <Label layoutX="15.0" layoutY="478.0" text="Opleiding" />
+                  <Label layoutX="15.0" layoutY="545.0" text="Vakken" />
+                  <TextField fx:id="vakken" layoutX="11.0" layoutY="569.0" prefHeight="31.0" prefWidth="250.0" promptText="Gebruik komma voor meerdere vakken" />
+                  <Button fx:id="annuleer" layoutX="15.0" layoutY="660.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="250.0" text="Annuleren" textOverrun="CLIP" />
                </children>
             </Pane>
          </children>
       </Pane>
       <Pane prefHeight="698.0" prefWidth="950.0">
          <children>
-            <ImageView fitHeight="155.0" fitWidth="210.0" layoutX="17.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../Pictures/Saved%20Pictures/samenwerken.jpg" />
-               </image>
-            </ImageView>
-            <Button layoutX="68.0" layoutY="411.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Upload" textOverrun="CLIP" />
+            <Button fx:id="upload" layoutX="68.0" layoutY="411.0" mnemonicParsing="false" onAction="#upload" prefHeight="31.0" prefWidth="115.0" text="Upload" textOverrun="CLIP" />
             <TextArea cacheShape="false" centerShape="false" editable="false" focusTraversable="false" layoutX="12.0" layoutY="462.0" prefHeight="155.0" prefWidth="217.0" scaleShape="false" text="Upload hier uw profielfoto&#10;met de volgende afmetingen:&#10;&#10;210 x 155&#10;&#10;Deze afbeelding moet een .jpg&#10;of .png bestand zijn. " />
+            <StackPane layoutX="25.0" layoutY="181.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="200.0" layoutX="25.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <ImageView fx:id="profielfoto" fitHeight="176.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Pictures/Saved%20Pictures/samenwerken.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
          </children>
       </Pane>
    </children>

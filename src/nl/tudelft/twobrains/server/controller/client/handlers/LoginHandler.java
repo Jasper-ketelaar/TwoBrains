@@ -16,7 +16,6 @@ public class LoginHandler implements ClientListener {
     public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Database database) {
         try {
             if (evt.getEvent().equals("Login")) {
-                System.out.println("TEST");
                 final String[] split = evt.getArguments().split(":");
 
                 if (database.containsKey(split[0])) {
@@ -28,7 +27,7 @@ public class LoginHandler implements ClientListener {
                         responseStream.writeUTF("Wachtwoord is verkeerd");
                     }
                 } else {
-                    System.err.println("Deze user bestaat niet");
+                    responseStream.writeUTF("Email bestaat niet");
                 }
             }
         } catch (Exception e) {

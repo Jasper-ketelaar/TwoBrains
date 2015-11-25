@@ -1,58 +1,77 @@
 package nl.tudelft.twobrains.client;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import nl.tudelft.twobrains.client.model.Gebruiker;
+import javafx.util.Duration;
+import nl.tudelft.twobrains.client.controller.views.LoginController;
+import nl.tudelft.twobrains.client.controller.views.RegisterController;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
-import nl.tudelft.twobrains.client.view.match.comp.UserBox;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 //TODO: Javadoc comments
 //TODO: Change resource locations to user.home/.TwoBrains
 public class TwoBrains extends Application {
 
+    private TwoBrainsSocket socket;
+
+    private Scene loginScene;
+    private Scene matchScene;
+    private Scene registerScene;
+
+    private Stage stage;
+
     public static void main(final String[] args) {
         launch(args);
     }
 
+    public TwoBrainsSocket getSocket() {
+        return this.socket;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        final Parent loader = FXMLLoader.load(getClass().getResource("view/match/matchpage.fxml"));
-        final Node scrollPane = loader.getChildrenUnmodifiable().get(1);
-        final TwoBrainsSocket user = new TwoBrainsSocket("127.0.0.1", 4444);
+        this.stage = primaryStage;
 
-        final String email = "ibuddyh@gmail.com";
-        user.getOutputStream().writeUTF("Login:;" + email + ":000000");
-        final String response = user.getInputStream().readUTF();
-        setUserAgentStylesheet(STYLESHEET_MODENA);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/login/login.fxml"));
+        loader.setController(new LoginController(this));
+        final Parent loginParent = loader.load();
+        this.loginScene = new Scene(loginParent);
 
-        if (response.contains("Succes")) {
-            final JSONParser parser = new JSONParser();
-            final String json = response.replace("Succes:", "");
+        loader = new FXMLLoader(getClass().getResource("view/match/match.fxml"));
+        final Parent matchParent = loader.load();
+        this.matchScene = new Scene(matchParent);
 
-            final Gebruiker gebruiker = new Gebruiker(email, (JSONObject) parser.parse(json));
-            gebruiker.setConnection(user);
+        loader = new FXMLLoader(getClass().getResource("view/registreer/registreer.fxml"));
+        loader.setController(new RegisterController(this));
+        final Parent registreerParent = loader.load();
+        this.registerScene = new Scene(registreerParent);
 
-            final Separator separator = new Separator();
-            separator.setMaxSize(1265.0, 3.0);
-            separator.setPadding(new Insets(15.0));
+        this.socket = new TwoBrainsSocket("127.0.0.1", 4444);
 
-            final UserBox userBox = new UserBox(gebruiker);
-
-            ((VBox) ((ScrollPane) scrollPane).getContent()).getChildren().addAll(separator, userBox);
-        }
-
-        final Scene scene = new Scene(loader);
-        primaryStage.setScene(scene);
+        primaryStage.setScene(loginScene);
         primaryStage.show();
     }
+
+    public Scene getMatchScene() {
+        return this.matchScene;
+    }
+
+    public Scene getRegisterScene() {
+        return this.registerScene;
+    }
+
+    public void show(final Scene scene) {
+        this.stage.setScene(scene);
+  //      final FadeTransition ft = new FadeTransition(Duration.millis(800), this.stage)
+        this.stage.centerOnScreen();
+    }
+
+    public Stage getStage() {
+        return this.stage;
+    }
+
+
 }

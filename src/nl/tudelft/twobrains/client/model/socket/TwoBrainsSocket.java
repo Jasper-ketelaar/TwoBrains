@@ -3,6 +3,7 @@ package nl.tudelft.twobrains.client.model.socket;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
+import org.json.simple.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -57,5 +58,25 @@ public class TwoBrainsSocket extends Socket {
             }
         }
         return images.get(file);
+    }
+
+    public String login(final String email, final String password) {
+        try {
+            getOutputStream().writeUTF("Login:;" + email + ":" + password);
+            return getInputStream().readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public String register(final String email, final JSONObject data) {
+        try {
+            getOutputStream().writeUTF("Registreer:;" + email + ":" + data);
+            return getInputStream().readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

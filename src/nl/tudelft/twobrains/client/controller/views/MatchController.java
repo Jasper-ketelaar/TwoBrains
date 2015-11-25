@@ -1,4 +1,4 @@
-package nl.tudelft.twobrains.client.controller.tabs;
+package nl.tudelft.twobrains.client.controller.views;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
