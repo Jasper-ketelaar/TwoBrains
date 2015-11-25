@@ -25,6 +25,12 @@ public class UserBox extends HBox {
 
     private final Gebruiker gebruiker;
 
+    /**
+     * Klasse Userbox
+     *      Laat de gegevens van een gebruiker zien in een info-Pane
+     *
+     * @param gebruiker
+     */
     public UserBox(final Gebruiker gebruiker) {
         this.gebruiker = gebruiker;
 
@@ -70,6 +76,11 @@ public class UserBox extends HBox {
         this.getChildren().addAll(imgView, info);
     }
 
+    /**
+     * Klasse getGebruiker
+     *      Retourneert een gebruiker-JSONobject
+     * @return
+     */
     public Gebruiker getGebruiker() {
         return this.gebruiker;
     }
