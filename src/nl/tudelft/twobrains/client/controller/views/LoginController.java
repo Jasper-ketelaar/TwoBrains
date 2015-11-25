@@ -9,21 +9,33 @@ import nl.tudelft.twobrains.client.TwoBrains;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 
 /**
- * Created by jasperketelaar on 11/25/15.
+ * Controller klasse voor de login pagina
  */
 public class LoginController {
 
+    /**
+     * Email text field
+     */
     @FXML
     private TextField email;
 
+    /**
+     * Wachtwoord password field
+     */
     @FXML
     private PasswordField password;
 
+    /**
+     * Label waar error komt te staan
+     */
     @FXML
     private Label error;
 
+    /**
+     * TwoBrains instantie
+     */
     private final TwoBrains twoBrains;
-
+    
     public LoginController(final TwoBrains twoBrains) {
         this.twoBrains = twoBrains;
     }
