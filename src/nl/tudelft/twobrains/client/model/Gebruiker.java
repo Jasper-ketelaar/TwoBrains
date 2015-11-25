@@ -85,7 +85,7 @@ public class Gebruiker {
     }
 
     public boolean isConnected() {
-        return connection != null;
+        return ((connection != null) && (connection.isConnected()));
     }
 
     public void disconnect() {
