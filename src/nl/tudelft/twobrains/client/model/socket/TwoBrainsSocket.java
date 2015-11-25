@@ -44,12 +44,11 @@ public class TwoBrainsSocket extends Socket {
                 output.writeUTF("Image:;" + file);
                 final byte[] sizeB = new byte[4];
                 input.read(sizeB);
-                System.out.println("TEST");
 
                 final int size = ByteBuffer.wrap(sizeB).asIntBuffer().get();
 
                 final byte[] imageB = new byte[size];
-                input.read(imageB);
+                System.out.println(input.read(imageB));
                 final BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageB));
 
                 images.put(file, image);
