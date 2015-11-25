@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="112.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="27.0" layoutY="10.0" text="MeetingMinds">
+               <font>
+                  <Font size="54.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="413.0" prefWidth="435.0">
+         <children>
+          <AnchorPane blendMode="SRC_ATOP" minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="412.0">
+               <children>
+                  <TextField layoutX="184.0" layoutY="78.0" promptText="Emai;" />
+                  <PasswordField layoutX="184.0" layoutY="116.0" promptText="Wachtwoord" />
+                  <Button layoutX="74.0" layoutY="183.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="265.0" text="Log in" />
+                  <Button layoutX="75.0" layoutY="273.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="265.0" text="Registreer" />
+                  <Label layoutX="32.0" layoutY="117.0" text="Wachtwoord:">
+                     <font>
+                        <Font name="Verdana" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="74.0" layoutY="79.0" text="Email:">
+                     <font>
+                        <Font name="Verdana" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+   </children>
+</VBox>
