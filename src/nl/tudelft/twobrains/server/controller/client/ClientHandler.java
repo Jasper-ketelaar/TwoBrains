@@ -42,9 +42,9 @@ public class ClientHandler extends Thread {
         while (!socket.isClosed()) {
             try {
                 final String input = this.input.readUTF();
-                System.out.println(input);
+                //System.out.println(input); debug check
                 final String[] split = input.split(":;");
-                System.out.println(split.length);
+                //System.out.println(split.length); debug check
                 final ClientEvent evt = new ClientEvent(split[0], split[1]);
                 for (final ClientListener listener : listeners) {
                     listener.onClientEvent(evt, output, database);
@@ -61,12 +61,12 @@ public class ClientHandler extends Thread {
             }
         }
     }
-
-    public void addListener(final ClientListener listener) {
-        this.listeners.add(listener);
-    }
-
-    public void removeListener(final ClientListener listener) {
-        this.listeners.remove(listener);
-    }
 }
+
+//    Deze zijn niet nodig, alle Listeners zitten al in de Array (Login, Image, Registreer).
+//
+//    public void addListener(final ClientListener listener) {this.listeners.add(listener);}
+//
+//    public void removeListener(final ClientListener listener) {
+//        this.listeners.remove(listener);
+//    }

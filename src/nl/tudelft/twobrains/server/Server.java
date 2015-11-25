@@ -24,7 +24,7 @@ public class Server {
         try {
             final URL resource = Server.class.getResource("resources/database.json");
             this.database = Database.parse(resource.getFile());
-            this.database.write(resource.getFile());
+            this.database.write(resource.getFile()); //only for Writer test
         } catch (final IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
