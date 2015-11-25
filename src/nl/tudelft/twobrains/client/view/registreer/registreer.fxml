@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox prefHeight="720.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="720.0" prefWidth="1208.0">
+         <children>
+            <Pane layoutX="90.0" layoutY="21.0" prefHeight="679.0" prefWidth="480.0">
+               <children>
+                  <Button layoutX="292.0" layoutY="610.0" mnemonicParsing="false" text="Registreer" textOverrun="CLIP" />
+                  <Label layoutX="18.0" layoutY="229.0" text="Vooraam:" />
+                  <Label layoutX="207.0" layoutY="229.0" text="Achteraam:" />
+                  <TextField layoutX="14.0" layoutY="250.0" prefHeight="31.0" prefWidth="173.0" promptText="Voornaam" />
+                  <TextField layoutX="203.0" layoutY="250.0" prefHeight="31.0" prefWidth="173.0" promptText="Achternaam" />
+                  <Label layoutX="15.0" layoutY="49.0" text="Email:" />
+                  <TextField layoutX="11.0" layoutY="70.0" prefHeight="31.0" prefWidth="217.0" promptText="voorbeeld@voorbeeld.com" />
+                  <Label layoutX="15.0" layoutY="117.0" text="Wachtwoord:" />
+                  <PasswordField layoutX="11.0" layoutY="138.0" promptText="Wachtwoord" />
+                  <Label layoutX="14.0" layoutY="302.0" text="Geslacht" />
+                  <RadioButton layoutX="119.0" layoutY="302.0" mnemonicParsing="false" text="Man" />
+                  <RadioButton layoutX="223.0" layoutY="302.0" mnemonicParsing="false" text="Vrouw" />
+                  <Label layoutX="15.0" layoutY="343.0" text="Geboortedatum" />
+                  <Label layoutX="13.0" layoutY="437.0" text="Locatie" />
+                  <TextField layoutX="16.0" layoutY="458.0" prefHeight="31.0" prefWidth="250.0" promptText="Locatie" />
+                  <Label layoutX="16.0" layoutY="502.0" text="Opleiding" />
+                  <TextField layoutX="16.0" layoutY="523.0" prefHeight="31.0" prefWidth="250.0" promptText="Opleiding" />
+                  <Label layoutX="17.0" layoutY="565.0" text="Vakken:" />
+                  <TextField layoutX="16.0" layoutY="586.0" prefHeight="31.0" prefWidth="250.0" promptText="Vakken" />
+                  <Label layoutX="15.0" layoutY="194.0" text="Persoonlijke gegevens">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="14.0" text="Inlog gegevens">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <DatePicker layoutX="15.0" layoutY="377.0" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane prefHeight="698.0" prefWidth="950.0">
+         <children>
+            <ImageView fitHeight="155.0" fitWidth="210.0" layoutX="17.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Pictures/Saved%20Pictures/samenwerken.jpg" />
+               </image>
+            </ImageView>
+            <Button layoutX="68.0" layoutY="411.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Upload" textOverrun="CLIP" />
+            <TextArea cacheShape="false" centerShape="false" editable="false" focusTraversable="false" layoutX="12.0" layoutY="462.0" prefHeight="155.0" prefWidth="217.0" scaleShape="false" text="Upload hier uw profielfoto&#10;met de volgende afmetingen:&#10;&#10;210 x 155&#10;&#10;Deze afbeelding moet een .jpg&#10;of .png bestand zijn. " />
+         </children>
+      </Pane>
+   </children>
+</HBox>
