@@ -23,7 +23,11 @@ import java.awt.image.BufferedImage;
  */
 public class UserBox extends HBox {
 
+    private final Gebruiker gebruiker;
+
     public UserBox(final Gebruiker gebruiker) {
+        this.gebruiker = gebruiker;
+
         final BufferedImage bImage = gebruiker.getUserImage();
         final WritableImage writableImage = new WritableImage(bImage.getWidth(), bImage.getHeight());
         final Image image = SwingFXUtils.toFXImage(bImage, writableImage);
@@ -64,5 +68,9 @@ public class UserBox extends HBox {
 
         info.getChildren().addAll(name, text, list);
         this.getChildren().addAll(imgView, info);
+    }
+
+    public Gebruiker getGebruiker() {
+        return this.gebruiker;
     }
 }

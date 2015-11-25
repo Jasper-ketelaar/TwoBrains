@@ -17,7 +17,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 //TODO: Javadoc comments
-//TODO: Change resource locations to system.home/.TwoBrains
+//TODO: Change resource locations to user.home/.TwoBrains
 public class TwoBrains extends Application {
 
     public static void main(final String[] args) {

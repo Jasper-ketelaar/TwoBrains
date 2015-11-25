@@ -49,8 +49,7 @@ public class ImageHandler implements ClientListener {
             final File file = getFile(fileName);
             final BufferedImage image = ImageIO.read(file);
             final String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length());
-            System.out.println(ext);
-            System.out.println("image = " + image);
+
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(image, ext, baos);
 
