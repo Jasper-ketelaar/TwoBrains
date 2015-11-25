@@ -2,6 +2,8 @@ package nl.tudelft.twobrains.client.model;
 
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -17,6 +19,17 @@ public class Gebruiker {
     public Gebruiker(final String email, final JSONObject data) {
         this.email = email;
         this.data = data;
+    }
+
+    public static Gebruiker parse(final String email, final String data) {
+        final JSONParser parser = new JSONParser();
+        try {
+            final JSONObject obj = (JSONObject) parser.parse(data);
+            return new Gebruiker(email, obj);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String getAttribuut(String attribuut) {
