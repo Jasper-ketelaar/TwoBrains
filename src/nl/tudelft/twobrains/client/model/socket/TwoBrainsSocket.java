@@ -23,6 +23,13 @@ public class TwoBrainsSocket extends Socket {
     private final DataInputStream input;
     private final DataOutputStream output;
 
+    /**
+     * Constructor TwoBrainsSocket
+     *      Creert "Socket-object"? 
+     * @param ip
+     * @param port
+     * @throws IOException
+     */
     public TwoBrainsSocket(final String ip, final int port) throws IOException {
         super(ip, port);
         this.input = new DataInputStream(super.getInputStream());
