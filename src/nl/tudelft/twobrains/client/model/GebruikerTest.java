@@ -148,6 +148,14 @@ public class GebruikerTest extends TestCase {
 
     }
 
+
+    //TODO: Schrijven
+    @Test
+    public void testParse(){
+
+
+    }
+
     //TODO: Schrijven
     @Test
     public void testGetUserImage() {

@@ -7,10 +7,7 @@ import org.json.simple.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -20,8 +17,8 @@ public class TwoBrainsSocket extends Socket {
 
     private final HashMap<String, BufferedImage> images = new HashMap<>();
 
-    private final DataInputStream input;
-    private final DataOutputStream output;
+    private  DataInputStream input;
+    private  DataOutputStream output;
 
     /**
      * Constructor TwoBrainsSocket
@@ -44,6 +41,14 @@ public class TwoBrainsSocket extends Socket {
     @Override
     public DataOutputStream getOutputStream() {
         return this.output;
+    }
+
+    public void setInputStream(DataInputStream IS){
+        this.input = IS;
+    }
+
+    public void setOutputStream(DataOutputStream OS){
+        this.output = OS;
     }
 
     public BufferedImage getImage(final String file) {
