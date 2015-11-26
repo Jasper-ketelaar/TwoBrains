@@ -29,6 +29,9 @@ public class Database extends HashMap<String, Gebruiker> {
     public static Database parse(final String file) throws IOException, ParseException {
         final JSONParser parser = new JSONParser();
         final FileReader reader = new FileReader(file);
+        if(reader.read() == -1) {
+            return new Database(new JSONObject());
+        }
         return new Database((JSONObject) parser.parse(reader));
     }
 

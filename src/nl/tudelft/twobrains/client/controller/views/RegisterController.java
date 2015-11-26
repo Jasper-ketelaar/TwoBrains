@@ -14,6 +14,10 @@ import nl.tudelft.twobrains.client.TwoBrains;
 import nl.tudelft.twobrains.server.model.Gebruiker;
 import org.json.simple.JSONObject;
 
+import java.time.Period;
+import java.time.temporal.Temporal;
+import java.util.Calendar;
+
 /**
  * Created by jasperketelaar on 11/25/15.
  */
@@ -52,9 +56,6 @@ public class RegisterController {
     @FXML
     private RadioButton vrouw;
 
-    @FXML
-    private HBox hBox;
-
     private final TwoBrains twoBrains;
 
     public RegisterController(final TwoBrains twoBrains) {
@@ -72,8 +73,10 @@ public class RegisterController {
 
         final JSONObject user = new JSONObject();
         user.put("Voornaam", voornaam.getText());
+        voornaam.setStyle(".text-field.error {-fx-text-box-border:red; -fx-focus-color:red;}");
+
         user.put("Achternaam", achternaam.getText());
-        user.put("Leeftijd", "" + (2015 - geboorte.getValue().getYear()));
+                user.put("Leeftijd", "" + (2015 - geboorte.getValue().getYear()));
         user.put("Geslacht", man.isSelected() ? "M" : "V");
         user.put("Wachtwoord", wachtwoord.getText());
         user.put("Locatie", locatie.getText());
@@ -83,7 +86,13 @@ public class RegisterController {
         final String response = twoBrains.getSocket().register(email.getText(), user);
         if (response.equals("Succes")) {
             twoBrains.show(twoBrains.getLoginScene());
+        } else {
+
         }
 
+    }
+
+    public void annuleer(final ActionEvent evt) {
+        twoBrains.show(twoBrains.getLoginScene());
     }
 }

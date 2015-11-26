@@ -4,6 +4,7 @@ import nl.tudelft.twobrains.server.controller.client.ClientHandler;
 import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -21,10 +22,21 @@ public class Server {
 
     public Server(final int port) throws IOException {
         this.server = new ServerSocket(port);
+
         try {
-            final String file = System.getProperty("user.home") + "./TwoBrains/database.json";
-            this.database = Database.parse(file);
-            this.database.write(file); //only for Writer test
+            final File dir = new File(System.getProperty("user.home") + "/TwoBrains/");
+            if (!dir.exists()) {
+                dir.mkdir();
+            } else {
+                System.out.println(dir.getAbsolutePath());
+            }
+
+            final File file = new File(dir.getAbsolutePath() + "/database.json");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            this.database = Database.parse(file.getPath());
+            this.database.write(file.getPath()); //only for Writer test
         } catch (final IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {

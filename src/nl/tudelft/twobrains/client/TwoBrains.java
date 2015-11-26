@@ -3,6 +3,7 @@ package nl.tudelft.twobrains.client;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -70,11 +71,10 @@ public class TwoBrains extends Application {
     public void show(final Scene scene) {
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
+
     }
 
     public Stage getStage() {
         return this.stage;
     }
-
-
 }

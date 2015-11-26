@@ -58,6 +58,7 @@ public class LoginController {
             error.setText("Gegevens verkeerd");
         }
         password.clear();
+        password.requestFocus();
     }
 
     public void register(final ActionEvent evt) {
