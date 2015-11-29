@@ -1,0 +1,99 @@
+Database:
+File -parse- Database
+
+gebruiker -add- Database
+
+Database -write- File
+
+filter:
+filters gebruikers op Predicate<> predicate
+_______________________________________________
+Server:
+Constructor:
+ServerSocket met port int
+parse/write --> Database = File
+
+main():
+Maak Server met defaultport
+
+run():
+wait for connect to Socket met .accept()
+new ClientHandler op Socket (accept, en database)
+clientHandler.start(), want Thread
+
+close():
+close Server
+_______________________________________________
+ClientEvent:
+Constructor:
+String event, argument
+
+Get methode voor allebei
+_______________________________________________
+ClientListener:
+interface foor onClientListener
+_______________________________________________
+ImageHandler implements ClientListener:
+onClientEvent:(Database database altijd, want
+interface, soms niet gebruikt)
+krijg event binnen
+check of Image event
+pack de naam (arguments)
+call sendImage met naam en responseStream
+
+getFile: make een file met URI's van image
+names. URI is naam als URL straat is waar woont
+
+sendImage:
+maak bufferedImage read de file
+String ext: (.jpg, etc)
+ByteArrayOutputStream;
+write Image
+size van Image in byte[]
+maak ruimte en dan plak
+_______________________________________________
+LoginHandler:
+onClientEvent:
+
+Login:;Naam(e-mail):Wachtwoord
+
+hak in stukken en check met database
+
+wachtwoordfout: response ""
+naamfout: response ""
+goed: "Succes: " en gebruiker.JSONString()
+
+gebruik try, catch alle exceptions
+_______________________________________________
+RegistreerHandler:
+onClientEvent:
+check het event
+
+split met ":"
+
+als niet e-mail/naam al in database
+dan add(gebruiker)
+
+Faulty case wordt nog geschreven
+_______________________________________________
+ClientHandler:
+ArrayList met listeners
+
+Constructor:
+socket, database
+Input/Output Stream
+
+run():
+als Socket open
+event gesplit met ":;"
+check of evt(event) in de Array zit
+try-->
+input read als UTF
+
+Als exception --> socket close + err message
+
+add/remove Listener in de Array
+_______________________________________________
+local ip  = 127.0.0.1
+
+
