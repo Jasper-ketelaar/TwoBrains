@@ -19,7 +19,18 @@ public class Server {
     private Database database;
     private ClientHandler handler;
 
-
+    /**
+     * Deze methode zal als eerst kijken of er een file is in de map TwoBrains.
+     * Zo niet dan wordt er een nieuw aangemaakt.
+     *
+     * Daarna wordt er gekeken of er een database.json file in de map zit.
+     * Zo niet dan wordt er een nieuwe aangemaakt.
+     *
+     * De database.json file wordt geparsed naar het private Database element
+     * van de Server.
+     * @param port wordt een nieuwe ServerSocket aangemaakt.
+     * @throws IOException
+     */
     public Server(final int port) throws IOException {
         this.server = new ServerSocket(port);
 
@@ -44,8 +55,20 @@ public class Server {
         }
     }
 
+    /**
+     *
+     * @return De huidige Database wordt geretouneerd.
+     */
     public Database getDatabase() {
         return this.database;
+    }
+
+    /**
+     *  Setter voor Test
+     * @param database wordt de nieuwe Database.
+     */
+    public void setDatabase(Database database) {
+        this.database = database;
     }
 
     public static void main(final String[] args) throws IOException {
@@ -64,8 +87,20 @@ public class Server {
         server.run();
     }
 
+    /**
+     *
+     * @return de huidige ClientHandler wordt geretouneerd
+     */
     public ClientHandler getHandler() {
         return this.handler;
+    }
+
+    /**
+     * Setter voor Test
+     * @param handler wordt de nieuwe ClientHandler.
+     */
+    public void setHandler(ClientHandler handler) {
+        this.handler = handler;
     }
 
     public void run() {
