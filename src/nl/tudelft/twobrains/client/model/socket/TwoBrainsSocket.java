@@ -17,8 +17,8 @@ public class TwoBrainsSocket extends Socket {
 
     private final HashMap<String, BufferedImage> images = new HashMap<>();
 
-    private  DataInputStream input;
-    private  DataOutputStream output;
+    private final DataInputStream input;
+    private final DataOutputStream output;
 
     /**
      * Constructor TwoBrainsSocket
@@ -43,13 +43,7 @@ public class TwoBrainsSocket extends Socket {
         return this.output;
     }
 
-    public void setInputStream(DataInputStream IS){
-        this.input = IS;
-    }
 
-    public void setOutputStream(DataOutputStream OS){
-        this.output = OS;
-    }
 
     public BufferedImage getImage(final String file) {
         if (!images.containsKey(file)) {

@@ -68,6 +68,18 @@ public class TwoBrains extends Application {
         return this.loginScene;
     }
 
+    public void setLoginScene(Scene loginScene) {
+        this.loginScene = loginScene;
+    }
+
+    public void setMatchScene(Scene matchScene) {
+        this.matchScene = matchScene;
+    }
+
+    public void setRegisterScene(Scene registerScene) {
+        this.registerScene = registerScene;
+    }
+
     public void show(final Scene scene) {
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
