@@ -12,7 +12,7 @@ import nl.tudelft.twobrains.client.controller.views.LoginController;
 import nl.tudelft.twobrains.client.controller.views.RegisterController;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 
-//TODO: Javadoc comments
+
 //TODO: Change resource locations to user.home/.TwoBrains
 public class TwoBrains extends Application {
 
@@ -24,14 +24,37 @@ public class TwoBrains extends Application {
 
     private Stage stage;
 
+    /**
+     * De Application wordt gestart.
+     * @param args
+     */
     public static void main(final String[] args) {
         launch(args);
     }
 
+    /**
+     *
+     * @return De huidige TwoBrainsSocket wordt geretouneerd
+     */
     public TwoBrainsSocket getSocket() {
         return this.socket;
     }
 
+    /**
+     *
+     * @param socket wordt de nieuwe TwoBrainsSocket
+     */
+    public void setSocket(TwoBrainsSocket socket) {
+        this.socket = socket;
+    }
+
+    /**
+     *  Alle Scene's worden geladen en geinitialiseerd.
+     *  En de LoginScene wordt geshowed.
+     *
+     * @param primaryStage De ingevoerde Stage zal de primaryStage worden
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
@@ -56,36 +79,68 @@ public class TwoBrains extends Application {
         primaryStage.show();
     }
 
+    /**
+     *
+     * @return De MatchScene wordt geretouneerd
+     */
     public Scene getMatchScene() {
         return this.matchScene;
     }
 
+    /**
+     *
+     * @return De RegistreerScene wordt geretouneerd
+     */
     public Scene getRegisterScene() {
         return this.registerScene;
     }
 
+    /**
+     *
+     * @return De LoginScene wordt geretouneerd
+     */
     public Scene getLoginScene() {
         return this.loginScene;
     }
 
+    /**
+     *
+     * @param loginScene wordt de nieuwe LoginScene
+     */
     public void setLoginScene(Scene loginScene) {
         this.loginScene = loginScene;
     }
 
+    /**
+     *
+     * @param matchScene wordt de nieuwe MatchScene
+     */
     public void setMatchScene(Scene matchScene) {
         this.matchScene = matchScene;
     }
 
+    /**
+     *
+     * @param registerScene wordt de nieuwe MatchScene
+     */
     public void setRegisterScene(Scene registerScene) {
         this.registerScene = registerScene;
     }
 
+    /**
+     *
+     * @param scene wordt geshowed op het beeld.
+     */
     public void show(final Scene scene) {
         this.stage.setScene(scene);
         this.stage.centerOnScreen();
 
     }
 
+    /**
+     *
+     * @return Retouneert de huidige Stage
+     */
     public Stage getStage() {
         return this.stage;
     }
