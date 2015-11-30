@@ -71,6 +71,11 @@ public class Server {
         this.database = database;
     }
 
+    /**
+     * Als er geen port wordt ingevoerd zal de server port 4444 gebruiken
+     * @param args Als eerste arg kan een poort worden ingevoerd waar de Server op runt
+     * @throws IOException
+     */
     public static void main(final String[] args) throws IOException {
         int defaultPort = 4444;
         if (args.length > 0) {
@@ -103,6 +108,9 @@ public class Server {
         this.handler = handler;
     }
 
+    /**
+     * Probeert de ClientHandler te starten als er connectie is.
+     */
     public void run() {
         while (true) {
             try {
@@ -116,6 +124,10 @@ public class Server {
         }
     }
 
+    /**
+     * Sluit de Server
+     * @throws IOException
+     */
     public void close() throws IOException {
         server.close();
     }
