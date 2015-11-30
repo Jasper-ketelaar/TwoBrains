@@ -1,0 +1,52 @@
+.hbox {
+    -fx-background-color: rgb(50, 50, 50);
+}
+
+.profiel-foto {
+    -fx-background-color: rgb(50, 50, 50);
+}
+
+.text-field {
+    -fx-background-color: steelblue, rgb(50, 50, 50), rgb(50, 50, 50);
+    -fx-background-insets: 0 0 -1 0, 0 0 0 0, 0 0 3 0;
+    -fx-prompt-text-fill: slategrey ;
+    -fx-text-fill: slategrey;
+}
+
+.radio-button {
+    -fx-text-fill:steelblue;
+}
+
+.radio-button .radio {
+    -fx-background-color: steelblue;
+    -fx-dot-color:red;
+}
+
+.radio-button .dot {
+    -fx-mark-highlight-color: lightblue ;
+    -fx-mark-color: lightblue ;
+}
+
+.date-picker.popup {
+    #-fx-background-color: red;
+}
+
+.date-picker.error, .button.error {
+    -fx-border-color: red;
+}
+
+.label {
+    -fx-text-fill: steelblue;
+}
+
+.label.error {
+    -fx-text-fill:red;
+}
+
+.text-field.error {
+    -fx-background-color: red, white, white;
+}
+
+
+
+

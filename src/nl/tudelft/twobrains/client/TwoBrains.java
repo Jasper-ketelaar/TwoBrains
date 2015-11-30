@@ -72,7 +72,7 @@ public class TwoBrains extends Application {
         loader.setController(new RegisterController(this));
         final Parent registreerParent = loader.load();
         this.registerScene = new Scene(registreerParent);
-        this.registerScene.getStylesheets().add(getClass().getResource("view/registreer/error.css").toExternalForm());
+        this.registerScene.getStylesheets().add(getClass().getResource("view/registreer/registreer.css").toExternalForm());
 
         this.socket = new TwoBrainsSocket("127.0.0.1", 4444);
 
