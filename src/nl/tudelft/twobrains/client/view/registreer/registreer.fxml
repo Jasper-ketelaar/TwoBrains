@@ -21,14 +21,13 @@
                   <RadioButton fx:id="man" layoutX="119.0" layoutY="302.0" mnemonicParsing="false" text="Man">
                      <toggleGroup>
                         <ToggleGroup fx:id="geslacht" />
-                     </toggleGroup></RadioButton>
+                     </toggleGroup>
+                  </RadioButton>
                   <RadioButton fx:id="vrouw" layoutX="223.0" layoutY="302.0" mnemonicParsing="false" text="Vrouw" toggleGroup="$geslacht" />
                   <DatePicker fx:id="geboorte" layoutX="11.0" layoutY="366.0" />
                   <TextField fx:id="locatie" layoutX="11.0" layoutY="432.0" prefHeight="31.0" prefWidth="250.0" promptText="Locatie" />
                   <TextField fx:id="opleiding" layoutX="11.0" layoutY="502.0" prefHeight="31.0" prefWidth="250.0" promptText="Opleiding" />
                   <TextField fx:id="vakken" layoutX="11.0" layoutY="569.0" prefHeight="31.0" prefWidth="250.0" promptText="Gebruik komma voor meerdere vakken" />
-                  <Button layoutX="15.0" layoutY="622.0" mnemonicParsing="false" onAction="#register" prefHeight="26.0" prefWidth="250.0" text="Registreer" textOverrun="CLIP" />
-                  <Button layoutX="15.0" layoutY="660.0" mnemonicParsing="false" onAction="#annuleer" prefHeight="26.0" prefWidth="250.0" text="Annuleren" textOverrun="CLIP" />
                   <Label layoutX="15.0" layoutY="229.0" text="Vooraam:" />
                   <Label layoutX="207.0" layoutY="229.0" text="Achteraam:" />
                   <Label layoutX="15.0" layoutY="49.0" text="Email:" />
@@ -41,36 +40,35 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="16.0" layoutY="14.0" text="Inlog gegevens">
+                  <Label layoutX="16.0" layoutY="5.0" text="Inlog gegevens">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                   <Label layoutX="15.0" layoutY="478.0" text="Opleiding" />
                   <Label layoutX="15.0" layoutY="545.0" text="Vakken" />
+                  <Button layoutY="653.0" mnemonicParsing="false" onAction="#register" prefHeight="26.0" prefWidth="250.0" text="Registreer" textOverrun="CLIP" />
                </children>
             </Pane>
          </children>
       </Pane>
-      <Pane prefHeight="698.0" prefWidth="950.0">
+      <Pane prefHeight="720.0" prefWidth="950.0">
          <children>
-            <Button fx:id="upload" layoutX="23.0" layoutY="340.0" mnemonicParsing="false" onAction="#upload" prefHeight="31.0" prefWidth="182.0" text="Upload" textOverrun="CLIP" />
-            <TextArea cacheShape="false" centerShape="false" editable="false" focusTraversable="false" layoutX="1.0" layoutY="395.0" prefHeight="155.0" prefWidth="228.0" scaleShape="false" text="Upload hier uw profielfoto&#10;met de volgende afmetingen:&#10;&#10;210 x 155&#10;&#10;Deze afbeelding moet een .jpg&#10;of .png bestand zijn. " />
-            <StackPane layoutX="13.0" layoutY="118.0">
+            <Button fx:id="upload" layoutX="24.0" layoutY="293.0" mnemonicParsing="false" onAction="#upload" prefHeight="20.0" prefWidth="175.0" text="Upload" textOverrun="CLIP" />
+            <TextArea cacheShape="false" centerShape="false" editable="false" focusTraversable="false" layoutX="23.0" layoutY="337.0" prefHeight="190.0" prefWidth="175.0" scaleShape="false" text="Upload hier uw profielfoto. &#10;De foto moet aan de volgende&#10;eisen voldoen:&#10;&#10;1) Een .jpg of .png bestand&#10;2) Maximaal 500 KB&#10;&#10;Let op: De foto zal worden&#10;geschaald op basis van &#10;onze standaarden. &#10;&#10;" />
+            <StackPane layoutX="24.0" layoutY="82.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="200.0" layoutX="25.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                  <ImageView fx:id="profielfoto" fitHeight="176.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Pictures/Saved%20Pictures/samenwerken.jpg" />
-                     </image>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="200.0" layoutX="25.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" width="175.0" />
+                  <ImageView fx:id="profielfoto" fitHeight="190.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
                </children>
             </StackPane>
-            <Label layoutX="50.0" layoutY="35.0" text="Profiel foto">
+            <Label layoutX="52.0" layoutY="27.0" text="Profiel foto">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
+            <Button layoutX="-80.0" layoutY="675.0" mnemonicParsing="false" onAction="#annuleer" prefHeight="26.0" prefWidth="250.0" text="Annuleren" textOverrun="CLIP" />
          </children>
       </Pane>
    </children>

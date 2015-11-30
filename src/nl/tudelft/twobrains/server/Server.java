@@ -35,19 +35,19 @@ public class Server {
         this.server = new ServerSocket(port);
 
         try {
-            final File dir = new File(System.getProperty("user.home") + "/TwoBrains/");
-            if (!dir.exists()) {
-                dir.mkdir();
+            final File dir = new File(System.getProperty("user.home") + "/.TwoBrains/");
+            final File iDir = new File(dir.getPath() + "/images/");
+            if (!iDir.exists()) {
+                iDir.mkdir();
             } else {
                 System.out.println(dir.getAbsolutePath());
             }
-
             final File file = new File(dir.getAbsolutePath() + "/database.json");
             if (!file.exists()) {
                 file.createNewFile();
             }
             this.database = Database.parse(file.getPath());
-            this.database.write(file.getPath()); //only for Writer test
+            this.database.write(file.getPath());
         } catch (final IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
