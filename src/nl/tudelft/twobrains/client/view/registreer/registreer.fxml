@@ -32,7 +32,7 @@
                   <Label layoutX="207.0" layoutY="229.0" text="Achteraam:" />
                   <Label layoutX="15.0" layoutY="49.0" text="Email:" />
                   <Label layoutX="15.0" layoutY="117.0" text="Wachtwoord:" />
-                  <Label layoutX="15.0" layoutY="302.0" text="Geslacht" />
+                  <Label fx:id="geslachtLabel" layoutX="15.0" layoutY="302.0" text="Geslacht" />
                   <Label layoutX="15.0" layoutY="343.0" text="Geboortedatum" />
                   <Label layoutX="15.0" layoutY="408.0" text="Locatie" />
                   <Label layoutX="15.0" layoutY="194.0" text="Persoonlijke gegevens">

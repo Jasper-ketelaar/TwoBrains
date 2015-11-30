@@ -3,9 +3,10 @@ package nl.tudelft.twobrains.client.controller.views;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -50,6 +51,10 @@ public class RegisterController {
     private RadioButton man;
     @FXML
     private RadioButton vrouw;
+    @FXML
+    private Label geslachtLabel;
+    @FXML
+    private Button upload;
 
     public RegisterController(final TwoBrains twoBrains) {
         this.twoBrains = twoBrains;
@@ -84,32 +89,30 @@ public class RegisterController {
     }
 
     public void register(final ActionEvent evt) {
+        final String emailText = email.getText();
         final String voornaamText = voornaam.getText();
         final String achternaamText = achternaam.getText();
         final String leeftijdText = geboorte.getValue() == null ? "" : calculateAge(geboorte.getValue());
-        final String geslachtText = man.isSelected() ? "M" : "V";
+        final String geslachtText = man.isSelected() ? "M" : (vrouw.isSelected() ? "V" : "");
         final String wachtwoordText = wachtwoord.getText();
         final String locatieText = locatie.getText();
         final String opleidingText = opleiding.getText();
         final String vakkenText = vakken.getText();
+        final javafx.scene.image.Image foto = this.profielfoto.getImage();
 
-        boolean cont = true;
-        if (voornaamText.equals("")) {
-            voornaam.getStyleClass().add("error");
-            cont = false;
+        final boolean fotoVal;
+        if (foto == null) {
+            upload.getStyleClass().add("error");
+            fotoVal = false;
+        } else {
+            fotoVal = true;
+            upload.getStyleClass().remove("error");
         }
 
-        if (achternaamText.equals("")) {
-            achternaam.getStyleClass().add("error");
-            cont = false;
-        }
-
-        if(leeftijdText.equals("")) {
-            geboorte.getStyleClass().add("error");
-        }
-
-
-        if (cont) {
+        if (fotoVal & validate(email, emailText) & validate(voornaam, voornaamText) & validate(achternaam, achternaamText)
+                & validate(geboorte, leeftijdText) & validate(geslachtLabel, geslachtText)
+                & validate(wachtwoord, wachtwoordText) & validate(locatie, locatieText)
+                & validate(opleiding, opleidingText) & validate(vakken, vakkenText)) {
             final JSONObject user = new JSONObject();
             user.put("Voornaam", voornaamText);
             user.put("Achternaam", achternaamText);
@@ -120,7 +123,7 @@ public class RegisterController {
             user.put("Opleiding", opleidingText);
             user.put("Vakken", vakkenText);
 
-            final String response = twoBrains.getSocket().register(email.getText(), user);
+            final String response = twoBrains.getSocket().register(emailText, user);
             if (response.equals("Succes")) {
                 twoBrains.show(twoBrains.getLoginScene());
             } else {
@@ -154,5 +157,16 @@ public class RegisterController {
 
     public void annuleer(final ActionEvent evt) {
         twoBrains.show(twoBrains.getLoginScene());
+    }
+
+    private boolean validate(final Node node, final String value) {
+        if (value.equals("")) {
+            System.out.println(node);
+            node.getStyleClass().add("error");
+            return false;
+        } else {
+            node.getStyleClass().remove("error");
+            return true;
+        }
     }
 }

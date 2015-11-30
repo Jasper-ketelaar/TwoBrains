@@ -2,6 +2,13 @@
     -fx-text-box-border: red ;
     -fx-focus-color: red ;
 }
-.date-picker .text-field {
-    -fx-text-border-color: red;
+
+.date-picker.error, .button.error {
+    -fx-border-color: red;
 }
+
+.label.error {
+    -fx-text-fill:red;
+}
+
+
