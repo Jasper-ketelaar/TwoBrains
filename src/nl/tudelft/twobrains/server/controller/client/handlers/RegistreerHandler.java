@@ -13,6 +13,17 @@ import java.io.IOException;
  */
 public class RegistreerHandler implements ClientListener {
 
+    /**
+     * Method for reacting to client 'Registreer'/register events (overrides
+     * interface method). The method checks if the evt argument is of type (name)
+     * 'Registreer'. The content(argument) of the evt argument is put into a
+     * String array by splitting. The database is checked for already containing
+     * this email (=username). If not the users information is added to the database.
+     *
+     * @param evt A client event consisting of two Strings: event, argument.
+     * @param responseStream A data ouput stream to write data to the client.
+     * @param database The database containing all the users information.
+     */
     @Override
     public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Database database) {
 

@@ -13,12 +13,26 @@ public class Gebruiker {
     private final JSONObject gebruiker;
     private final String email;
 
-
+    /**
+     * Class constructor specifying the email (=username) and information of
+     * a user.
+     *
+     * @param email The email (=username) of the user.
+     * @param gebruiker The other information of the user.
+     */
     public Gebruiker(final String email, final JSONObject gebruiker) {
         this.gebruiker = gebruiker;
         this.email = email;
     }
 
+    /**
+     * Method for creating a Gebruiker Object from two Strings containing
+     * the email (=username) and data.
+     *
+     * @param email The email (=username) of the user.
+     * @param data The other information of the user.
+     * @return Null, a new Gebruiker Object, if there are no parse exceptions.
+     */
     public static Gebruiker parse(final String email, final String data) {
         final JSONParser parser = new JSONParser();
         try {
@@ -30,6 +44,11 @@ public class Gebruiker {
         return null;
     }
 
+    /**
+     * Methods for getting all the different properties of the Gebruiker.
+     *
+     * @return A property of the Gebruiker.
+     */
     public String getEmail() {
         return email;
     }
@@ -78,6 +97,11 @@ public class Gebruiker {
         return gebruiker;
     }
 
+    /**
+     * Method for converting the Gebruiker to a String.
+     *
+     * @return A string containg all the information of the Gebruiker.
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder("Gebruiker[Voornaam=");

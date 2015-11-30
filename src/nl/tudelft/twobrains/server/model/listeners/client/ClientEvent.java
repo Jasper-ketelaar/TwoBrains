@@ -8,6 +8,12 @@ public class ClientEvent {
     private final String event;
     private final String argument;
 
+    /**
+     * Class constructor specifying the type of event and the content.
+     *
+     * @param event The type of event.
+     * @param argument The content/argument of the event.
+     */
     public ClientEvent(final String event, final String argument) {
         this.event = event;
         this.argument = argument;

@@ -12,6 +12,20 @@ import java.io.DataOutputStream;
  */
 public class LoginHandler implements ClientListener {
 
+    /**
+     * Method for reacting to client login events (overrides interface method).
+     * The method checks if the evt argument is of type 'Login'. The content
+     * (argument) of the evt argument is put into a String array by splitting.
+     * The database is checked for containing the username. If the username is in
+     * the database the password is checked for being correct. A corresponding
+     * message for the different cases is send to the user. If the username and
+     * password are correct the Server returns the users information (JSON).
+     *
+     * @param evt A client event consisting of two Strings: event, argument.
+     *            The argument can contain the username and password.
+     * @param responseStream A data ouput stream to write data to the client.
+     * @param database The database of containing the info of all the users.
+     */
     @Override
     public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Database database) {
         try {

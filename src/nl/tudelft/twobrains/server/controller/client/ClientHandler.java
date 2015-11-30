@@ -30,6 +30,14 @@ public class ClientHandler extends Thread {
     private final DataOutputStream output;
     private final Database database;
 
+    /**
+     * Class constructor specifying the socket and database. A new input/output
+     * stream are connected to the Socket specified by the socket argument.
+     *
+     * @param socket The socket that will be used by the ClientHandler.
+     * @param database The database that will be used by the ClientHandler.
+     * @throws IOException Checks for I/O exceptions.
+     */
     public ClientHandler(final Socket socket, final Database database) throws IOException {
         this.database = database;
         this.socket = socket;
@@ -37,6 +45,13 @@ public class ClientHandler extends Thread {
         this.output = new DataOutputStream(socket.getOutputStream());
     }
 
+    /**
+     * Method for listening and responding to all client events. The input
+     * from the client is put in a String array by splitting. The first and
+     * second value are used to create a client event. The correct handler is
+     * selected by a listener. The socket closes when the end of the input stream
+     * has been reached unexpectedly or an I/O operation creates an exception.
+     */
     @Override
     public void run() {
         while (!socket.isClosed()) {
