@@ -11,6 +11,8 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 //TODO: Bepaalde server utils schrijven zoals gebruikers gegevens aanvragen
 public class TwoBrainsSocket extends Socket {
@@ -55,7 +57,7 @@ public class TwoBrainsSocket extends Socket {
                 final int size = ByteBuffer.wrap(sizeB).asIntBuffer().get();
 
                 final byte[] imageB = new byte[size];
-                System.out.println(input.read(imageB));
+                input.read(imageB);
                 final BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageB));
 
                 images.put(file, image);
@@ -76,9 +78,32 @@ public class TwoBrainsSocket extends Socket {
         return "";
     }
 
-    public String register(final String email, final JSONObject data) {
+
+
+    public String register(final String email, final JSONObject data, final BufferedImage image) {
         try {
             getOutputStream().writeUTF("Registreer:;" + email + ":" + data);
+
+
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", baos);
+
+            final byte[] file = baos.toByteArray();
+            getOutputStream().writeInt(baos.size());
+            getOutputStream().write(file);
+            getOutputStream().flush();
+
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        baos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, 5000);
+
             return getInputStream().readUTF();
         } catch (IOException e) {
             e.printStackTrace();

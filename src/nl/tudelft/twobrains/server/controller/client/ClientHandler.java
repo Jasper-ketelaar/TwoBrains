@@ -8,12 +8,12 @@ import nl.tudelft.twobrains.server.model.Database;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientListener;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -56,11 +56,20 @@ public class ClientHandler extends Thread {
     public void run() {
         while (!socket.isClosed()) {
             try {
+
                 final String input = this.input.readUTF();
-                //System.out.println(input); debug check
                 final String[] split = input.split(":;");
-                //System.out.println(split.length); debug check
                 final ClientEvent evt = new ClientEvent(split[0], split[1]);
+                if(evt.getEvent().equals("Registreer")) {
+
+                    final int size = this.input.readInt();
+                    final byte[] dataB = new byte[size];
+
+                    for(int i = 0; i < size; i++) {
+                        dataB[i] = (byte) this.input.read();
+                    }
+                    evt.setData(dataB);
+                }
                 for (final ClientListener listener : listeners) {
                     listener.onClientEvent(evt, output, database);
                 }

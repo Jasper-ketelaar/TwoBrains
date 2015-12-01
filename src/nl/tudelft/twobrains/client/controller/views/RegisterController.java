@@ -56,6 +56,8 @@ public class RegisterController {
     @FXML
     private Button upload;
 
+    private BufferedImage profileImage;
+
     public RegisterController(final TwoBrains twoBrains) {
         this.twoBrains = twoBrains;
     }
@@ -73,13 +75,13 @@ public class RegisterController {
             } else {
                 try {
                     final Image toolkitImage = ImageIO.read(file).getScaledInstance(165, 190, Image.SCALE_SMOOTH);
-                    final BufferedImage image = new BufferedImage(toolkitImage.getWidth(null), toolkitImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-                    final Graphics g = image.getGraphics();
+                    this.profileImage = new BufferedImage(toolkitImage.getWidth(null), toolkitImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                    final Graphics g = this.profileImage.getGraphics();
                     g.drawImage(toolkitImage, 0, 0, null);
                     g.dispose();
 
                     final WritableImage wImage = null;
-                    this.profielfoto.setImage(SwingFXUtils.toFXImage(image, wImage));
+                    this.profielfoto.setImage(SwingFXUtils.toFXImage(this.profileImage, wImage));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -123,7 +125,7 @@ public class RegisterController {
             user.put("Opleiding", opleidingText);
             user.put("Vakken", vakkenText);
 
-            final String response = twoBrains.getSocket().register(emailText, user);
+            final String response = twoBrains.getSocket().register(emailText, user, this.profileImage);
             if (response.equals("Succes")) {
                 twoBrains.show(twoBrains.getLoginScene());
             } else {

@@ -5,7 +5,11 @@ import nl.tudelft.twobrains.server.model.Gebruiker;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientListener;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -29,8 +33,12 @@ public class RegistreerHandler implements ClientListener {
 
         if (evt.getEvent().equals("Registreer")) {
             try {
+                final BufferedImage image = ImageIO.read(new ByteArrayInputStream(evt.getData()));
                 final String split[] = evt.getArguments().split(":");
                 final String email = split[0];
+                final File file = new File(System.getProperty("user.home") + "/.Twobrains/images/" + email + ".jpg");
+                ImageIO.write(image, "jpg", file);
+
                 final String input = evt.getArguments().replace(email + ":", "");
                 if (database.containsKey(email)) {
                     responseStream.writeUTF("Email bestaat al");

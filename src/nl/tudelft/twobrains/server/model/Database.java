@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,8 +45,9 @@ public class Database extends HashMap<String, Gebruiker> {
      */
     public static Database parse(final String file) throws IOException, ParseException {
         final JSONParser parser = new JSONParser();
-        final FileReader reader = new FileReader(file);
-        if(reader.read() == -1) {
+        final File f = new File(file);
+        final FileReader reader = new FileReader(f);
+        if(f.length() == 0) {
             return new Database(new JSONObject());
         }
         return new Database((JSONObject) parser.parse(reader));

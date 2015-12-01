@@ -11,6 +11,11 @@ import javafx.util.Duration;
 import nl.tudelft.twobrains.client.controller.views.LoginController;
 import nl.tudelft.twobrains.client.controller.views.RegisterController;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
+import org.json.simple.JSONObject;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 
 //TODO: Change resource locations to user.home/.TwoBrains

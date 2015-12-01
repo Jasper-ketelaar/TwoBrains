@@ -1,5 +1,5 @@
 .hbox {
-    -fx-background-color: rgb(50, 50, 50);
+    -fx-background-color: grey;
 }
 
 .profiel-foto {
@@ -7,14 +7,14 @@
 }
 
 .text-field {
-    -fx-background-color: steelblue, rgb(50, 50, 50), rgb(50, 50, 50);
+    -fx-background-color: white, gray, gray;
     -fx-background-insets: 0 0 -1 0, 0 0 0 0, 0 0 3 0;
-    -fx-prompt-text-fill: slategrey ;
-    -fx-text-fill: slategrey;
+    -fx-prompt-text-fill: black ;
+    -fx-text-fill: white;
 }
 
 .radio-button {
-    -fx-text-fill:steelblue;
+    -fx-text-fill:black;
 }
 
 .radio-button .radio {
@@ -36,7 +36,7 @@
 }
 
 .label {
-    -fx-text-fill: steelblue;
+    -fx-text-fill: white;
 }
 
 .label.error {
