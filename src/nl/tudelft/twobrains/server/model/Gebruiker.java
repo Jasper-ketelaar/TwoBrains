@@ -121,7 +121,17 @@ public class Gebruiker {
     }
 
     //TODO: Implementatie schrijven
-    public boolean matches() {
+    public boolean matches(final Gebruiker other) {
+        return false;
+    }
+
+
+    @Override
+    public boolean equals(final Object other) {
+        if (other instanceof Gebruiker) {
+            final Gebruiker otherGebruiker = (Gebruiker) other;
+            return otherGebruiker.getJSONObject().equals(this.getJSONString()) && otherGebruiker.getEmail().equals(this.getEmail());
+        }
         return false;
     }
 
