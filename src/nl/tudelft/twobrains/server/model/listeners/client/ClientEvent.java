@@ -19,10 +19,20 @@ public class ClientEvent {
         this.argument = argument;
     }
 
+    /**
+     * Method for getting the event argument of the Clientevent.
+     *
+     * @return The event argument.
+     */
     public String getEvent() {
         return this.event;
     }
 
+    /**
+     * Method for getting the 'argument' argument of the Clientevent.
+     *
+     * @return The 'argument' argument.
+     */
     public String getArguments() {
         return this.argument;
     }

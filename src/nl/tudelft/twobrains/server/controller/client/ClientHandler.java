@@ -77,11 +77,3 @@ public class ClientHandler extends Thread {
         }
     }
 }
-
-//    Deze zijn niet nodig, alle Listeners zitten al in de Array (Login, Image, Registreer).
-//
-//    public void addListener(final ClientListener listener) {this.listeners.add(listener);}
-//
-//    public void removeListener(final ClientListener listener) {
-//        this.listeners.remove(listener);
-//    }
