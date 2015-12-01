@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URL;
+import java.util.Scanner;
 
 //TODO: Javadoc comments
 public class Server {
@@ -22,12 +22,13 @@ public class Server {
     /**
      * Deze methode zal als eerst kijken of er een file is in de map TwoBrains.
      * Zo niet dan wordt er een nieuw aangemaakt.
-     *
+     * <p>
      * Daarna wordt er gekeken of er een database.json file in de map zit.
      * Zo niet dan wordt er een nieuwe aangemaakt.
-     *
+     * <p>
      * De database.json file wordt geparsed naar het private Database element
      * van de Server.
+     *
      * @param port wordt een nieuwe ServerSocket aangemaakt.
      * @throws IOException
      */
@@ -56,23 +57,8 @@ public class Server {
     }
 
     /**
-     *
-     * @return De huidige Database wordt geretouneerd.
-     */
-    public Database getDatabase() {
-        return this.database;
-    }
-
-    /**
-     *  Setter voor Test
-     * @param database wordt de nieuwe Database.
-     */
-    public void setDatabase(Database database) {
-        this.database = database;
-    }
-
-    /**
      * Als er geen port wordt ingevoerd zal de server port 4444 gebruiken
+     *
      * @param args Als eerste arg kan een poort worden ingevoerd waar de Server op runt
      * @throws IOException
      */
@@ -93,7 +79,22 @@ public class Server {
     }
 
     /**
+     * @return De huidige Database wordt geretouneerd.
+     */
+    public Database getDatabase() {
+        return this.database;
+    }
+
+    /**
+     * Setter voor Test
      *
+     * @param database wordt de nieuwe Database.
+     */
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
+
+    /**
      * @return de huidige ClientHandler wordt geretouneerd
      */
     public ClientHandler getHandler() {
@@ -102,6 +103,7 @@ public class Server {
 
     /**
      * Setter voor Test
+     *
      * @param handler wordt de nieuwe ClientHandler.
      */
     public void setHandler(ClientHandler handler) {
@@ -112,6 +114,25 @@ public class Server {
      * Probeert de ClientHandler te starten als er connectie is.
      */
     public void run() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final Scanner scanner = new Scanner(System.in);
+                while (true) {
+                    if (scanner.hasNextLine()) {
+                        final String line = scanner.nextLine();
+                        if (line.equalsIgnoreCase("Stop")) {
+                            try {
+                                close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            System.exit(0);
+                        }
+                    }
+                }
+            }
+        }).start();
         while (true) {
             try {
                 final Socket accept = server.accept();
@@ -126,9 +147,13 @@ public class Server {
 
     /**
      * Sluit de Server
+     *
      * @throws IOException
      */
     public void close() throws IOException {
+        database.write(System.getProperty("user.home").concat("/.TwoBrains/database.json"));
         server.close();
     }
+
+
 }

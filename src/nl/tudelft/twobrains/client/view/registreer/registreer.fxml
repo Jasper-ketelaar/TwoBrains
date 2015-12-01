@@ -8,62 +8,63 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox prefHeight="720.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox prefHeight="720.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="720.0" prefWidth="1208.0" styleClass="hbox">
          <children>
-            <Pane layoutX="90.0" layoutY="21.0" prefHeight="679.0" prefWidth="480.0">
+            <Pane prefHeight="720.0" prefWidth="479.0">
                <children>
-                  <TextField fx:id="email" layoutX="11.0" layoutY="47.0" prefHeight="31.0" prefWidth="211.0" promptText="email@adres.nl" />
-                  <PasswordField fx:id="wachtwoord" layoutX="11.0" layoutY="100.0" prefHeight="31.0" prefWidth="211.0" promptText="Wachtwoord" />
-                  <TextField fx:id="voornaam" layoutX="11.0" layoutY="188.0" prefHeight="31.0" prefWidth="211.0" promptText="Voornaam" />
-                  <TextField fx:id="achternaam" layoutX="11.0" layoutY="231.0" prefHeight="31.0" prefWidth="211.0" promptText="Achternaam" />
-                  <RadioButton fx:id="man" layoutX="11.0" layoutY="302.0" mnemonicParsing="false" text="Man">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="geslacht" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="vrouw" layoutX="56.0" layoutY="302.0" mnemonicParsing="false" text="Vrouw" toggleGroup="$geslacht" />
-                  <DatePicker fx:id="geboorte" layoutX="11.0" layoutY="366.0" />
-                  <TextField fx:id="locatie" layoutX="11.0" layoutY="432.0" prefHeight="31.0" prefWidth="250.0" promptText="Locatie" />
-                  <TextField fx:id="opleiding" layoutX="11.0" layoutY="502.0" prefHeight="31.0" prefWidth="250.0" promptText="Opleiding" />
-                  <TextField fx:id="vakken" layoutX="11.0" layoutY="569.0" prefHeight="31.0" prefWidth="250.0" promptText="Gebruik komma voor meerdere vakken" />
-                  <Label fx:id="geslachtLabel" layoutX="11.0" layoutY="272.0" text="Geslacht" />
-                  <Label layoutX="15.0" layoutY="343.0" text="Geboortedatum" />
-                  <Label layoutY="153.0" text="Persoonlijke gegevens">
+                  <TextField fx:id="email" layoutX="94.0" layoutY="174.0" prefHeight="30.0" prefWidth="250.0" promptText="email@adres.nl" />
+                  <PasswordField fx:id="wachtwoord" layoutX="94.0" layoutY="214.0" prefHeight="30.0" prefWidth="250.0" promptText="Wachtwoord" />
+                  <TextField fx:id="voornaam" layoutX="94.0" layoutY="319.0" prefHeight="30.0" prefWidth="250.0" promptText="Voornaam" />
+                  <TextField fx:id="achternaam" layoutX="94.0" layoutY="359.0" prefHeight="30.0" prefWidth="250.0" promptText="Achternaam" />
+                  <DatePicker fx:id="geboorte" layoutX="94.0" layoutY="439.0" prefHeight="30.0" prefWidth="250.0" promptText="Geboorte datum" />
+                  <TextField fx:id="locatie" layoutX="94.0" layoutY="479.0" prefHeight="30.0" prefWidth="250.0" promptText="Locatie" />
+                  <TextField fx:id="opleiding" layoutX="94.0" layoutY="519.0" prefHeight="30.0" prefWidth="250.0" promptText="Opleiding" />
+                  <TextField fx:id="vakken" layoutX="94.0" layoutY="559.0" prefHeight="30.0" prefWidth="250.0" promptText="Vakken; komma's voor meerdere vakken" />
+                  <Label layoutX="84.0" layoutY="264.0" text="Persoonlijke gegevens">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutY="5.0" text="Inlog gegevens">
+                  <Label layoutX="84.0" layoutY="119.0" text="Inlog gegevens">
                      <font>
                         <Font name="Ebrima" size="24.0" />
                      </font>
                   </Label>
-                  <Button layoutX="-84.0" layoutY="652.0" mnemonicParsing="false" onAction="#register" prefHeight="26.0" prefWidth="236.0" text="Registreer" textOverrun="CLIP" />
-                  <Button layoutX="178.0" layoutY="652.0" mnemonicParsing="false" onAction="#annuleer" prefHeight="26.0" prefWidth="236.0" text="Annuleren" textOverrun="CLIP" />
+                  <Button layoutX="94.0" layoutY="620.0" mnemonicParsing="false" onAction="#register" prefHeight="28.0" prefWidth="250.0" text="Registreer" textOverrun="CLIP" />
+                  <Button layoutX="94.0" layoutY="660.0" mnemonicParsing="false" onAction="#annuleer" prefHeight="28.0" prefWidth="250.0" text="Annuleren" textOverrun="CLIP" />
+                  <Separator layoutX="75.0" layoutY="159.0" prefHeight="3.0" prefWidth="278.0" />
+                  <Separator layoutX="75.0" layoutY="304.0" prefHeight="3.0" prefWidth="278.0" />
+                  <ComboBox fx:id="geslacht" layoutX="94.0" layoutY="399.0" prefHeight="30.0" prefWidth="250.0" promptText="Geslacht" />
+                  <Label layoutX="227.0" text="Registratie">
+                     <font>
+                        <Font size="54.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="43.0" layoutY="83.0" prefHeight="3.0" prefWidth="621.0" />
                </children>
             </Pane>
          </children>
       </Pane>
       <Pane prefHeight="720.0" prefWidth="950.0" styleClass="profiel-foto">
          <children>
-            <Button fx:id="upload" layoutX="24.0" layoutY="293.0" mnemonicParsing="false" onAction="#upload" prefHeight="20.0" prefWidth="175.0" text="Upload" textOverrun="CLIP" />
-            <TextArea cacheShape="false" centerShape="false" editable="false" focusTraversable="false" layoutX="23.0" layoutY="337.0" prefHeight="190.0" prefWidth="175.0" scaleShape="false" text="Upload hier uw profielfoto. &#10;De foto moet aan de volgende&#10;eisen voldoen:&#10;&#10;1) Een .jpg of .png bestand&#10;2) Maximaal 500 KB&#10;&#10;Let op: De foto zal worden&#10;geschaald op basis van &#10;onze standaarden. &#10;&#10;" />
-            <StackPane layoutX="24.0" layoutY="82.0">
+            <Button fx:id="upload" layoutX="23.0" layoutY="385.0" mnemonicParsing="false" onAction="#upload" prefHeight="20.0" prefWidth="175.0" text="Upload" textOverrun="CLIP" />
+            <TextArea cacheShape="false" centerShape="false" editable="false" focusTraversable="false" layoutX="22.0" layoutY="420.0" prefHeight="170.0" prefWidth="175.0" scaleShape="false" text="&#10;Upload hier uw profielfoto. &#10;De foto moet aan de volgende&#10;eisen voldoen:&#10;&#10;1) Een .jpg of .png bestand&#10;2) Maximaal 500 KB&#10;" />
+            <StackPane layoutX="23.0" layoutY="174.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e3" height="200.0" layoutX="25.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" width="175.0" />
                   <ImageView fx:id="profielfoto" fitHeight="190.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
                </children>
             </StackPane>
-            <Label layoutX="52.0" layoutY="27.0" text="Profiel foto">
+            <Label layoutX="9.0" layoutY="119.0" text="Profiel foto">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
+            <Separator layoutY="159.0" prefHeight="3.0" prefWidth="210.0" />
          </children>
       </Pane>
-      <VBox prefHeight="200.0" prefWidth="100.0" />
    </children>
 </HBox>

@@ -6,12 +6,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import nl.tudelft.twobrains.client.TwoBrains;
+import nl.tudelft.twobrains.client.controller.AbstractController;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Controller klasse voor de login pagina
  */
-public class LoginController {
+public class LoginController extends AbstractController {
 
     /**
      * Email text field
@@ -63,5 +67,10 @@ public class LoginController {
 
     public void register(final ActionEvent evt) {
         twoBrains.show(twoBrains.getRegisterScene());
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

@@ -3,6 +3,7 @@ package nl.tudelft.twobrains.client.controller.views;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.*;
@@ -12,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 import nl.tudelft.twobrains.client.TwoBrains;
+import nl.tudelft.twobrains.client.controller.AbstractController;
 import nl.tudelft.twobrains.client.view.popup.TBPopup;
 import org.json.simple.JSONObject;
 
@@ -20,13 +22,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.ResourceBundle;
 
 /**
  * Created by jasperketelaar on 11/25/15.
  */
-public class RegisterController {
+public class RegisterController extends AbstractController {
 
     private final TwoBrains twoBrains;
     @FXML
@@ -48,11 +52,7 @@ public class RegisterController {
     @FXML
     private ImageView profielfoto;
     @FXML
-    private RadioButton man;
-    @FXML
-    private RadioButton vrouw;
-    @FXML
-    private Label geslachtLabel;
+    private ComboBox geslacht;
     @FXML
     private Button upload;
 
@@ -74,14 +74,16 @@ public class RegisterController {
                 popup.show();
             } else {
                 try {
-                    final Image toolkitImage = ImageIO.read(file).getScaledInstance(165, 190, Image.SCALE_SMOOTH);
-                    this.profileImage = new BufferedImage(toolkitImage.getWidth(null), toolkitImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-                    final Graphics g = this.profileImage.getGraphics();
+                    this.profileImage = ImageIO.read(file);
+
+                    final Image toolkitImage = profileImage.getScaledInstance(165, 190, Image.SCALE_SMOOTH);
+                    final BufferedImage scaled = new BufferedImage(toolkitImage.getWidth(null), toolkitImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                    final Graphics g = scaled.getGraphics();
                     g.drawImage(toolkitImage, 0, 0, null);
                     g.dispose();
 
                     final WritableImage wImage = null;
-                    this.profielfoto.setImage(SwingFXUtils.toFXImage(this.profileImage, wImage));
+                    this.profielfoto.setImage(SwingFXUtils.toFXImage(scaled, wImage));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -95,7 +97,7 @@ public class RegisterController {
         final String voornaamText = voornaam.getText();
         final String achternaamText = achternaam.getText();
         final String leeftijdText = geboorte.getValue() == null ? "" : calculateAge(geboorte.getValue());
-        final String geslachtText = man.isSelected() ? "M" : (vrouw.isSelected() ? "V" : "");
+        final String geslachtText = geslacht.getSelectionModel().getSelectedItem().toString();
         final String wachtwoordText = wachtwoord.getText();
         final String locatieText = locatie.getText();
         final String opleidingText = opleiding.getText();
@@ -112,7 +114,7 @@ public class RegisterController {
         }
 
         if (fotoVal & validate(email, emailText) & validate(voornaam, voornaamText) & validate(achternaam, achternaamText)
-                & validate(geboorte, leeftijdText) & validate(geslachtLabel, geslachtText)
+                & validate(geboorte, leeftijdText) & validate(geslacht, geslachtText)
                 & validate(wachtwoord, wachtwoordText) & validate(locatie, locatieText)
                 & validate(opleiding, opleidingText) & validate(vakken, vakkenText)) {
             final JSONObject user = new JSONObject();
@@ -170,5 +172,16 @@ public class RegisterController {
             node.getStyleClass().remove("error");
             return true;
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+    @Override
+    public void initItems() {
+        this.geslacht.getItems().clear();
+        this.geslacht.getItems().addAll("Man", "Vrouw");
     }
 }

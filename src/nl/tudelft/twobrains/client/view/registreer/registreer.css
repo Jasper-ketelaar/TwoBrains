@@ -1,42 +1,16 @@
-.hbox {
-    -fx-background-color: grey;
-}
-
-.profiel-foto {
-    -fx-background-color: rgb(50, 50, 50);
-}
-
 .text-field {
-    -fx-background-color: white, gray, gray;
+    -fx-background-color: gray, #f4f4f4, #f4f4f4;
     -fx-background-insets: 0 0 -1 0, 0 0 0 0, 0 0 3 0;
-    -fx-prompt-text-fill: black ;
-    -fx-text-fill: white;
+    -fx-prompt-text-fill: gray ;
+    -fx-text-fill: black;
 }
 
-.radio-button {
-    -fx-text-fill:black;
-}
-
-.radio-button .radio {
-    -fx-background-color: steelblue;
-    -fx-dot-color:red;
-}
-
-.radio-button .dot {
-    -fx-mark-highlight-color: lightblue ;
-    -fx-mark-color: lightblue ;
-}
-
-.date-picker.popup {
-    #-fx-background-color: red;
+.date-picker .text-field {
+    -fx-background-insets: 1, 1, 1
 }
 
 .date-picker.error, .button.error {
     -fx-border-color: red;
-}
-
-.label {
-    -fx-text-fill: white;
 }
 
 .label.error {
@@ -47,6 +21,16 @@
     -fx-background-color: red, white, white;
 }
 
+.separator {
+    -fx-background-color: grey;
+    -fx-opacity: 0.5;
+}
+
+.separator *.line {
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+
+}
 
 
 
