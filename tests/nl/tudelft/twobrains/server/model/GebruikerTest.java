@@ -118,19 +118,31 @@ public class GebruikerTest extends TestCase {
         assertNotEquals("Technische Wiskunde", koen.getOpleiding());
     }
 //vakken werken nog niet
-//    @Test
-//    public void testGetVakkenpositive() throws Exception {
-//        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-//        Gebruiker budi = db.get("ibuddyh@gmail.com");
-//        assertEquals("Calculus", koen.getVakken());
-//    }
-//
-//    @Test
-//    public void testGetVakkennegative() throws Exception {
-//        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-//        Gebruiker budi = db.get("ibuddyh@gmail.com");
-//        assertNotEquals("wiskunde", koen.getVakken());
-//    }
+    @Test
+    public void testGetVakkenpositive() throws Exception {
+        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
+        Gebruiker budi = db.get("ibuddyh@gmail.com");
+
+        String alleVakken = "";
+
+        for (int i = 0; i < koen.getVakken().length; i++) {
+            alleVakken = alleVakken + koen.getVakken()[i];
+        }
+        assertEquals("Calculus", alleVakken);
+    }
+
+    @Test
+    public void testGetVakkennegative() throws Exception {
+        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
+        Gebruiker budi = db.get("ibuddyh@gmail.com");
+
+        String alleVakken = "";
+
+        for (int i = 0; i < koen.getVakken().length; i++) {
+            alleVakken = alleVakken + koen.getVakken()[i];
+        }
+        assertNotEquals("wiskunde", koen.getVakken());
+    }
 
     @Test
     public void testGetLocatiepositive() throws Exception {
