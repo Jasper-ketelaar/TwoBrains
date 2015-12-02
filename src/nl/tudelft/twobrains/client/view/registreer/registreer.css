@@ -5,6 +5,10 @@
     -fx-text-fill: black;
 }
 
+.text-field.error {
+    -fx-background-color: red, #f4f4f4, #f4f4f4;
+}
+
 .date-picker .text-field {
     -fx-background-insets: 1, 1, 1
 }
@@ -17,9 +21,6 @@
     -fx-text-fill:red;
 }
 
-.text-field.error {
-    -fx-background-color: red, white, white;
-}
 
 .separator {
     -fx-background-color: grey;
