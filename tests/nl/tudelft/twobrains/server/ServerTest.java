@@ -48,7 +48,7 @@ public class ServerTest extends TestCase {
 
         assertEquals(DB, testServer.getDatabase());
     }
-    
+
     //TODO: Fixen(geeft timeout)
     @Test
     public void testHandler(){
