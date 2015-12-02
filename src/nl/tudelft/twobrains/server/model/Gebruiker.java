@@ -151,6 +151,12 @@ public class Gebruiker {
     }
 
 
+    /**
+     * Equals methode
+     * Kijkt of JSONobject en email gelijk zijn of niet
+     * @param other
+     * @return
+     */
     @Override
     public boolean equals(final Object other) {
         if (other instanceof Gebruiker) {

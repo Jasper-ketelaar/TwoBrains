@@ -1,0 +1,15 @@
+Vandaag laten zien dat we kunnen inloggen.
+nog niet mogelijk om te registreren en te kunnen matchen.
+matchfinder moet nog worden gemaakt.
+Instellingen kunnen niet worden aangepast  omdat we ook nog niet kunnen Registreren.
+Echter kunnen we wel ana naar de database toeschrijven, maar registeren werkt nog niet helemaal.
+UML is af, maar kan niet getoond worden om het bestand niet in pdf staat. Zal de volgende keer aan bot komen.
+
+Voor de test:
+Zijn een aantal testen geschreven, maar geen 80%. Vanwege onduidelijkheid over het testen van de server en de gui.
+Antwoord:
+De server moet getest worden, alleen de GUI niet.
+ECLemma. http://eclemma.org/ plugin voor branch coverage
+test-coverage mag je zelf kiezen wat je test(Gui-uitgesloten) maar moet de 80% halen.
+Notule kan zowel op github als op google drive
+
