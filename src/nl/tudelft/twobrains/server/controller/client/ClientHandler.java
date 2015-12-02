@@ -51,9 +51,6 @@ public class ClientHandler extends Thread {
      * second value are used to create a client event. The correct handler is
      * selected by a listener. The socket closes when the end of the input stream
      * has been reached unexpectedly or an I/O operation creates an exception.
-     * If the event is of type 'Registreer' the data of the event is set by
-     * first creating a byte array with the correct size and then using the
-     * method setData.
      */
     @Override
     public void run() {
@@ -89,3 +86,11 @@ public class ClientHandler extends Thread {
         }
     }
 }
+
+//    Deze zijn niet nodig, alle Listeners zitten al in de Array (Login, Image, Registreer).
+//
+//    public void addListener(final ClientListener listener) {this.listeners.add(listener);}
+//
+//    public void removeListener(final ClientListener listener) {
+//        this.listeners.remove(listener);
+//    }

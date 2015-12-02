@@ -12,18 +12,10 @@ public class MatchFinder extends Thread {
 
     private final Database database;
 
-    /**
-     * Class constructor specifying the database to use.
-     *
-     * @param database The database that is used.
-     */
     public MatchFinder(final Database database) {
         this.database = database;
     }
 
-    /**
-     * Method for matching a user with other users.
-     */
     @Override
     public void run() {
         while (true) {
