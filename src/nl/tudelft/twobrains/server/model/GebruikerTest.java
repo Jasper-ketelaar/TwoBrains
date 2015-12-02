@@ -15,7 +15,7 @@ public class GebruikerTest extends TestCase {
     Database db;
 
     public GebruikerTest() throws IOException, ParseException {
-        db = Database.parse(Server.class.getResource("resources/database.json").getFile());
+        db = Database.parse(Server.RESOURCES + "/database.json");
         Gebruiker koen = db.get("kvanzeijl@hotmail.com");
     }
 //    public String getelementoutofarray(){

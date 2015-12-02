@@ -13,6 +13,14 @@ import java.util.Scanner;
 //TODO: Javadoc comments
 public class Server {
 
+
+    public static final String RESOURCES;
+    public static final String IMAGES;
+    static {
+        RESOURCES = System.getProperty("user.dir") + "/.TwoBrains/resources";
+        IMAGES = RESOURCES + "/images/";
+    }
+
     private final ServerSocket server;
 
 
@@ -36,7 +44,8 @@ public class Server {
         this.server = new ServerSocket(port);
 
         try {
-            final File dir = new File(System.getProperty("user.home") + "/.TwoBrains/");
+            final File dir = new File(Server.RESOURCES);
+
             final File iDir = new File(dir.getPath() + "/images/");
             if (!iDir.exists()) {
                 iDir.mkdir();

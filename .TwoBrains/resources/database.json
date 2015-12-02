@@ -1,0 +1,22 @@
+{
+  "kvanzeijl@hotmail.com": {
+    "Voornaam": "Koen",
+    "Achternaam": "Zeijl",
+    "Geslacht": "M",
+    "Leeftijd": "18",
+    "Wachtwoord": "000000",
+    "Opleiding": "Informatica",
+    "Vakken": "Calculus",
+    "Locatie": "Delft"
+  },
+  "ibuddyh@gmail.com": {
+    "Voornaam": "Budi",
+    "Achternaam": "Han",
+    "Geslacht": "M",
+    "Leeftijd": "21",
+    "Wachtwoord": "000000",
+    "Opleiding": "Informatica",
+    "Vakken": "Calculus",
+    "Locatie": "Delft"
+  }
+}

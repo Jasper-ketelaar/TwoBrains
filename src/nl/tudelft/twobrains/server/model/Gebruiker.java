@@ -104,35 +104,36 @@ public class Gebruiker {
      */
        @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder("Gebruiker[Voornaam=");
-        builder.append(getVoornaam());
+           final StringBuilder builder = new StringBuilder("Gebruiker[Voornaam=");
+           builder.append(getVoornaam());
 
-        builder.append(", Achternaam=");
-        builder.append(getAchternaam());
+           builder.append(", Achternaam=");
+           builder.append(getAchternaam());
 
-        builder.append(", E-mail=");
-        builder.append(getEmail());
+           builder.append(", E-mail=");
+           builder.append(getEmail());
 
-        builder.append(", Wachtwoord=");
-        builder.append(getWachtwoord());
+           builder.append(", Wachtwoord=");
+           builder.append(getWachtwoord());
 
-        builder.append(", Geslacht=");
-        builder.append(getGeslacht());
+           builder.append(", Geslacht=");
+           builder.append(getGeslacht());
 
-        builder.append(", Leeftijd=");
-        builder.append(getLeeftijd());
+           builder.append(", Leeftijd=");
+           builder.append(getLeeftijd());
 
-        builder.append(", Opleiding=");
-        builder.append(getOpleiding());
+           builder.append(", Opleiding=");
+           builder.append(getOpleiding());
 
-        builder.append(", Vakken=");
-        builder.append(getVakken());
+           builder.append(", Vakken=");
+           builder.append(getVakken());
 
-        builder.append(", Locatie=");
-        builder.append(getLocatie());
+           builder.append(", Locatie=");
+           builder.append(getLocatie());
 
-        builder.append("]");
-        return builder.toString();
+           builder.append("]");
+           return builder.toString();
+       }
 
     //TODO: Implementatie schrijven
     public boolean matches(final Gebruiker other) {

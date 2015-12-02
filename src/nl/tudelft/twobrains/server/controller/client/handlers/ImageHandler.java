@@ -11,7 +11,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,9 +26,9 @@ public class ImageHandler implements ClientListener {
      * (argument) of the evt argument is put into a string. Then the method
      * calls the sendImage method with this string and the responseStream argument.
      *
-     * @param evt A client event consisting of two Strings: event, argument.
+     * @param evt            A client event consisting of two Strings: event, argument.
      * @param responseStream A data ouput stream to write data to the client.
-     * @param database The database is not used in this method.
+     * @param database       The database is not used in this method.
      */
     @Override
     public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Database database) {
@@ -51,16 +50,13 @@ public class ImageHandler implements ClientListener {
      * on the Server.
      */
     private File getFile(final String email) {
-        try {
-            final File file = new File(Server.class.getResource("resources/images").toURI());
-            for (final File child : file.listFiles()) {
-                if (child.getName().contains(email)) {
-                    return child;
-                }
+        final File file = new File(Server.IMAGES);
+        for (final File child : file.listFiles()) {
+            if (child.getName().contains(email)) {
+                return child;
             }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
         }
+
         return null;
     }
 
@@ -75,7 +71,7 @@ public class ImageHandler implements ClientListener {
      * bytes to be written out. Every 5000 ms the method tries to close the output stream.
      *
      * @param fileName The name of the Image File.
-     * @param output A data ouput stream to write data to the client.
+     * @param output   A data ouput stream to write data to the client.
      */
     private void sendImage(final String fileName, final DataOutputStream output) {
         try {
