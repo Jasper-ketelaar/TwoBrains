@@ -1,6 +1,7 @@
 package nl.tudelft.twobrains.client;
 
 import javafx.scene.Scene;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +10,11 @@ import static org.junit.Assert.*;
  */
 public class TwoBrainsTest {
 
-    TwoBrains testTwoBrains = new TwoBrains();
+
+
+    @Test
+    public void Tester(){
+        assertEquals(1,1);
+    }
 
 }

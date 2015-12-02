@@ -19,11 +19,23 @@ import javafx.stage.Stage;
 
 /**
  * Created by Jasper on 11/30/2015.
+ * Deze klasse wordt gebruikt op het moment er een pop-up moet verschijnen
+ * In de pop-up wordt veelal informatie gezet voor de gebruiker
  */
 public class TBPopup extends Stage {
 
     public static final int WARNING = 0;
 
+    /**
+     * Hier wordt de pop-up constructor aangemaakt, hij krijgt een aantal parameters mee:
+     * In de constructor wordt dmv de parameters vastgezet hoe de pop er precies uit moet zien
+     * Wat de waarschuwing is, wat de hoogte en de  breedte is etc:
+     * @param owner
+     * @param warning
+     * @param width
+     * @param height
+     * @param type
+     */
     public TBPopup(final Stage owner, final String warning, final double width, final double height, final int type) {
         this.initModality(Modality.APPLICATION_MODAL);
         this.initOwner(owner);
@@ -51,6 +63,11 @@ public class TBPopup extends Stage {
         this.setScene(scene);
     }
 
+    /**
+     * Methode waarbij gezorgd wordt indien de pop-up een waarschuwing is hij de kleur rood krijgt
+     * @param type
+     * @return
+     */
     private Paint decodeType(final int type) {
         if(type == WARNING) {
             return Color.RED;
@@ -58,6 +75,11 @@ public class TBPopup extends Stage {
         return Color.BLACK;
     }
 
+    /**
+     * Methode waarbij ervoor gezorgd wordt indien de pop-up een waarschuwing is de gebruiker ook te zien krijgt dat het een waarschuwing is
+     * @param type
+     * @return
+     */
     private String decodeTitle(final int type) {
         if(type == WARNING) {
             return "Warning";

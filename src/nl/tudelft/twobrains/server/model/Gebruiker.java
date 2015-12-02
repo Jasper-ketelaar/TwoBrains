@@ -17,7 +17,7 @@ public class Gebruiker {
      * Class constructor specifying the email (=username) and information of
      * a user.
      *
-     * @param email The email (=username) of the user.
+     * @param email     The email (=username) of the user.
      * @param gebruiker The other information of the user.
      */
     public Gebruiker(final String email, final JSONObject gebruiker) {
@@ -30,7 +30,7 @@ public class Gebruiker {
      * the email (=username) and data.
      *
      * @param email The email (=username) of the user.
-     * @param data The other information of the user.
+     * @param data  The other information of the user.
      * @return Null, a new Gebruiker Object, if there are no parse exceptions.
      */
     public static Gebruiker parse(final String email, final String data) {
@@ -81,6 +81,16 @@ public class Gebruiker {
         return getAttribuut("Vakken").split(",");
     }
 
+    public String toStringVakken(String[] vakken) {
+        String alleVakken = "";
+
+        for (int i = 0; i < vakken.length; i++) {
+            alleVakken = alleVakken + getVakken()[i] + ", " ;
+        }
+        alleVakken = alleVakken.substring(0, alleVakken.length()-2);
+        return alleVakken;
+    }
+
     public String getLocatie() {
         return getAttribuut("Locatie");
     }
@@ -102,38 +112,38 @@ public class Gebruiker {
      *
      * @return A string containg all the information of the Gebruiker.
      */
-       @Override
+    @Override
     public String toString() {
-           final StringBuilder builder = new StringBuilder("Gebruiker[Voornaam=");
-           builder.append(getVoornaam());
+        final StringBuilder builder = new StringBuilder("Gebruiker[Voornaam=");
+        builder.append(getVoornaam());
 
-           builder.append(", Achternaam=");
-           builder.append(getAchternaam());
+        builder.append(", Achternaam=");
+        builder.append(getAchternaam());
 
-           builder.append(", E-mail=");
-           builder.append(getEmail());
+        builder.append(", E-mail=");
+        builder.append(getEmail());
 
-           builder.append(", Wachtwoord=");
-           builder.append(getWachtwoord());
+        builder.append(", Wachtwoord=");
+        builder.append(getWachtwoord());
 
-           builder.append(", Geslacht=");
-           builder.append(getGeslacht());
+        builder.append(", Geslacht=");
+        builder.append(getGeslacht());
 
-           builder.append(", Leeftijd=");
-           builder.append(getLeeftijd());
+        builder.append(", Leeftijd=");
+        builder.append(getLeeftijd());
 
-           builder.append(", Opleiding=");
-           builder.append(getOpleiding());
+        builder.append(", Opleiding=");
+        builder.append(getOpleiding());
 
-           builder.append(", Vakken=");
-           builder.append(getVakken());
+        builder.append(", Vakken=");
+        builder.append(toStringVakken(getVakken()));
 
-           builder.append(", Locatie=");
-           builder.append(getLocatie());
+        builder.append(", Locatie=");
+        builder.append(getLocatie());
 
-           builder.append("]");
-           return builder.toString();
-       }
+        builder.append("]");
+        return builder.toString();
+    }
 
     //TODO: Implementatie schrijven
     public boolean matches(final Gebruiker other) {
@@ -141,11 +151,17 @@ public class Gebruiker {
     }
 
 
+    /**
+     * Equals methode
+     * Kijkt of JSONobject en email gelijk zijn of niet
+     * @param other Het object waarmee wordt vergeleken
+     * @return boolean met true als gelijk en false als niet gelijk
+     */
     @Override
     public boolean equals(final Object other) {
         if (other instanceof Gebruiker) {
             final Gebruiker otherGebruiker = (Gebruiker) other;
-            return otherGebruiker.getJSONObject().equals(this.getJSONString()) && otherGebruiker.getEmail().equals(this.getEmail());
+            return otherGebruiker.getJSONString().equals(this.getJSONString()) && otherGebruiker.getEmail().equals(this.getEmail());
         }
         return false;
     }

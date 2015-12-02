@@ -1,23 +1,27 @@
 package nl.tudelft.twobrains.client.controller.views;
 
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import nl.tudelft.twobrains.client.TwoBrains;
 import nl.tudelft.twobrains.client.controller.AbstractController;
 import nl.tudelft.twobrains.client.view.popup.TBPopup;
+import nl.tudelft.twobrains.client.view.registreer.comp.TooltipTextField;
 import org.json.simple.JSONObject;
 
 import javax.imageio.ImageIO;
+import javax.tools.Tool;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,11 +30,17 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 /**
  * Created by jasperketelaar on 11/25/15.
  */
 public class RegisterController extends AbstractController {
+
+    public static final String EMAIL_REGEX = "^[-a-z0-9A-Z~!$%^&*_=+}{'?]+(\\.[-a-z0-9~!$%^&*_=+}{\\'?]+)*@([a-z0-9_][-A-Z-a-z0-9_]*(\\.[-a-z0-9_]+)*\\.(com|edu|net|org|nl)|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})?$";
+    final Pattern pattern = Pattern.compile(EMAIL_REGEX);
+
 
     private final TwoBrains twoBrains;
     @FXML
@@ -55,6 +65,8 @@ public class RegisterController extends AbstractController {
     private ComboBox geslacht;
     @FXML
     private Button upload;
+    @FXML
+    private Pane gegevens;
 
     private BufferedImage profileImage;
 
@@ -92,6 +104,7 @@ public class RegisterController extends AbstractController {
 
     }
 
+    @FXML
     public void register(final ActionEvent evt) {
         final String emailText = email.getText();
         final String voornaamText = voornaam.getText();
@@ -176,7 +189,9 @@ public class RegisterController extends AbstractController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        final TooltipTextField email = new TooltipTextField("Test", false);
+        email.getTextField().setPromptText("email@adres.com");
+        gegevens.getChildren().add(new TooltipTextField("Test", false));
     }
 
     @Override
@@ -184,4 +199,54 @@ public class RegisterController extends AbstractController {
         this.geslacht.getItems().clear();
         this.geslacht.getItems().addAll("Man", "Vrouw");
     }
+
+
+    @FXML
+    public void emailKeyTyped(final KeyEvent evt) {
+        validate(email, s -> pattern.matcher(s).matches(), email.getText());
+    }
+
+    @FXML
+    public void voornaamKeyPressed(final KeyEvent evt) {
+
+    }
+
+    @FXML
+    public void achternaamKeyPressed(final KeyEvent evt) {
+
+    }
+
+    @FXML
+    public void wachtwoordKeyPressed(final KeyEvent evt) {
+
+    }
+
+
+    @FXML
+    public void locatieKeyPressed(final KeyEvent evt) {
+
+    }
+
+    @FXML
+    public void opleidingKeyPressed(final KeyEvent evt) {
+
+    }
+
+    @FXML
+    public void vakkenKeyPressed(final KeyEvent evt) {
+
+    }
+
+    public <T> void validate(final Node node, final Predicate<T> predicate, final T value) {
+        final ObservableList<String> classes = node.getStyleClass();
+        if (predicate.test(value)) {
+           if(classes.contains("error"))
+               classes.remove("error");
+        } else {
+            if(!classes.contains("error"))
+                classes.add("error");
+        }
+    }
+
+
 }
