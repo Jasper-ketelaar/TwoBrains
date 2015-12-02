@@ -8,13 +8,17 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import nl.tudelft.twobrains.client.controller.AbstractController;
 import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.client.view.match.comp.UserBox;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Created by jasperketelaar on 11/24/15.
  */
-public class MatchController {
+public class MatchController extends AbstractController {
 
     @FXML
     private TextField filter;
@@ -54,5 +58,10 @@ public class MatchController {
                 }
             }
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

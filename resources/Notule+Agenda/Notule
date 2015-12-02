@@ -1,0 +1,20 @@
+Notule (Woensdag 2 december)
+
+Presentatie:
+*Laten zien dat we kunnen inloggen
+*Aangetoond dat registreren nog niet mogelijk is
+*Aangetoond dat de match functie nog niet werkt
+*Matchfinder moet nog aangemaakt worden
+*Wegschrijven naar de database werkt wel
+*UML was af, maar foutmelding met laten zien omdat het niet in PDF stond
+
+Testen:
+*Minimaal 80% vereist
+*Nog niet aan voldaan
+*Ook server moet getest worden, zelf kiezen wat getest kan worden, maar 80% is essentieel
+*ECLemma (http://eclemma.org/) plugin voor intellij voor branch coverage
+*GUI wordt niet getest
+
+Planning volgende week:
+*Testcoverage van 80%
+*Werkende registreerfunctie

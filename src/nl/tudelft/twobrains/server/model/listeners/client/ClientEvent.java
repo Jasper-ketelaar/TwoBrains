@@ -5,6 +5,8 @@ package nl.tudelft.twobrains.server.model.listeners.client;
  */
 public class ClientEvent {
 
+    private byte[] data;
+
     private final String event;
     private final String argument;
 
@@ -35,5 +37,13 @@ public class ClientEvent {
      */
     public String getArguments() {
         return this.argument;
+    }
+
+    public void setData(final byte[] data) {
+        this.data = data;
+    }
+
+    public byte[] getData() {
+        return this.data;
     }
 }

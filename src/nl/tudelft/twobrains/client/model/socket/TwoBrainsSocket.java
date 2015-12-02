@@ -11,12 +11,19 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 //TODO: Bepaalde server utils schrijven zoals gebruikers gegevens aanvragen
 public class TwoBrainsSocket extends Socket {
 
+    /**
+     * Maakt 3 attributen aan
+     * @attrib Hashmap
+     * @Attrib datainputsteam
+     * @attrib Dataoutputstream
+     */
     private final HashMap<String, BufferedImage> images = new HashMap<>();
-
     private final DataInputStream input;
     private final DataOutputStream output;
 
@@ -33,6 +40,11 @@ public class TwoBrainsSocket extends Socket {
         this.output = new DataOutputStream(super.getOutputStream());
     }
 
+    /**
+     * 2 get methoden
+     * @method getInputsteam
+     * @method getOutputstream
+     */
     @Override
     public DataInputStream getInputStream() {
         return this.input;
@@ -44,6 +56,12 @@ public class TwoBrainsSocket extends Socket {
     }
 
 
+    /**
+     * Methode voor verkrijgen van image
+     * @param file
+     * @return image
+     * @throws IOException
+     */
 
     public BufferedImage getImage(final String file) {
         if (!images.containsKey(file)) {
@@ -55,7 +73,7 @@ public class TwoBrainsSocket extends Socket {
                 final int size = ByteBuffer.wrap(sizeB).asIntBuffer().get();
 
                 final byte[] imageB = new byte[size];
-                System.out.println(input.read(imageB));
+                input.read(imageB);
                 final BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageB));
 
                 images.put(file, image);
@@ -66,6 +84,14 @@ public class TwoBrainsSocket extends Socket {
         return images.get(file);
     }
 
+    /**
+     * Methode om in te loggen op de server
+     * Krijgt  2 inputs
+     * @param email
+     * @param password
+     * @return
+     * @throws IOException
+     */
     public String login(final String email, final String password) {
         try {
             getOutputStream().writeUTF("Login:;" + email + ":" + password);
@@ -76,9 +102,40 @@ public class TwoBrainsSocket extends Socket {
         return "";
     }
 
-    public String register(final String email, final JSONObject data) {
+
+    /**
+     * Methode om een account te registeren op de server
+     * Verwacht 3 parameters
+     * @param email = userinput emailadress
+     * @param data = userinput wachtwoord
+     * @param image = userinput toegevoegde profielfoto
+     * @return
+     * @throws IOException
+     */
+    public String register(final String email, final JSONObject data, final BufferedImage image) {
         try {
             getOutputStream().writeUTF("Registreer:;" + email + ":" + data);
+
+
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", baos);
+
+            final byte[] file = baos.toByteArray();
+            getOutputStream().writeInt(baos.size());
+            getOutputStream().write(file);
+            getOutputStream().flush();
+
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        baos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, 5000);
+
             return getInputStream().readUTF();
         } catch (IOException e) {
             e.printStackTrace();

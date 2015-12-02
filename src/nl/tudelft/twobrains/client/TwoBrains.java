@@ -11,16 +11,33 @@ import javafx.util.Duration;
 import nl.tudelft.twobrains.client.controller.views.LoginController;
 import nl.tudelft.twobrains.client.controller.views.RegisterController;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
+import nl.tudelft.twobrains.client.view.SceneWrapper;
+import org.json.simple.JSONObject;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+/**
+ * Klasse waarin het programma wordt gecreëerd en opgestart
+ */
 
 //TODO: Change resource locations to user.home/.TwoBrains
 public class TwoBrains extends Application {
 
+    /**
+     * Iniliateerst 5 attributen
+     * @attrib Socket
+     * @attrib Scenewrapper: scene voor login
+     * @attrib Scenewrapper: scene voor matchen
+     * @attrib Scenewrapper: scene voor registeren
+     * @attrib Stage:stage
+     */
     private TwoBrainsSocket socket;
 
-    private Scene loginScene;
-    private Scene matchScene;
-    private Scene registerScene;
+    private SceneWrapper loginScene;
+    private SceneWrapper matchScene;
+    private SceneWrapper registerScene;
 
     private Stage stage;
 
@@ -59,24 +76,13 @@ public class TwoBrains extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/login/login.fxml"));
-        loader.setController(new LoginController(this));
-        final Parent loginParent = loader.load();
-        this.loginScene = new Scene(loginParent);
 
-        loader = new FXMLLoader(getClass().getResource("view/match/match.fxml"));
-        final Parent matchParent = loader.load();
-        this.matchScene = new Scene(matchParent);
-
-        loader = new FXMLLoader(getClass().getResource("view/registreer/registreer.fxml"));
-        loader.setController(new RegisterController(this));
-        final Parent registreerParent = loader.load();
-        this.registerScene = new Scene(registreerParent);
-        this.registerScene.getStylesheets().add(getClass().getResource("view/registreer/error.css").toExternalForm());
-
+        this.loginScene = new SceneWrapper("login", new LoginController(this));
+        this.matchScene = new SceneWrapper("match");
+        this.registerScene = new SceneWrapper("registreer", new RegisterController(this), getClass().getResource("view/registreer/registreer.css").toExternalForm());
         this.socket = new TwoBrainsSocket("127.0.0.1", 4444);
 
-        primaryStage.setScene(loginScene);
+        primaryStage.setScene(loginScene.getScene());
         primaryStage.show();
     }
 
@@ -84,7 +90,7 @@ public class TwoBrains extends Application {
      *
      * @return De MatchScene wordt geretouneerd
      */
-    public Scene getMatchScene() {
+    public SceneWrapper getMatchScene() {
         return this.matchScene;
     }
 
@@ -92,7 +98,7 @@ public class TwoBrains extends Application {
      *
      * @return De RegistreerScene wordt geretouneerd
      */
-    public Scene getRegisterScene() {
+    public SceneWrapper getRegisterScene() {
         return this.registerScene;
     }
 
@@ -100,40 +106,17 @@ public class TwoBrains extends Application {
      *
      * @return De LoginScene wordt geretouneerd
      */
-    public Scene getLoginScene() {
+    public SceneWrapper getLoginScene() {
         return this.loginScene;
-    }
-
-    /**
-     *
-     * @param loginScene wordt de nieuwe LoginScene
-     */
-    public void setLoginScene(Scene loginScene) {
-        this.loginScene = loginScene;
-    }
-
-    /**
-     *
-     * @param matchScene wordt de nieuwe MatchScene
-     */
-    public void setMatchScene(Scene matchScene) {
-        this.matchScene = matchScene;
-    }
-
-    /**
-     *
-     * @param registerScene wordt de nieuwe MatchScene
-     */
-    public void setRegisterScene(Scene registerScene) {
-        this.registerScene = registerScene;
     }
 
     /**
      *
      * @param scene wordt geshowed op het beeld.
      */
-    public void show(final Scene scene) {
-        this.stage.setScene(scene);
+    public void show(final SceneWrapper scene) {
+        this.stage.setScene(scene.getScene());
+        scene.getController().initItems();
         this.stage.centerOnScreen();
 
     }

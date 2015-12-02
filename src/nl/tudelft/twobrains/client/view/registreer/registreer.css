@@ -1,0 +1,37 @@
+.text-field {
+    -fx-background-color: gray, #f4f4f4, #f4f4f4;
+    -fx-background-insets: 0 0 -1 0, 0 0 0 0, 0 0 3 0;
+    -fx-prompt-text-fill: gray ;
+    -fx-text-fill: black;
+}
+
+.text-field.error {
+    -fx-background-color: red, #f4f4f4, #f4f4f4;
+}
+
+.date-picker .text-field {
+    -fx-background-insets: 1, 1, 1
+}
+
+.date-picker.error, .button.error {
+    -fx-border-color: red;
+}
+
+.label.error {
+    -fx-text-fill:red;
+}
+
+
+.separator {
+    -fx-background-color: grey;
+    -fx-opacity: 0.5;
+}
+
+.separator *.line {
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+
+}
+
+
+

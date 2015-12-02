@@ -20,16 +20,27 @@ import java.awt.image.BufferedImage;
 
 /**
  * Created by Jasper on 11/21/2015.
+ * Klasse Userbox
+ * Laat de gegevens van een gebruiker zien in een info-Pane
+ *
+ *
+ */
  */
 public class UserBox extends HBox {
+
+    //attribuut Gebruiker
 
     private final Gebruiker gebruiker;
 
     /**
-     * Klasse Userbox
-     *      Laat de gegevens van een gebruiker zien in een info-Pane
-     *
+     * Contructor Userbox wordt aangemaakt
      * @param gebruiker
+     * Er wordt eerst een imagine van de gebruiker geladen, want het wordt allemaal in een userbox gezet
+     * Wordt vastgesteld hoe groot en breed deze box is
+     * Vervolgens wordt een pane aangemaakt
+     * Hier wordt de naam, text en een lijst ingezet (dus de gebruikersinfo)
+     * Aan het einde wordt de pane (met daarin de informatie) en de imagine van de gebruiker in een userbox gezet
+     *
      */
     public UserBox(final Gebruiker gebruiker) {
         this.gebruiker = gebruiker;
