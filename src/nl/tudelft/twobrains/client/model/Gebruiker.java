@@ -11,9 +11,14 @@ import java.io.IOException;
 //TODO: Gebruiker attributes aanmaken
 public class Gebruiker {
 
+    /**
+     * Initialiseert 3 attributen
+     * @attrib String:email
+     * @attrib JSONobject:data
+     * @attrib Twobrainsocket:connection
+     */
     private final String email;
     private final JSONObject data;
-
     private TwoBrainsSocket connection;
 
     /**
