@@ -1,22 +1,6 @@
 {
-  "kvanzeijl@hotmail.com": {
-    "Voornaam": "Koen",
-    "Achternaam": "Zeijl",
-    "Geslacht": "M",
-    "Leeftijd": "18",
-    "Wachtwoord": "000000",
-    "Opleiding": "Informatica",
-    "Vakken": "Calculus",
-    "Locatie": "Delft"
-  },
-  "ibuddyh@gmail.com": {
-    "Voornaam": "Budi",
-    "Achternaam": "Han",
-    "Geslacht": "M",
-    "Leeftijd": "21",
-    "Wachtwoord": "000000",
-    "Opleiding": "Informatica",
-    "Vakken": "Calculus",
-    "Locatie": "Delft"
-  }
+"kvanzeijl@hotmail.com":{
+"Geslacht":"M","Leeftijd":"18","Voornaam":"Koen","Achternaam":"Zeijl","Wachtwoord":"000000","Locatie":"Delft","Vakken":"Calculus","Opleiding":"Informatica"}
+,"ibuddyh@gmail.com":{
+"Geslacht":"M","Leeftijd":"21","Voornaam":"Budi","Achternaam":"Han","Wachtwoord":"000000","Locatie":"Delft","Vakken":"Calculus","Opleiding":"Informatica"}
 }
