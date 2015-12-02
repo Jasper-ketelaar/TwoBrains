@@ -1,15 +1,20 @@
-Vandaag laten zien dat we kunnen inloggen.
-nog niet mogelijk om te registreren en te kunnen matchen.
-matchfinder moet nog worden gemaakt.
-Instellingen kunnen niet worden aangepast  omdat we ook nog niet kunnen Registreren.
-Echter kunnen we wel ana naar de database toeschrijven, maar registeren werkt nog niet helemaal.
-UML is af, maar kan niet getoond worden om het bestand niet in pdf staat. Zal de volgende keer aan bot komen.
+Notule (Woensdag 2 december)
 
-Voor de test:
-Zijn een aantal testen geschreven, maar geen 80%. Vanwege onduidelijkheid over het testen van de server en de gui.
-Antwoord:
-De server moet getest worden, alleen de GUI niet.
-ECLemma. http://eclemma.org/ plugin voor branch coverage
-test-coverage mag je zelf kiezen wat je test(Gui-uitgesloten) maar moet de 80% halen.
-Notule kan zowel op github als op google drive
+Presentatie:
+*Laten zien dat we kunnen inloggen
+*Aangetoond dat registreren nog niet mogelijk is
+*Aangetoond dat de match functie nog niet werkt
+*Matchfinder moet nog aangemaakt worden
+*Wegschrijven naar de database werkt wel
+*UML was af, maar foutmelding met laten zien omdat het niet in PDF stond
 
+Testen:
+*Minimaal 80% vereist
+*Nog niet aan voldaan
+*Ook server moet getest worden, zelf kiezen wat getest kan worden, maar 80% is essentieel
+*ECLemma (http://eclemma.org/) plugin voor intellij voor branch coverage
+*GUI wordt niet getest
+
+Planning volgende week:
+*Testcoverage van 80%
+*Werkende registreerfunctie
