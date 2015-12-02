@@ -13,6 +13,5 @@ public class ServerTest extends TestCase {
     @Test
     public void testieks(){
         assertTrue(true);
-
     }
 }
