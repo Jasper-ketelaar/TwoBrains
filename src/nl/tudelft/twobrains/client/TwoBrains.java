@@ -18,10 +18,21 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+/**
+ * Klasse waarin het programma wordt gecreëerd en opgestart
+ */
 
 //TODO: Change resource locations to user.home/.TwoBrains
 public class TwoBrains extends Application {
 
+    /**
+     * Iniliateerst 5 attributen
+     * @attrib Socket
+     * @attrib Scenewrapper: scene voor login
+     * @attrib Scenewrapper: scene voor matchen
+     * @attrib Scenewrapper: scene voor registeren
+     * @attrib Stage:stage
+     */
     private TwoBrainsSocket socket;
 
     private SceneWrapper loginScene;
