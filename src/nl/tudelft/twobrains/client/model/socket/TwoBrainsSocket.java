@@ -17,8 +17,13 @@ import java.util.TimerTask;
 //TODO: Bepaalde server utils schrijven zoals gebruikers gegevens aanvragen
 public class TwoBrainsSocket extends Socket {
 
+    /**
+     * Maakt 3 attributen aan
+     * @attrib Hashmap
+     * @Attrib datainputsteam
+     * @attrib Dataoutputstream
+     */
     private final HashMap<String, BufferedImage> images = new HashMap<>();
-
     private final DataInputStream input;
     private final DataOutputStream output;
 
@@ -35,6 +40,11 @@ public class TwoBrainsSocket extends Socket {
         this.output = new DataOutputStream(super.getOutputStream());
     }
 
+    /**
+     * 2 get methoden
+     * @method getInputsteam
+     * @method getOutputstream
+     */
     @Override
     public DataInputStream getInputStream() {
         return this.input;
@@ -46,6 +56,12 @@ public class TwoBrainsSocket extends Socket {
     }
 
 
+    /**
+     * Methode voor verkrijgen van image
+     * @param file
+     * @return image
+     * @throws IOException
+     */
 
     public BufferedImage getImage(final String file) {
         if (!images.containsKey(file)) {
@@ -68,6 +84,14 @@ public class TwoBrainsSocket extends Socket {
         return images.get(file);
     }
 
+    /**
+     * Methode om in te loggen op de server
+     * Krijgt  2 inputs
+     * @param email
+     * @param password
+     * @return
+     * @throws IOException
+     */
     public String login(final String email, final String password) {
         try {
             getOutputStream().writeUTF("Login:;" + email + ":" + password);
@@ -79,7 +103,15 @@ public class TwoBrainsSocket extends Socket {
     }
 
 
-
+    /**
+     * Methode om een account te registeren op de server
+     * Verwacht 3 parameters
+     * @param email = userinput emailadress
+     * @param data = userinput wachtwoord
+     * @param image = userinput toegevoegde profielfoto
+     * @return
+     * @throws IOException
+     */
     public String register(final String email, final JSONObject data, final BufferedImage image) {
         try {
             getOutputStream().writeUTF("Registreer:;" + email + ":" + data);
