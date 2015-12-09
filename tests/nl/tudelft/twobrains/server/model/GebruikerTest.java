@@ -200,6 +200,13 @@ public class GebruikerTest extends TestCase {
     }
 
     @Test
+    public void testEqualsnegative() throws Exception {
+        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
+        Gebruiker budi = db.get("ibuddyh@gmail.com");
+        assertFalse(koen.equals("koen"));
+    }
+
+    @Test
     public void testMatches(){
     }
 }
