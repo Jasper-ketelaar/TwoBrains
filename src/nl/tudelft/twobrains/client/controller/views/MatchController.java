@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import nl.tudelft.twobrains.client.TwoBrains;
 import nl.tudelft.twobrains.client.controller.AbstractController;
 import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.client.view.match.comp.UserBox;
@@ -25,6 +26,13 @@ public class MatchController extends AbstractController {
 
     @FXML
     private VBox vBox;
+
+
+    private final TwoBrains twoBrains;
+
+    public MatchController(final TwoBrains twoBrains) {
+        this.twoBrains = twoBrains;
+    }
 
     @FXML
     public void filterAction(final KeyEvent event) {
@@ -63,5 +71,10 @@ public class MatchController extends AbstractController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    @Override
+    public void initItems() {
+        vBox.getChildren().add(new UserBox(twoBrains.getGebruiker()));
     }
 }

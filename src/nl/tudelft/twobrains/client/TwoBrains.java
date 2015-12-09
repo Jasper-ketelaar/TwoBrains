@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nl.tudelft.twobrains.client.controller.views.LoginController;
+import nl.tudelft.twobrains.client.controller.views.MatchController;
 import nl.tudelft.twobrains.client.controller.views.RegisterController;
+import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 import nl.tudelft.twobrains.client.view.SceneWrapper;
 import org.json.simple.JSONObject;
@@ -32,6 +34,7 @@ public class TwoBrains extends Application {
      * @attrib Scenewrapper: scene voor matchen
      * @attrib Scenewrapper: scene voor registeren
      * @attrib Stage:stage
+     * @attrib Gebruiker:gebruiker
      */
     private TwoBrainsSocket socket;
 
@@ -40,6 +43,9 @@ public class TwoBrains extends Application {
     private SceneWrapper registerScene;
 
     private Stage stage;
+
+    private Gebruiker gebruiker;
+
 
     /**
      * De Application wordt gestart.
@@ -78,7 +84,7 @@ public class TwoBrains extends Application {
 
 
         this.loginScene = new SceneWrapper("login", new LoginController(this));
-        this.matchScene = new SceneWrapper("match");
+        this.matchScene = new SceneWrapper("match", new MatchController(this));
         this.registerScene = new SceneWrapper("registreer", new RegisterController(this), getClass().getResource("view/registreer/registreer.css").toExternalForm());
         this.socket = new TwoBrainsSocket("127.0.0.1", 4444);
 
@@ -127,5 +133,21 @@ public class TwoBrains extends Application {
      */
     public Stage getStage() {
         return this.stage;
+    }
+
+    /**
+     * Set de gebruiker naar een gegeven gebruiker
+     */
+    public void setGebruiker(final Gebruiker gebruiker) {
+        this.gebruiker = gebruiker;
+        this.gebruiker.setConnection(socket);
+    }
+
+    /**
+     * Verkrijgt de gebruiker
+     * @return de gebruiker
+     */
+    public Gebruiker getGebruiker() {
+        return this.gebruiker;
     }
 }

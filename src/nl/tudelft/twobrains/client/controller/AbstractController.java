@@ -9,5 +9,4 @@ public abstract class AbstractController implements Initializable {
 
     public void initItems() {}
 
-
 }

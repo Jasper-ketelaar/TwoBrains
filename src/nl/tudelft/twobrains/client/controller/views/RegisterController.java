@@ -22,6 +22,7 @@ import nl.tudelft.twobrains.client.view.registreer.comp.TooltipTextField;
 import org.json.simple.JSONObject;
 
 import javax.imageio.ImageIO;
+import javax.tools.Tool;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -117,7 +118,16 @@ public class RegisterController extends AbstractController implements EventHandl
             upload.getStyleClass().remove("error");
         }
 
+        for(final TooltipTextField field : textFields.values()) {
+            if (!field.getValidation().validate()) {
+                return;
+            }
+        }
 
+        if(leeftijdText == "" || geslachtText == "" || foto == null) {
+            return;
+
+        }
         final JSONObject user = new JSONObject();
         user.put("Voornaam", voornaamText);
         user.put("Achternaam", achternaamText);
@@ -204,24 +214,29 @@ public class RegisterController extends AbstractController implements EventHandl
 
         final TooltipTextField voornaam = new TooltipTextField("Jouw voornaam", false, 94.0, 319, "Voornaam");
         voornaam.setOnKeyReleased(this);
-        textFields.put("Voornaam", voornaam)
+        textFields.put("Voornaam", voornaam);
 
         final TooltipTextField achternaam = new TooltipTextField("Jouw achternaam", false, 94.0, 359, "Achternaam");
         achternaam.setOnKeyReleased(this);
+        textFields.put("Achternaam", achternaam);
 
         final TooltipTextField locatie = new TooltipTextField("Jouw locatie", false, 94.0, 479, "Locatie");
         locatie.setOnKeyReleased(this);
+        textFields.put("Locatie", locatie);
 
-        final TooltipTextField opleiding = new TooltipTextField("Jouw locatie", false, 94.0, 479, "Locatie");
+        final TooltipTextField opleiding = new TooltipTextField("Jouw opleiding", false, 94.0, 519, "Opleiding");
         opleiding.setOnKeyReleased(this);
+        textFields.put("Opleiding", opleiding);
 
 
-        final TooltipTextField opleiding = new TooltipTextField("Wachtwoord; moet minimaal 6 karakters hebben waarvan " +
-                "minimaal 1 hoofdletter en minimaal 1 cijfer", false, 94.0, 519, "Wachtwoord");
-        final TooltipTextField vakken = new TooltipTextField("Wachtwoord; moet minimaal 6 karakters hebben waarvan " +
-                "minimaal 1 hoofdletter en minimaal 1 cijfer", false, 94.0, 559, "Wachtwoord");
+        final TooltipTextField vakken = new TooltipTextField("Jouw vakken; meerdere vakken met komma's scheiden"
+                    , false, 94.0, 559, "Vakken");
+        textFields.put("Vakken", vakken);
 
-        gegevens.getChildren().addAll(email, wachtwoord, voornaam);
+        /*final TooltipTextField vakken = new TooltipTextField("Wachtwoord; moet minimaal 6 karakters hebben waarvan " +
+                "minimaal 1 hoofdletter en minimaal 1 cijfer", false, 94.0, 559, "Wachtwoord");*/
+
+        gegevens.getChildren().addAll(email, wachtwoord, voornaam, achternaam, locatie, opleiding, vakken);
     }
 
     @Override
