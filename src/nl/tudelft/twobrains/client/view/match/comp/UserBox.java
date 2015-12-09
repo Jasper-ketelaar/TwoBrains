@@ -25,7 +25,6 @@ import java.awt.image.BufferedImage;
  *
  *
  */
- */
 public class UserBox extends HBox {
 
     //attribuut Gebruiker
