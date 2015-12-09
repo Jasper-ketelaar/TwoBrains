@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * Created by Jasper on 12/1/2015.
- * Deze klasse zorgt ervoor dat dat we een controller aan een scene kunnen hangne
+ * Deze klasse zorgt ervoor dat dat we een controller aan een scene kunnen hangen
  * Ook vermakkelijkt deze klasse het maken van een scene
  * Een scene is de javaFX display, hier staan alle componenten op (GUI)
  * Klasse wordt aangemaakt met 3 constructors verschillend van parameter.
@@ -38,7 +38,6 @@ public class SceneWrapper {
      */
     public SceneWrapper(final String name, final AbstractController controller, final String... sheets) throws IOException {
         this.controller = controller;
-        System.out.println(name);
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(name + "/" + name + ".fxml"));
         if (controller != null)
             loader.setController(controller);

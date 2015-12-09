@@ -30,7 +30,6 @@ public class TooltipTextField extends StackPane {
         this.textField.setPromptText(prompt);
 
         this.tooltip = new Tooltip(tooltip);
-        System.out.println(getClass().getResource("../info.png"));
         this.imageView = new ImageView(new Image(getClass().getResource("../info.png").toExternalForm()));
         this.imageView.setFitHeight(15);
         this.imageView.setFitWidth(15);

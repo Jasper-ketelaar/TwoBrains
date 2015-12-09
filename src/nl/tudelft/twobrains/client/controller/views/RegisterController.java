@@ -231,6 +231,7 @@ public class RegisterController extends AbstractController implements EventHandl
 
         final TooltipTextField vakken = new TooltipTextField("Jouw vakken; meerdere vakken met komma's scheiden"
                     , false, 94.0, 559, "Vakken");
+        vakken.setOnKeyReleased(this);
         textFields.put("Vakken", vakken);
 
         /*final TooltipTextField vakken = new TooltipTextField("Wachtwoord; moet minimaal 6 karakters hebben waarvan " +
