@@ -160,7 +160,7 @@ public class Server {
      * @throws IOException
      */
     public void close() throws IOException {
-        database.write(System.getProperty("user.home").concat("/.TwoBrains/database.json"));
+        database.write(RESOURCES.concat("/database.json"));
         server.close();
     }
 
