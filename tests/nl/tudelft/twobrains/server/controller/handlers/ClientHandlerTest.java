@@ -1,4 +1,4 @@
-package nl.tudelft.twobrains.server.controller;
+package nl.tudelft.twobrains.server.controller.handlers;
 
 import org.junit.Test;
 
