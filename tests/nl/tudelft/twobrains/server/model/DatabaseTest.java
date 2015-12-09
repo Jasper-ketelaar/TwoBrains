@@ -33,9 +33,9 @@ public class DatabaseTest {
 
     @Test
     public void testParse_Empty() throws Exception {
-
+        dbEmpty.write("parseFileTest");
+        assertEquals(dbEmpty, Database.parse("parseFileTest"));
     }
-
     @Test
     public void testGetAlleGebruikers_WithTwo() throws Exception {
         Gebruiker[] gebruikerArray = {koen, buddy};
@@ -55,9 +55,8 @@ public class DatabaseTest {
     }
     @Test
     public void testWrite_Parse() throws Exception {
-        File file = new File("");
-        db.write("file");
-        assertEquals(db, Database.parse("file"));
+        db.write("writeFileTest");
+        assertEquals(db, Database.parse("writeFileTest"));
     }
     //gebruik een labda expression voor het krijgen van de juiste gebruikers
     @Test
