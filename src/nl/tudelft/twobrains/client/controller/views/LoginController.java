@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import nl.tudelft.twobrains.client.TwoBrains;
 import nl.tudelft.twobrains.client.controller.AbstractController;
+import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 
 import java.net.URL;
@@ -71,6 +72,7 @@ public class LoginController extends AbstractController {
         final String response = socket.login(email, pw);
 
         if (response.contains("Succes")) {
+            twoBrains.setGebruiker(Gebruiker.parse(email, response.replace("Succes:", "")));
             twoBrains.show(twoBrains.getMatchScene());
         } else {
             error.setText("Gegevens verkeerd");

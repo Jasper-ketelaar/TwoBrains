@@ -1,4 +1,4 @@
-package nl.tudelft.twobrains.client.view;
+package nl.tudelft.twobrains.client.view.popup;
 
 import javafx.stage.Stage;
 import nl.tudelft.twobrains.client.view.popup.TBPopup;

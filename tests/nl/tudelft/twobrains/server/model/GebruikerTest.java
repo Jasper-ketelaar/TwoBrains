@@ -200,6 +200,35 @@ public class GebruikerTest extends TestCase {
     }
 
     @Test
+    public void testEqualsnegative() throws Exception {
+        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
+        Gebruiker budi = db.get("ibuddyh@gmail.com");
+        assertFalse(koen.equals("koen"));
+    }
+
+    @Test
+    public void testParse() throws Exception{
+        Gebruiker koen = Gebruiker.parse("kvanzeijl@hotmail.com","{\n" +
+                "    \"Voornaam\": \"Koen\",\n" +
+                "    \"Achternaam\": \"Zeijl\",\n" +
+                "    \"Geslacht\": \"M\",\n" +
+                "    \"Leeftijd\": \"18\",\n" +
+                "    \"Wachtwoord\": \"000000\",\n" +
+                "    \"Opleiding\": \"Informatica\",\n" +
+                "    \"Vakken\": \"Calculus\",\n" +
+                "    \"Locatie\": \"Delft\"\n" +
+                "  }");
+        Gebruiker koen2 = db.get("kvanzeijl@hotmail.com");
+        assertEquals(koen,koen2);
+    }
+    @Test
+    public void testParseCatch() throws Exception{
+        Gebruiker koen = Gebruiker.parse("kvanzeijl@hotmail.com","{}");
+
+    }
+
+
+    @Test
     public void testMatches(){
     }
 }

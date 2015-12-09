@@ -15,17 +15,7 @@
          <children>
             <Pane fx:id="gegevens" prefHeight="720.0" prefWidth="479.0">
                <children>
-                  <TextField fx:id="email" layoutX="94.0" layoutY="174.0" onKeyReleased="#emailKeyTyped" prefHeight="30.0" prefWidth="250.0" promptText="email@adres.nl">
-                     <tooltip>
-                        <Tooltip text="Email adres" />
-                     </tooltip></TextField>
-                  <PasswordField fx:id="wachtwoord" layoutX="94.0" layoutY="214.0" onKeyPressed="#wachtwoordKeyPressed" prefHeight="30.0" prefWidth="250.0" promptText="Wachtwoord" />
-                  <TextField fx:id="voornaam" layoutX="94.0" layoutY="319.0" onKeyPressed="#voornaamKeyPressed" prefHeight="30.0" prefWidth="250.0" promptText="Voornaam" />
-                  <TextField fx:id="achternaam" layoutX="94.0" layoutY="359.0" onKeyPressed="#achternaamKeyPressed" prefHeight="30.0" prefWidth="250.0" promptText="Achternaam" />
                   <DatePicker fx:id="geboorte" layoutX="94.0" layoutY="439.0" prefHeight="30.0" prefWidth="250.0" promptText="Geboorte datum" />
-                  <TextField fx:id="locatie" layoutX="94.0" layoutY="479.0" onKeyPressed="#locatieKeyPressed" prefHeight="30.0" prefWidth="250.0" promptText="Locatie" />
-                  <TextField fx:id="opleiding" layoutX="94.0" layoutY="519.0" onKeyPressed="#opleidingKeyPressed" prefHeight="30.0" prefWidth="250.0" promptText="Opleiding" />
-                  <TextField fx:id="vakken" layoutX="94.0" layoutY="559.0" onKeyPressed="#vakkenKeyPressed" prefHeight="30.0" prefWidth="250.0" promptText="Vakken; komma's voor meerdere vakken" />
                   <Label layoutX="84.0" layoutY="264.0" text="Persoonlijke gegevens">
                      <font>
                         <Font size="24.0" />
@@ -47,14 +37,6 @@
                      </font>
                   </Label>
                   <Separator layoutX="43.0" layoutY="83.0" prefHeight="3.0" prefWidth="621.0" />
-                  <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="358.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@info.png" />
-                     </image>
-                     <effect>
-                        <Glow level="0.47" />
-                     </effect>
-                  </ImageView>
                </children>
             </Pane>
          </children>

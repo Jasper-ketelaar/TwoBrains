@@ -152,8 +152,28 @@ public class GebruikerTest extends TestCase {
     //TODO: Schrijven
     @Test
     public void testParse(){
+        testdata.put("Voornaam", "Koen");
+        testdata.put("Achternaam", "Zeijl");
+        testdata.put("Geslacht", "M");
+        testdata.put("Leeftijd", "18");
+        testdata.put("Wachtwoord", "000000");
+        testdata.put("Opleiding", "Informatica");
+        testdata.put("Vakken", "Calculus");
+        testdata.put("Locatie", "Delft");
 
 
+        Gebruiker koen = Gebruiker.parse("kvanzeijl@hotmail.com","{\n" +
+                "    \"Voornaam\": \"Koen\",\n" +
+                "    \"Achternaam\": \"Zeijl\",\n" +
+                "    \"Geslacht\": \"M\",\n" +
+                "    \"Leeftijd\": \"18\",\n" +
+                "    \"Wachtwoord\": \"000000\",\n" +
+                "    \"Opleiding\": \"Informatica\",\n" +
+                "    \"Vakken\": \"Calculus\",\n" +
+                "    \"Locatie\": \"Delft\"\n" +
+                "  }");
+
+        assertFalse(koen.equals(testGebruiker));
     }
 
     //TODO: Schrijven
