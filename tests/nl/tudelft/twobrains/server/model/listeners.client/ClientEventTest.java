@@ -11,11 +11,13 @@ import static org.junit.Assert.*;
 public class ClientEventTest {
 
     ClientEvent clientEvent;
+    byte[] b;
 
     @Before
     public void setUp() throws Exception {
 
         clientEvent = new ClientEvent("test1", "test2");
+        b = new byte[4];
 
     }
     @Test
@@ -30,12 +32,13 @@ public class ClientEventTest {
 
     @Test
     public void testSetData() throws Exception {
-
+        clientEvent.setData(b);
 
     }
 
     @Test
     public void testGetData() throws Exception {
+        clientEvent.setData(b);
 
     }
 }
