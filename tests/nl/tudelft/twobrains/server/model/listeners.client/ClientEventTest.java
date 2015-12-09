@@ -33,12 +33,9 @@ public class ClientEventTest {
     @Test
     public void testSetData() throws Exception {
         clientEvent.setData(b);
+        assertTrue(b.equals(clientEvent.getData()));
 
     }
 
-    @Test
-    public void testGetData() throws Exception {
-        clientEvent.setData(b);
 
-    }
 }
