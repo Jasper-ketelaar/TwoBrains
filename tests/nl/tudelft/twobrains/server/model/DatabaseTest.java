@@ -32,9 +32,22 @@ public class DatabaseTest {
     }
 
     @Test
+    public void testWrite_Empty() throws Exception {
+        dbEmpty.write("");
+        assertEquals(dbEmpty.size(), 0);
+    }
+
+    @Test
+    public void testParse_FileLengthZero() throws Exception {
+        assertEquals(new Database(new JSONObject()), Database.parse(
+                "tests\\nl\\tudelft\\twobrains\\server\\model\\DatabaseTestFiles\\fileLengthZero"));
+    }
+
+    @Test
     public void testParse_Empty() throws Exception {
-        dbEmpty.write("parseFileTest");
-        assertEquals(dbEmpty, Database.parse("parseFileTest"));
+        dbEmpty.write("tests\\nl\\tudelft\\twobrains\\server\\model\\DatabaseTestFiles\\parseFileTest");
+        assertEquals(dbEmpty, Database.parse(
+                "tests\\nl\\tudelft\\twobrains\\server\\model\\DatabaseTestFiles\\parseFileTest"));
     }
     @Test
     public void testGetAlleGebruikers_WithTwo() throws Exception {
@@ -55,8 +68,9 @@ public class DatabaseTest {
     }
     @Test
     public void testWrite_Parse() throws Exception {
-        db.write("writeFileTest");
-        assertEquals(db, Database.parse("writeFileTest"));
+        db.write("tests\\nl\\tudelft\\twobrains\\server\\model\\DatabaseTestFiles\\writeFileTest");
+        assertEquals(db, Database.parse(
+                "tests\\nl\\tudelft\\twobrains\\server\\model\\DatabaseTestFiles\\writeFileTest"));
     }
     //gebruik een labda expression voor het krijgen van de juiste gebruikers
     @Test

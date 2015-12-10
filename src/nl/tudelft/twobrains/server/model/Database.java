@@ -80,6 +80,7 @@ public class Database extends HashMap<String, Gebruiker> {
      */
     public void write(final String file) throws IOException {
         final FileWriter writer = new FileWriter(file);
+        //Need to cover this branch in Test --> Jasper
         if (database.size() < this.size()) {
             for (final Object key : this.keySet()) {
                 database.put(key, this.get(key).getJSONObject());

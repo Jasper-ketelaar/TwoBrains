@@ -2,6 +2,7 @@ package nl.tudelft.twobrains.server.controller;
 
 import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.JSONObject;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -10,14 +11,11 @@ import static org.junit.Assert.*;
  */
 public class MatchFinderTest {
 
-    JSONObject testJson = new JSONObject();
-    Database testDatabase = new Database(testJson);
-
     @Test
-    public void testName(){
+    public void testConstructor(){
 
-        MatchFinder testMatchFinder = new MatchFinder(testDatabase);
+        MatchFinder m = new MatchFinder(new Database(new JSONObject()));
 
-        assertTrue(true);
+        assertNotNull(m);
     }
 }
