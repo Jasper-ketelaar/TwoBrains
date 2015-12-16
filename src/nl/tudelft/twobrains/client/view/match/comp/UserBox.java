@@ -72,7 +72,7 @@ public class UserBox extends HBox {
         text.setFont(Font.font("Verdana", 16));
         text.setText(String.format("%s is een %s van %s jaar oud die %s in %s studeert " +
                         "\nOm contact op te nemen met %s stuur een mail naar %s.", gebruiker.getVoornaam(),
-                gebruiker.getGeslacht().equals("M") ? "man" : "vrouw", gebruiker.getLeeftijd(), gebruiker.getOpleiding(),
+                gebruiker.getGeslacht().contains("M") ? "man" : "vrouw", gebruiker.getLeeftijd(), gebruiker.getOpleiding(),
                 gebruiker.getLocatie(), gebruiker.getVoornaam(), gebruiker.getEmail()));
 
 
