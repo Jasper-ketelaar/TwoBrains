@@ -3,6 +3,8 @@
 "Geslacht":"M","Leeftijd":"18","Voornaam":"Koen","Achternaam":"Zeijl","Wachtwoord":"000000","Locatie":"Delft","Vakken":"Calculus","Opleiding":"Informatica"}
 ,"kevinvheel@gmail.com":{
 "Geslacht":"Man","Leeftijd":"19","Voornaam":"Kevin","Achternaam":"van Heel","Wachtwoord":"Racist420","Locatie":"Delft","Vakken":"Calculus, OOP","Opleiding":"Technische Informatica"}
+,"bernard@gmail.com":{
+"Geslacht":"Vrouw","Leeftijd":"-1","Voornaam":"Bernard","Achternaam":"Bot","Wachtwoord":"Bernard123","Locatie":"Delft","Vakken":"Optellen,Aftrekken","Opleiding":"Gynaecologie"}
 ,"ibuddyh@gmail.com":{
 "Geslacht":"M","Leeftijd":"21","Voornaam":"Budi","Achternaam":"Han","Wachtwoord":"000000","Locatie":"Delft","Vakken":"Calculus","Opleiding":"Informatica"}
 }
