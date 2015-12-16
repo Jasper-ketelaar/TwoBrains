@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-//TODO: Javadoc comments
 public class Database extends HashMap<String, Gebruiker> {
 
     private final JSONObject database;

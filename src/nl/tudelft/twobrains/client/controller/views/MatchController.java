@@ -30,10 +30,29 @@ public class MatchController extends AbstractController {
 
     private final TwoBrains twoBrains;
 
+    /**
+     * Class constructor specificeren welke TwoBrains. De MatchController
+     * wordt zo aan een specifieke TwoBrains app gekoppeld.
+     * @param twoBrains
+     */
     public MatchController(final TwoBrains twoBrains) {
         this.twoBrains = twoBrains;
     }
 
+    /**
+     * Methode voor het filteren welke Matches worden weergegeven als
+     * er een letter in de searchbar wordt toegevoegd of weggehaald.
+     * Eerst wordt gecheckd of de key een backspace is of niet.
+     * Als het een backspace is wordt de String waarmee wordt
+     * vergeleken een character korter, anders wordt de letter
+     * toegevoegd.
+     * <p>
+     * De verschillende Matches (Gebruikers) worden geselecteerd of
+     * ze wel of niet de String in hun voor/achternaam bevatten.
+     * Zo wel blijven ze staan, anders 'faden' ze weg.
+     *
+     * @param event De KeyEvent waarop gereageerd moet worden.
+     */
     @FXML
     public void filterAction(final KeyEvent event) {
 
@@ -68,11 +87,22 @@ public class MatchController extends AbstractController {
         }
     }
 
+    /**
+     * Methode die de URL en de ResourceBundle specificeerd voor
+     * het opstarten van deze controller.
+     *
+     * @param location De locatie URL waarna de controller moet
+     *                 reageren.
+     * @param resources De resources die worden door de controller.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
+    /**
+     * Methode voor het initialiseren van de users in de MatchScene.
+     */
     @Override
     public void initItems() {
         vBox.getChildren().add(new UserBox(twoBrains.getGebruiker()));

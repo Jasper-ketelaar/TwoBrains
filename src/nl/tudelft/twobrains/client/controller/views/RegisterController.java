@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
  */
 public class RegisterController extends AbstractController implements EventHandler<KeyEvent> {
 
-    public static final String EMAIL_REGEX = "^[-a-z0-9A-Z~!$%^&*_=+}{'?]+(\\.[-a-z0-9~!$%^&*_=+}{\\'?]+)*@([a-z0-9_][-A-Z-a-z0-9_]*(\\.[-a-z0-9_]+)*\\.(com|edu|net|org|nl)|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})?$";
+    public static final String EMAIL_REGEX = "^[-a-z0-9A-Z~!$%^&*_=+}{'?]+(\\.[-a-z0-9~!$%^&*_=+}{\\'?]+)*@([a-z0-9_][-A-Z-a-z0-9_]*(\\.[-a-z0-9_]+)*\\.(com|edu|net|org|nl)|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,30}))(:[0-9]{1,5})?$";
     public static final Pattern PATTERN = Pattern.compile(EMAIL_REGEX);
 
     private final HashMap<String, TooltipTextField> textFields = new HashMap<>();
