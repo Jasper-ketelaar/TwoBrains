@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Leroy on 25-11-2015.
  */
-public class GebruikerTest extends TestCase {
+public class GebruikerTest {
 
     String email = "leroyvelzel@gmail.com";
     JSONObject testdata = new JSONObject();

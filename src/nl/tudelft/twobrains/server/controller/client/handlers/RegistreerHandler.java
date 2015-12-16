@@ -5,6 +5,7 @@ import nl.tudelft.twobrains.server.model.Database;
 import nl.tudelft.twobrains.server.model.Gebruiker;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientListener;
+import org.json.simple.parser.ParseException;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -44,9 +45,14 @@ public class RegistreerHandler implements ClientListener {
                 if (database.containsKey(email)) {
                     responseStream.writeUTF("Email bestaat al");
                 } else {
-                    final Gebruiker gebruiker = Gebruiker.parse(email, input);
-                    database.add(gebruiker);
-                    responseStream.writeUTF("Succes");
+                    final Gebruiker gebruiker;
+                    try {
+                        gebruiker = Gebruiker.parse(email, input);
+                        database.add(gebruiker);
+                        responseStream.writeUTF("Succes");
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

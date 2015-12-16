@@ -33,15 +33,11 @@ public class Gebruiker {
      * @param data  The other information of the user.
      * @return Null, a new Gebruiker Object, if there are no parse exceptions.
      */
-    public static Gebruiker parse(final String email, final String data) {
+    public static Gebruiker parse(final String email, final String data) throws ParseException {
         final JSONParser parser = new JSONParser();
-        try {
-            final JSONObject obj = (JSONObject) parser.parse(data);
-            return new Gebruiker(email, obj);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+
+        final JSONObject obj = (JSONObject) parser.parse(data);
+        return new Gebruiker(email, obj);
     }
 
     /**
@@ -85,9 +81,9 @@ public class Gebruiker {
         String alleVakken = "";
 
         for (int i = 0; i < vakken.length; i++) {
-            alleVakken = alleVakken + getVakken()[i] + ", " ;
+            alleVakken = alleVakken + getVakken()[i] + ", ";
         }
-        alleVakken = alleVakken.substring(0, alleVakken.length()-2);
+        alleVakken = alleVakken.substring(0, alleVakken.length() - 2);
         return alleVakken;
     }
 
@@ -154,6 +150,7 @@ public class Gebruiker {
     /**
      * Equals methode
      * Kijkt of JSONobject en email gelijk zijn of niet
+     *
      * @param other Het object waarmee wordt vergeleken
      * @return boolean met true als gelijk en false als niet gelijk
      */

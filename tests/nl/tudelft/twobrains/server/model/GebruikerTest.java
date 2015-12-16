@@ -9,10 +9,10 @@ import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 
-public class GebruikerTest extends TestCase {
+public class GebruikerTest {
     Database db;
 
     public GebruikerTest() throws IOException, ParseException {
@@ -220,6 +220,13 @@ public class GebruikerTest extends TestCase {
                 "  }");
         Gebruiker koen2 = db.get("kvanzeijl@hotmail.com");
         assertEquals(koen,koen2);
+    }
+
+    @Test(expected=ParseException.class)
+    public void testParsefail() throws ParseException {
+        Gebruiker gebruiker = Gebruiker.parse("", "sdafs");
+
+
     }
 
 
