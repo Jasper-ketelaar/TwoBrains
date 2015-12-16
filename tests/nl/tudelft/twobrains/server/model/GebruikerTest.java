@@ -221,11 +221,6 @@ public class GebruikerTest extends TestCase {
         Gebruiker koen2 = db.get("kvanzeijl@hotmail.com");
         assertEquals(koen,koen2);
     }
-    @Test
-    public void testParseCatch() throws Exception{
-        Gebruiker koen = Gebruiker.parse("kvanzeijl@hotmail.com","{}");
-
-    }
 
 
     @Test
