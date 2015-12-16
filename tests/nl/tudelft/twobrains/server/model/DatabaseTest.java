@@ -26,7 +26,7 @@ public class DatabaseTest {
     Database dbEmpty = new Database(new JSONObject());
 
     public DatabaseTest() throws IOException, org.json.simple.parser.ParseException {
-        db = Database.parse(Server.RESOURCES + "/database.json");
+        db = Database.parse(Server.RESOURCES + "/databasetest.json");
         koen = db.get("kvanzeijl@hotmail.com");
         buddy = db.get("ibuddyh@gmail.com");
     }
