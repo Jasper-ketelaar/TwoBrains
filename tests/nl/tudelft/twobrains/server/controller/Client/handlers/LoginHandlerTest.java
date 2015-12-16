@@ -1,15 +1,5 @@
 package nl.tudelft.twobrains.server.controller.client.handlers;
 
-<<<<<<< HEAD
-import nl.tudelft.twobrains.server.controller.client.handlers.LoginHandler;
-import nl.tudelft.twobrains.server.model.Database;
-import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
-import org.json.simple.JSONObject;
-import org.junit.Test;
-import org.omg.CORBA.DataOutputStream;
-
-import static org.junit.Assert.*;
-=======
 import nl.tudelft.twobrains.server.Server;
 import nl.tudelft.twobrains.server.model.Database;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
@@ -23,25 +13,11 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
->>>>>>> origin/master
 
 /**
  * Created by Bernard on 10-12-2015.
  */
 public class LoginHandlerTest {
-
-<<<<<<< HEAD
-    LoginHandler loginHandler = new LoginHandler();
-    Database database = new Database(new JSONObject());
-   // DataOutputStream dataStream = new
-    ClientEvent eventLogin = new ClientEvent("Login", "A");
-    ClientEvent eventNotLogin = new ClientEvent("NotLogin", "B");
-
-    @Test
-    public void testOnClientEvent() throws Exception {
-    //   loginHandler.onClientEvent(eventLogin, dataStream, database);
-=======
-
     @Test
     public void LoginHandlerTest() {
         LoginHandler testLoginHandler = new LoginHandler();
@@ -126,6 +102,5 @@ public class LoginHandlerTest {
 
         System.out.println(ByteBuffer.wrap(outputStream.toByteArray()).get(0));
 
->>>>>>> origin/master
     }
 }

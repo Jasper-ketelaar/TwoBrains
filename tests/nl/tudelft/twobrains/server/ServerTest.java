@@ -30,6 +30,7 @@ public class ServerTest extends TestCase {
 
     @Test
     public void testClose() {
+
         try {
             testServer.close();
         } catch (IOException e) {
