@@ -1,61 +1,59 @@
-package nl.tudelft.twobrains.server.controller.Client;
+package nl.tudelft.twobrains.server.controller.client;
 
+import com.sun.org.glassfish.external.arc.Taxonomy;
+import junit.framework.TestCase;
 import nl.tudelft.twobrains.server.Server;
 import nl.tudelft.twobrains.server.controller.client.ClientHandler;
 import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.JSONObject;
 import org.junit.Test;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Bernard on 2-12-2015.
+ * Created by Leroy on 30-11-2015.
  */
-public class ClientHandlerTest {
+public class ClientHandlerTest extends TestCase {
 
-    /*
-    Server maken om ClientHandler op te testen. (Kijk naar ServerTest).
-     */
     Server testServer;
-    Socket socket;
 
     {
         try {
             testServer = new Server(5555);
-            socket = new Socket("a", 4321);
-        } catch (BindException e){
-
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    Database database = new Database(new JSONObject());
-    ClientHandler clientHandler;
+    @Test
+    public void testHandler() {
+        JSONObject testObj = new JSONObject();
+        Database DB = new Database(testObj);
 
-    public ClientHandlerTest() throws IOException {
-        clientHandler = new ClientHandler(socket, database);
+        Socket testSocket;
+        ClientHandler testHandler = null;
+
+        try {
+            this.testServer = new Server(4444);
+            new Socket("127.0.0.1", 4444);
+            testSocket = testServer.getSocket().accept();
+            testHandler = new ClientHandler(testSocket, DB);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        testHandler.start();
+
+
     }
 
 
     @Test
-    public void testRun(){
-        clientHandler.run();
-    }
-
-    @Test
-    public void testRun2() throws Exception {
-
-    }
-
-    @Test
-    public void testConstructor() throws Exception {
-        assertNotNull(clientHandler);
+    public void testRun() {
+        // testServer.run();
     }
 }
