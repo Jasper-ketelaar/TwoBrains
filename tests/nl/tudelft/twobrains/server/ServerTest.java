@@ -70,4 +70,8 @@ public class ServerTest extends TestCase {
         testServer.setHandler(testHandler);
         assertEquals(testHandler, testServer.getHandler());
     }
+    @Test
+    public void testRun(){
+       // testServer.run();
+    }
 }
