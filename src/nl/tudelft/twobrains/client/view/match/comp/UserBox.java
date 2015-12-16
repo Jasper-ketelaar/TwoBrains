@@ -62,7 +62,7 @@ public class UserBox extends HBox {
         name.setPrefWidth(579.0);
         name.setText(gebruiker.getVoornaam() + " " + gebruiker.getAchternaam());
         name.setFont(Font.font("Verdana", 36));
-
+        //test
         final TextArea text = new TextArea();
         text.setEditable(false);
         text.setLayoutX(20.0);
