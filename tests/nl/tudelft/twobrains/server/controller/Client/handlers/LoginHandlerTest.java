@@ -1,4 +1,4 @@
-package nl.tudelft.twobrains.server.controller.handlers;
+package nl.tudelft.twobrains.server.controller.Client.handlers;
 
 import static org.junit.Assert.*;
 

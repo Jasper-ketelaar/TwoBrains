@@ -1,4 +1,4 @@
-package nl.tudelft.twobrains.server.controller.handlers;
+package nl.tudelft.twobrains.server.controller.Client.handlers;
 
 import nl.tudelft.twobrains.server.controller.client.handlers.ImageHandler;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;

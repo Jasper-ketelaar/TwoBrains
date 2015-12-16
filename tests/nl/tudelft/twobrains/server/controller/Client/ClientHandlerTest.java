@@ -1,4 +1,4 @@
-package nl.tudelft.twobrains.server.controller;
+package nl.tudelft.twobrains.server.controller.Client;
 
 import nl.tudelft.twobrains.server.Server;
 import nl.tudelft.twobrains.server.controller.client.ClientHandler;
