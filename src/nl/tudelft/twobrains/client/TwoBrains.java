@@ -121,8 +121,8 @@ public class TwoBrains extends Application {
      * @param scene wordt geshowed op het beeld.
      */
     public void show(final SceneWrapper scene) {
-        this.stage.setScene(scene.getScene());
         scene.getController().initItems();
+        this.stage.setScene(scene.getScene());
         this.stage.centerOnScreen();
 
     }

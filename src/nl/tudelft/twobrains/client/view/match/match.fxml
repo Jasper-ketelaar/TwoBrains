@@ -16,7 +16,7 @@
                   <Font size="39.0" />
                </font>
             </Label>
-            <TextField fx:id="filter" layoutX="953.0" layoutY="37.0" onKeyPressed="#filterAction" prefHeight="26.0" prefWidth="294.0" promptText="Filter" />
+            <TextField fx:id="filter" layoutX="953.0" layoutY="37.0" onKeyReleased="#filterAction" prefHeight="26.0" prefWidth="294.0" promptText="Filter" />
          </children>
       </Pane>
       <ScrollPane prefHeight="609.0" prefViewportHeight="621.0" prefViewportWidth="1256.0" prefWidth="1259.0">

@@ -38,18 +38,18 @@ public class MatchController extends AbstractController {
     public void filterAction(final KeyEvent event) {
 
         String input = filter.getText();
-        if (event.getCode().equals(KeyCode.BACK_SPACE)) {
+        /*if (event.getCode().equals(KeyCode.BACK_SPACE)) {
             input = input.substring(0, input.length() - 1);
         } else {
             input = input + event.getText();
-        }
+        }*/
 
         for (final Node child : vBox.getChildren()) {
             if (child instanceof UserBox) {
                 final UserBox userBox = (UserBox) child;
                 final Gebruiker gebruiker = userBox.getGebruiker();
-                System.out.println(filter.getText());
-                if ((gebruiker.getVoornaam() + gebruiker.getAchternaam()).toLowerCase().contains(input)) {
+                final String naam = gebruiker.getVoornaam() + " " + gebruiker.getAchternaam();
+                if ((naam).toLowerCase().contains(input.toLowerCase())) {
                     if (userBox.getOpacity() == 1) return;
                     final FadeTransition ft = new FadeTransition(Duration.millis(500), userBox);
                     ft.setToValue(1);

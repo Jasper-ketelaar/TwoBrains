@@ -19,24 +19,23 @@ import static org.junit.Assert.assertTrue;
 public class ServerTest extends TestCase {
 
     Server testServer;
-
     {
         try {
             testServer = new Server(5555);
-        } catch (BindException e){
-
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
     @Test
-    public void testMain() {
-
-
-
+    public void testClose() {
+        try {
+            testServer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assertTrue(testServer.getSocket().isClosed());
     }
 
     @Test
@@ -49,29 +48,26 @@ public class ServerTest extends TestCase {
         assertEquals(DB, testServer.getDatabase());
     }
 
-    //TODO: Fixen(geeft timeout)
+
     @Test
     public void testHandler(){
         JSONObject testObj = new JSONObject();
         Database DB = new Database(testObj);
+        System.out.println("TEst");
 
 
         Socket testSocket;
-        ServerSocket testServerSocket;
-        SocketAddress me = new InetSocketAddress("127.0.0.1", 5555);
         ClientHandler testHandler = null;
         try {
-            testServerSocket = new ServerSocket(4444);
-            testSocket = testServerSocket.accept();
-
+            this.testServer = new Server(4444);
+            new Socket("127.0.0.1", 4444);
+            testSocket = testServer.getSocket().accept();
             testHandler = new ClientHandler(testSocket, DB);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
         testServer.setHandler(testHandler);
-
         assertEquals(testHandler, testServer.getHandler());
     }
 }

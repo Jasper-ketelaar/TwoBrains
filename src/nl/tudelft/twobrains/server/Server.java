@@ -122,21 +122,18 @@ public class Server {
      * Probeert de ClientHandler te starten als er connectie is.
      */
     public void run() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final Scanner scanner = new Scanner(System.in);
-                while (true) {
-                    if (scanner.hasNextLine()) {
-                        final String line = scanner.nextLine();
-                        if (line.equalsIgnoreCase("Stop")) {
-                            try {
-                                close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            System.exit(0);
+        new Thread(() -> {
+            final Scanner scanner = new Scanner(System.in);
+            while (true) {
+                if (scanner.hasNextLine()) {
+                    final String line = scanner.nextLine();
+                    if (line.equalsIgnoreCase("Stop")) {
+                        try {
+                            close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
+                        System.exit(0);
                     }
                 }
             }
@@ -161,6 +158,14 @@ public class Server {
     public void close() throws IOException {
         database.write(RESOURCES.concat("/database.json"));
         server.close();
+    }
+
+    /**
+     * Verkrijgt de server socket
+     * @return de server socket
+     */
+    public ServerSocket getSocket() {
+        return this.server;
     }
 
 
