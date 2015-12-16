@@ -64,9 +64,24 @@ public class RegisterController extends AbstractController implements EventHandl
 
     private BufferedImage profileImage;
 
+    /**
+     * Hier wordt dce contructor voor de Register controller aangemaakt
+     * Ook hier wordt het twobrains object meegegeven als parameter, en vervolgens geinitialiseerd
+     * @param twoBrains
+     */
     public RegisterController(final TwoBrains twoBrains) {
         this.twoBrains = twoBrains;
     }
+
+    /**
+     * Een void methode waarin het mogelijk is om een profielfoto te uploaden
+     * Krijgt een ActionEvent als parameter mee
+     * @param evt
+     * Methode checkt eerst of er file wordt meegegeven, (!= null)
+     * Vervolgens wordt er gecheckt of de file groter is dan 500kb, indien dit het geval krijgt de gebruiker een pop-up met een warning
+     * Als de file kleiner is dan 500kb, gaat hij proberen het bestand te lezen
+     * Als laatste wordt de foto in de userbox geplaatst dmv van scaling
+     */
 
     public void upload(final ActionEvent evt) {
         final FileChooser chooser = new FileChooser();
@@ -98,6 +113,16 @@ public class RegisterController extends AbstractController implements EventHandl
 
     }
 
+
+    /**
+     * Void methode waarbij de gebruiker zich registreert
+     * Als allereerst worden de attributen van de registercontroller class gecast naar Strings
+     * Vervolgens wordt gecontroleerd met behulp van een boolean of er al een foto is geupload.
+     * Indien geen foto, krijgt de gebruiker een error
+     * Ook wordt de userinput gecheckt, op het moment dat dit allemaal in orde is dan wordt er nieuw final object gecreeerd
+     * In het final object wordt alle userinput geinitialiseerd in het JSONobject
+     * Indien het object geinitialiseerd is, krijgt de user te zien dat het gelukt is dmv de string "succes"
+     */
     @FXML
     public void register(final ActionEvent evt) {
         final String emailText = textFields.get("Email").getTextField().getText();
@@ -146,6 +171,18 @@ public class RegisterController extends AbstractController implements EventHandl
         }
 
     }
+    /**
+     * Methode waarin de leeftijd van de gebruiker wordt berekend
+     * @param geboorte
+     * Wordt gedaan dmv van de standaard java class Calender
+     * Waarden worden eerst uit het attribuut de Dateset Geboorte gehaald en geinitialiseerd op Jaar/Maand/Dag
+     * vervolgens wordt de leeftijd int gedefineerd.
+     * Maar er moet rekening worden gehouden met de maand waarin, iemand jarig is. Want Huidige jaar - Geboortejaar werkt niet altijd
+     * Dan een dubbel if statement om deze 'error' er uit te halen.
+     * Als Huidige maand eerder is dan de maand waarin gebruiker jarig is ( hij moet nog jarig worden dit jaar) dan leeftijd naar beneden
+     * Als de Huidige maand gelijk is aan de maand waarin de gebruiker jarig is (hij kán nog jarig worden) dan vergelijkt hij de dagen met elkaar
+     * @return age
+     */
 
     private String calculateAge(final LocalDate geboorte) {
         final Calendar birth = Calendar.getInstance();
@@ -169,21 +206,24 @@ public class RegisterController extends AbstractController implements EventHandl
         return age + "";
     }
 
+    /**
+     * Gebruiker krijgt de mogelijkheid om registratie te annuleren
+     * Indien even annuleren geactiveerd wordt de gebruiker terug gestuurd naar loginscherm
+     * @param evt
+     */
     public void annuleer(final ActionEvent evt) {
         twoBrains.show(twoBrains.getLoginScene());
     }
 
-    private boolean validate(final Node node, final String value) {
-        if (value.equals("")) {
-            System.out.println(node);
-            node.getStyleClass().add("error");
-            return false;
-        } else {
-            node.getStyleClass().remove("error");
-            return true;
-        }
-    }
-
+    /**
+     * Een methode die automatisch wordt aangeroepen daar JavaFX,
+     * De methode controlleert voor ieder userinput of de userinput correct is
+     * Voor iedere ToolTip wordt gecheckt aan de voorwaarde
+     * Indien een ToolTip niet in orde is staat achter de tooltip een informatiebalk
+     * In de informatiebalk staat waardoor de userinput niet in orde is
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         final TooltipTextField email = new TooltipTextField("Email adres; moet geldig zijn", false, 94.0, 174.0, "email@adres.com");
@@ -241,6 +281,9 @@ public class RegisterController extends AbstractController implements EventHandl
     }
 
     @Override
+    /**
+     * De tooltipbox waarbij de gebruiker kan kiezen tussen het geslacht man, en het geslacht vrouw
+     */
     public void initItems() {
         this.geslacht.getItems().clear();
         this.geslacht.getItems().addAll("Man", "Vrouw");
