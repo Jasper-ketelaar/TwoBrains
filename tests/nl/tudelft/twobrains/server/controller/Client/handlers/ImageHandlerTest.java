@@ -1,9 +1,9 @@
-package nl.tudelft.twobrains.server.controller.Client.handlers;
+package nl.tudelft.twobrains.server.controller.client.handlers;
 
-import com.sun.deploy.util.ArrayUtil;
 import nl.tudelft.twobrains.server.Server;
-import nl.tudelft.twobrains.server.controller.client.handlers.ImageHandler;
+import nl.tudelft.twobrains.server.model.Database;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
@@ -11,48 +11,68 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.nio.ByteBuffer;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Bernard on 10-12-2015.
  */
 public class ImageHandlerTest {
+    @Test
+    public void ImageHandlerTest() {
+        ImageHandler testImageHandler = new ImageHandler();
 
-    /*
-    Hoe test je private methods? + OutputStreams?
-     */
-
-    ImageHandler imageH = new ImageHandler();
-    ClientEvent event = new ClientEvent("Image", "kvanzeijl@hotmail.com");
+    }
 
     @Test
-    public void testOnClientEvent() throws Exception {
-        final ByteArrayOutputStream response = new ByteArrayOutputStream();
-        final DataOutputStream outputStream = new DataOutputStream(response);
+    public void onClientEventTestNIET() {
+        ImageHandler testImageHandler = new ImageHandler();
 
-        final ByteArrayOutputStream imageBytes = new ByteArrayOutputStream();
-        BufferedImage image = ImageIO.read(new File(".TwoBrains/resources/images/kvanzeijl@hotmail.com.jpg"));
-        ImageIO.write(image, "jpg", imageBytes);
-        byte[] bytes = imageBytes.toByteArray();
-
-        imageH.onClientEvent(event, outputStream, null);
-
-        final int size = ByteBuffer.wrap(response.toByteArray(), 0, 4).asIntBuffer().get();
-        //final byte[] responseImage = ByteBuffer.wrap(response.toByteArray(), 4, response.size() - 1).array();
-        //System.out.println(bytes.length);
-        System.out.println(imageBytes.toByteArray()[3]);
-        System.out.println(response.toByteArray()[3]);
-        //System.out.println(trim(response.toByteArray(), 4).length);
-        assertArrayEquals(trim(response.toByteArray(), 4), trim(response.toByteArray(), 4));
-    }
-
-    public byte[] trim(final byte[] bytes, final int offset) {
-        final byte[] response = new byte[bytes.length - offset];
-        for (int i = 0; i < response.length; i++) {
-            response[i] = bytes[i + (offset - 1)];
+        ClientEvent testClientEvent = new ClientEvent("NIETImage", "argument");
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+        Database testDatabase = null;
+        try {
+            testDatabase = Database.parse(Server.RESOURCES + "/databasetest.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        return response;
+
+        testImageHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
+
+
     }
+
+    @Test
+    public void onClientEventTestGeenImage() throws IOException {
+        ImageHandler testImageHandler = new ImageHandler();
+        Database testDatabase = null;
+        try {
+            testDatabase = Database.parse(Server.RESOURCES + "/database.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println(testDatabase.get("ibuddyh@gmail.com").getJSONString());
+
+        ClientEvent testClientEvent = new ClientEvent("Image", "ibuddyh@gmail.com");
+        BufferedImage image = ImageIO.read(new File(".TwoBrains/resources/images/ibuddyh@gmail.com.jpg"));
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        ImageIO.write(image, "jpg", outputStream);
+        testClientEvent.setData(outputStream.toByteArray());
+
+        outputStream.reset();
+
+        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+
+        testImageHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
+
+        System.out.println(ByteBuffer.wrap(outputStream.toByteArray()).get(0));
+
+    }
+
 }
