@@ -17,11 +17,11 @@ public class TBPopupTest {
     TBPopup testTBPopup = new TBPopup(testStage, "Warning", 400, 400, 3);
 
 
-    @Test
-    public void testWarning() {
-
-        TBPopup testTBPopup = new TBPopup(testStage, "Warning", 400, 400, 0);
-        testTBPopup.decodeType(0).equals(Color.RED);
-
-    }
+//    @Test
+//    public void testWarning() {
+//
+//        TBPopup testTBPopup = new TBPopup(testStage, "Warning", 400, 400, 0);
+//        testTBPopup.decodeType(0).equals(Color.RED);  //private methode, public maken?
+//
+//    }
 }

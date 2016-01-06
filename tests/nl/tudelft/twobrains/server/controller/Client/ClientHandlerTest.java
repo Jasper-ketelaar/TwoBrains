@@ -1,4 +1,4 @@
-package nl.tudelft.twobrains.server.controller.client;
+package nl.tudelft.twobrains.server.controller.Client;
 
 import com.sun.org.glassfish.external.arc.Taxonomy;
 import junit.framework.TestCase;

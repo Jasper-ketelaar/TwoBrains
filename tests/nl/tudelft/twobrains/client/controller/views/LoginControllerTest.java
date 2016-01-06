@@ -1,7 +1,9 @@
 package nl.tudelft.twobrains.client.controller.views;
 
-import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 import nl.tudelft.twobrains.client.TwoBrains;
+import nl.tudelft.twobrains.client.view.SceneWrapper;
+import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,11 +13,16 @@ import static org.junit.Assert.*;
  */
 public class LoginControllerTest {
 
-    LoginController loginController = new LoginController(new TwoBrains());
+    @Test
+    public void loginControllerTest(){
+        LoginController loginController = new LoginController(new TwoBrains());
+    }
 
     @Test
     public void testLogin() throws Exception {
-        loginController.login(new ActionEvent());
+        TwoBrains twoBrains = new TwoBrains();
+        LoginController loginController = new LoginController(twoBrains);
+        twoBrains.getLoginScene().
 
     }
 
