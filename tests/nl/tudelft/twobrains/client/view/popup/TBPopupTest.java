@@ -13,15 +13,5 @@ import org.junit.Test;
 
 //TODO: weet niet of hier een test voor geschreven moet worden
 public class TBPopupTest {
-    Stage testStage = new Stage();
-    TBPopup testTBPopup = new TBPopup(testStage, "Warning", 400, 400, 3);
 
-
-    @Test
-    public void testWarning() {
-
-        TBPopup testTBPopup = new TBPopup(testStage, "Warning", 400, 400, 0);
-        testTBPopup.decodeType(0).equals(Color.RED);
-
-    }
 }
