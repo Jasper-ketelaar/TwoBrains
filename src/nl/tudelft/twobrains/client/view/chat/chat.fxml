@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="281.0" prefWidth="1280.0">
+         <children>
+            <Label layoutX="577.0" layoutY="7.0" text="Naam">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="147.0" fitWidth="168.0" layoutX="21.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <ScrollPane prefViewportHeight="458.0" prefViewportWidth="1280.0">
+         <content>
+            <TextArea prefHeight="565.0" prefWidth="1280.0" />
+         </content>
+      </ScrollPane>
+      <Pane prefHeight="195.0" prefWidth="1280.0">
+         <children>
+            <TextField layoutX="10.0" layoutY="12.0" prefHeight="44.0" prefWidth="1052.0" />
+            <Button layoutX="1089.0" layoutY="13.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="168.0" text="Button" />
+         </children>
+      </Pane>
+   </children>
+</VBox>
