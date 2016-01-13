@@ -102,6 +102,13 @@ public class TwoBrainsSocket extends Socket {
         return "";
     }
 
+    /**
+     * Methode om een chatmessage te zenden
+     *
+     * @param email email van de Gebruiker waar het bericht naar verstuurd wordt
+     * @param bericht bericht dat wordt verzonden
+     * @return De UTF die terug van de Server komt.
+     */
     public String message(final String email, final String bericht){
         try {
             getOutputStream().writeUTF("Chat:;" + email + ":" + bericht);
