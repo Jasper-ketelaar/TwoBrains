@@ -6,14 +6,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nl.tudelft.twobrains.client.TwoBrains;
+import nl.tudelft.twobrains.client.controller.AbstractController;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 
 import javax.swing.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Created by Leroy on 13-1-2016.
  */
-public class ChatController {
+public class ChatController extends AbstractController {
 
     @FXML
     private TextArea chatWindow;
@@ -71,5 +74,9 @@ public class ChatController {
         Verstuurder.show(Verstuurder.getRegisterScene());
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 
 }
