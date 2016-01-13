@@ -105,6 +105,8 @@ public class MatchController extends AbstractController {
      */
     @Override
     public void initItems() {
+        vBox.setFocusTraversable(false);
         vBox.getChildren().addAll(new UserBox(twoBrains.getGebruiker()), new UserBox(twoBrains.getGebruiker()));
+
     }
 }

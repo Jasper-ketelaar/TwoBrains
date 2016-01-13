@@ -2,6 +2,7 @@ package nl.tudelft.twobrains.client.view.match.comp;
 
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -27,7 +29,9 @@ import java.awt.image.BufferedImage;
  */
 public class UserBox extends HBox {
 
-    //attribuut Gebruiker
+    /*
+     *  Attribuut gebruiker
+     */
 
     private final Gebruiker gebruiker;
 
@@ -43,7 +47,7 @@ public class UserBox extends HBox {
      */
     public UserBox(final Gebruiker gebruiker) {
         this.gebruiker = gebruiker;
-
+        this.setFocusTraversable(false);
         final BufferedImage bImage = gebruiker.getUserImage();
         final WritableImage writableImage = new WritableImage(bImage.getWidth(), bImage.getHeight());
         final Image image = SwingFXUtils.toFXImage(bImage, writableImage);
@@ -62,7 +66,7 @@ public class UserBox extends HBox {
         name.setPrefWidth(579.0);
         name.setText(gebruiker.getVoornaam() + " " + gebruiker.getAchternaam());
         name.setFont(Font.font("Verdana", 36));
-        //test
+
         final TextArea text = new TextArea();
         text.setEditable(false);
         text.setLayoutX(20.0);
@@ -84,6 +88,11 @@ public class UserBox extends HBox {
 
         info.getChildren().addAll(name, text, list);
         this.getChildren().addAll(imgView, info);
+        this.setOnMouseClicked(event -> {
+
+            this.setStyle("-fx-background-color: lightgray");
+
+        });
     }
 
     /**

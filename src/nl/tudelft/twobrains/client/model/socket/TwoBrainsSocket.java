@@ -102,6 +102,16 @@ public class TwoBrainsSocket extends Socket {
         return "";
     }
 
+    public String message(final String email, final String bericht){
+        try {
+            getOutputStream().writeUTF("Chat:;" + email + ":" + bericht);
+            return getInputStream().readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 
     /**
      * Methode om een account te registeren op de server
