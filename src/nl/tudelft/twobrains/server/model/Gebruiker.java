@@ -5,6 +5,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.util.Arrays;
+
 /**
  * TODO: Javadoc comments
  */
@@ -65,8 +67,8 @@ public class Gebruiker {
         return getAttribuut("Geslacht");
     }
 
-    public String getLeeftijd() {
-        return getAttribuut("Leeftijd");
+    public int getLeeftijd() {
+        return Integer.parseInt(getAttribuut("Leeftijd"));
     }
 
     public String getOpleiding() {
@@ -141,9 +143,46 @@ public class Gebruiker {
         return builder.toString();
     }
 
-    //TODO: Implementatie schrijven
-    public boolean matches(final Gebruiker other) {
-        return false;
+    /**
+     * Method for determining the match score between two users
+     * @param other the other users
+     * @return the match score between this and the other user
+     */
+    public int matchScore(final Gebruiker other) {
+        int score = 0;
+
+        for (final String vak : this.getVakken()) {
+            for (final String vak2 : other.getVakken()) {
+                if (vak.equals(vak2)) {
+                    score += 2;
+                }
+            }
+        }
+
+        if (Arrays.equals(this.getVakken(), other.getVakken())) {
+            score *= 2;
+        }
+
+        if (other.getLocatie().equalsIgnoreCase(this.getLocatie())) {
+            score *= 1.5;
+        }
+
+        final int leeftijdVerschil = Math.abs(other.getLeeftijd() - this.getLeeftijd());
+        switch (leeftijdVerschil) {
+            case 0:
+                score *= 1.5;
+                break;
+
+            case 1:case 2:
+                score *= 1.3;
+                break;
+
+            case 3:case 4:
+                score *= 1.2;
+                break;
+        }
+
+        return score;
     }
 
 

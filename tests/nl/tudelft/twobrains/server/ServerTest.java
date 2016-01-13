@@ -7,8 +7,11 @@ import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.JSONObject;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
+import java.nio.ByteBuffer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -28,15 +31,30 @@ public class ServerTest extends TestCase {
     }
 
 
+
     @Test
     public void testClose() {
 
         try {
             testServer.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         assertTrue(testServer.getSocket().isClosed());
+    }
+
+    @Test
+    public void test() {
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        final DataOutputStream outputStream1 = new DataOutputStream(outputStream);
+        try {
+            outputStream1.writeUTF("Test");
+            System.out.println(outputStream.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test

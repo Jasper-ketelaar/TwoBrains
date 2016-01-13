@@ -56,7 +56,7 @@ public class ImageHandlerTest {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.println(testDatabase.get("ibuddyh@gmail.com").getJSONString());
+
 
         ClientEvent testClientEvent = new ClientEvent("Image", "ibuddyh@gmail.com");
         BufferedImage image = ImageIO.read(new File(".TwoBrains/resources/images/ibuddyh@gmail.com.jpg"));
@@ -71,7 +71,7 @@ public class ImageHandlerTest {
 
         testImageHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
 
-        System.out.println(ByteBuffer.wrap(outputStream.toByteArray()).get(0));
+
 
     }
 

@@ -29,8 +29,9 @@ public class MatchFinder extends Thread {
         while (true) {
             for (final Gebruiker gebruiker : database.getAlleGebruikers()) {
                 for (final Gebruiker gebruiker2 : database.filter(g -> !gebruiker.equals(g))) {
-                    if (gebruiker.matches(gebruiker2)) {
-                        //TODO: Match case
+                    final int score = gebruiker.matchScore(gebruiker2);
+                    if (score > 2) {
+
                     }
                 }
             }
