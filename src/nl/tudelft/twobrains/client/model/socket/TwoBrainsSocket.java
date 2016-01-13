@@ -103,7 +103,13 @@ public class TwoBrainsSocket extends Socket {
     }
 
     public String message(final String email, final String bericht){
-
+        try {
+            getOutputStream().writeUTF("Chat:;" + email + ":" + bericht);
+            return getInputStream().readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 
