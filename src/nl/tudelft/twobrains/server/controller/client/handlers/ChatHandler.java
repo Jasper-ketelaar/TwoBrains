@@ -1,10 +1,13 @@
 package nl.tudelft.twobrains.server.controller.client.handlers;
 
+import nl.tudelft.twobrains.client.TwoBrains;
+import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 import nl.tudelft.twobrains.server.model.Database;
 import nl.tudelft.twobrains.server.model.Gebruiker;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientListener;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
 /**
@@ -23,7 +26,7 @@ public class ChatHandler implements ClientListener{
                     final Gebruiker gebruiker = database.get(split[0]);
                     final String message = split[1];
                     if(!message.equals("")){
-                        responseStream.writeUTF(message);
+                        responseStream.writeUTF("Succes:" + message);
                         //TODO:stuur message naar (andere) gebruiker
                     }
                 } else {
