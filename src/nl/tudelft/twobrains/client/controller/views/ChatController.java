@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import nl.tudelft.twobrains.client.TwoBrains;
 
 import javax.swing.*;
 
@@ -19,6 +20,14 @@ public class ChatController {
     private Label error;
 
 
+    private final TwoBrains twoBrains;
+
+
+    public ChatController(final TwoBrains twoBrains) {
+        this.twoBrains = twoBrains;
+    }
+
+
     public void verzend(final ActionEvent evt) {
         final String bericht = message.getText();
 
@@ -27,8 +36,10 @@ public class ChatController {
             return;
         }
 
-        
+    }
 
+    public void goMatchPage(ActionEvent evt) {
+        twoBrains.show(twoBrains.getRegisterScene());
     }
 
 
