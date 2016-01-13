@@ -26,7 +26,7 @@ public class ChatHandler implements ClientListener{
                     final Gebruiker gebruiker = database.get(split[0]);
                     final String message = split[1];
                     if(!message.equals("")){
-                        responseStream.writeUTF("Succes:" + message);
+                        responseStream.writeUTF("Success:" + message);
                         //TODO:stuur message naar (andere) gebruiker
                     }
                 } else {
