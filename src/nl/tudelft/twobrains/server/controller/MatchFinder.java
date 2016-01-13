@@ -31,7 +31,7 @@ public class MatchFinder extends Thread {
                 for (final Gebruiker gebruiker2 : database.filter(g -> !gebruiker.equals(g))) {
                     final int score = gebruiker.matchScore(gebruiker2);
                     if (score > 2) {
-
+                        //TODO:
                     }
                 }
             }
