@@ -22,6 +22,9 @@ public class ChatController {
     private TextField message;
 
     @FXML
+    private Label naamOntvanger;
+
+    @FXML
     private Label error;
 
 
@@ -32,9 +35,13 @@ public class ChatController {
 
 
     public ChatController(final TwoBrains twoBrainsOntvanger, final TwoBrains twoBrainsVerstuurder) {
+
         this.Verstuurder = twoBrainsVerstuurder;
         this.Ontvanger = twoBrainsOntvanger;
+
+
         emailOntvanger = this.Ontvanger.getGebruiker().getEmail();
+        naamOntvanger.setText(emailOntvanger);
 
     }
 
