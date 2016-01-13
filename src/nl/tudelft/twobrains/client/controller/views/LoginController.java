@@ -73,7 +73,7 @@ public class LoginController extends AbstractController {
 
         if (response.contains("Succes")) {
             twoBrains.setGebruiker(Gebruiker.parse(email, response.replace("Succes:", "")));
-            twoBrains.show(twoBrains.getMatchScene());
+            twoBrains.show(twoBrains.getTabScene());
         } else {
             error.setText("Gegevens verkeerd");
         }

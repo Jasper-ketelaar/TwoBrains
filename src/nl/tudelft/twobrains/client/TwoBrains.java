@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import nl.tudelft.twobrains.client.controller.views.LoginController;
 import nl.tudelft.twobrains.client.controller.views.MatchController;
 import nl.tudelft.twobrains.client.controller.views.RegisterController;
+import nl.tudelft.twobrains.client.controller.views.TabsController;
 import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 import nl.tudelft.twobrains.client.view.SceneWrapper;
@@ -41,6 +42,7 @@ public class TwoBrains extends Application {
     private SceneWrapper loginScene;
     private SceneWrapper matchScene;
     private SceneWrapper registerScene;
+    private SceneWrapper tabScene;
 
     private Stage stage;
 
@@ -86,6 +88,8 @@ public class TwoBrains extends Application {
         this.loginScene = new SceneWrapper("login", new LoginController(this));
         this.matchScene = new SceneWrapper("match", new MatchController(this));
         this.registerScene = new SceneWrapper("registreer", new RegisterController(this), getClass().getResource("view/registreer/registreer.css").toExternalForm());
+        this.tabScene = new SceneWrapper("tabs", new TabsController(this));
+
         this.socket = new TwoBrainsSocket("127.0.0.1", 4444);
 
         primaryStage.setScene(loginScene.getScene());
@@ -114,6 +118,14 @@ public class TwoBrains extends Application {
      */
     public SceneWrapper getLoginScene() {
         return this.loginScene;
+    }
+
+    /**
+     *
+     * @return De TabScene wordt geretouneerd
+     */
+    public SceneWrapper getTabScene() {
+        return this.tabScene;
     }
 
     /**
