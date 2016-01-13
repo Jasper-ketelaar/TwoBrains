@@ -102,6 +102,10 @@ public class TwoBrainsSocket extends Socket {
         return "";
     }
 
+    public String message(final String email, final String bericht){
+
+    }
+
 
     /**
      * Methode om een account te registeren op de server

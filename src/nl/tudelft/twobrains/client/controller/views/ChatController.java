@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import nl.tudelft.twobrains.client.TwoBrains;
+import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 
 import javax.swing.*;
 
@@ -20,11 +21,17 @@ public class ChatController {
     private Label error;
 
 
-    private final TwoBrains twoBrains;
+    private final TwoBrains Ontvanger;
+    private final TwoBrains Verstuurder;
+
+    private final String emailOntvanger;
 
 
-    public ChatController(final TwoBrains twoBrains) {
-        this.twoBrains = twoBrains;
+    public ChatController(final TwoBrains twoBrainsOntvanger, final TwoBrains twoBrainsVerstuurder) {
+        this.Verstuurder = twoBrainsVerstuurder;
+        this.Ontvanger = twoBrainsOntvanger;
+        emailOntvanger = this.Ontvanger.getGebruiker().getEmail();
+
     }
 
 
@@ -36,10 +43,13 @@ public class ChatController {
             return;
         }
 
+        final TwoBrainsSocket socket = Verstuurder.getSocket();
+        final String response = socket.message(emailOntvanger, bericht);
+
     }
 
     public void goMatchPage(ActionEvent evt) {
-        twoBrains.show(twoBrains.getRegisterScene());
+        Verstuurder.show(Verstuurder.getRegisterScene());
     }
 
 
