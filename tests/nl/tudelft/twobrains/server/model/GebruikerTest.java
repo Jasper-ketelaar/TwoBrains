@@ -242,4 +242,12 @@ public class GebruikerTest {
 
         assertEquals(9,koen.matchScore(koen));
     }
+    @Test
+    public void testMatchScore3() throws Exception {
+        Gebruiker koen2 = db.get("kvanzeijl2@hotmail.com");
+        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
+        Gebruiker budi = db.get("ibuddyh@gmail.com");
+
+        assertEquals(7,koen.matchScore(koen2));
+    }
 }
