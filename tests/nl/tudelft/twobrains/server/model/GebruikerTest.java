@@ -24,12 +24,6 @@ public class GebruikerTest {
 //
 //
 //    }
-    @Test
-    public void testGetEmailpositive() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertEquals("kvanzeijl@hotmail.com", koen.getEmail());
-    }
 
     @Test
     public void testTostringVakkenpositive() throws Exception {
@@ -232,5 +226,20 @@ public class GebruikerTest {
 
     @Test
     public void testMatches(){
+    }
+
+    @Test
+    public void testMatchScore() throws Exception {
+        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
+        Gebruiker budi = db.get("ibuddyh@gmail.com");
+
+        assertEquals(7,koen.matchScore(budi));
+    }
+    @Test
+    public void testMatchScore2() throws Exception {
+        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
+        Gebruiker budi = db.get("ibuddyh@gmail.com");
+
+        assertEquals(9,koen.matchScore(koen));
     }
 }
