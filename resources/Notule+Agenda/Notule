@@ -18,3 +18,22 @@ Testen:
 Planning volgende week:
 *Testcoverage van 80%
 *Werkende registreerfunctie
+
+
+Notule (Woensdag 9 december)
+
+*Voor de GUI wordt JavaFX gebruikt.
+*Vorige week is laten zien dat inloggen mogelijk is, maar registreren nog niet
+*Deze week is een pagina aangemaakt waarin het mogelijk is om gegevens voor een registratie aan te maken (registratiepagina)
+*Ook is het mogelijk om plaatje te uploaden, maar niet geheel zonder problemen
+*Door een limiet aan grootte van het plaatje wordt het plaatje ietwat vervormd, (aanpassen/kleinere plaatjes?)
+*registratieprocedure is nog niet helemaal compleet. Wordt namelijk nog niet opgenomen in JSONdatabase
+*Het object wordt echter wel verstuurd, maar hier vindt nog een onbekende error plaats, wordt volgende week opgelost
+*Na het inloggen is nu ook de infomatie + het plaatje te zien
+*Matchen werkt ook nog niet naar behoren, maar doelstelling is om registratieprocedure eerst te voltooien
+*UML-diagrammen zijn aangemaakt
+*Testen staan momenteel op 34% test coverage
+
+Voor volgende week:
+*testcoverage omhoog
+*registratieprocedure helemaal af
