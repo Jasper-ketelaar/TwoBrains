@@ -112,7 +112,7 @@ public class GebruikerTest {
     public void testGetLeeftijdpositive() throws Exception {
         Gebruiker koen = db.get("kvanzeijl@hotmail.com");
         Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertEquals("18", koen.getLeeftijd());
+        assertEquals(18, koen.getLeeftijd());
     }
 
     @Test
