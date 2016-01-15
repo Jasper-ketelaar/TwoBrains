@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -158,5 +159,17 @@ public class TwoBrainsSocket extends Socket {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public ArrayList<String> getMatches(final String user) {
+
+        try {
+
+            getOutputStream().writeUTF("Match:;" + user);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

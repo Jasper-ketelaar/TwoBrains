@@ -1,5 +1,6 @@
 package nl.tudelft.twobrains.server;
 
+import nl.tudelft.twobrains.server.controller.MatchFinder;
 import nl.tudelft.twobrains.server.controller.client.ClientHandler;
 import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.parser.ParseException;
@@ -25,6 +26,7 @@ public class Server {
 
     private Database database;
     private ClientHandler handler;
+    private MatchFinder matchFinder;
 
     /**
      * Deze methode zal als eerst kijken of er een file is in de map TwoBrains.
@@ -138,10 +140,18 @@ public class Server {
                 }
             }
         }).start();
+        try {
+            this.matchFinder = new MatchFinder(database);
+            this.matchFinder.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         while (true) {
             try {
                 final Socket accept = server.accept();
-                this.handler = new ClientHandler(accept, database);
+                this.handler = new ClientHandler(accept, this);
                 handler.start();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -168,5 +178,10 @@ public class Server {
         return this.server;
     }
 
+
+
+    public MatchFinder getMatchFinder() {
+        return this.matchFinder;
+    }
 
 }

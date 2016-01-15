@@ -28,10 +28,10 @@ public class RegistreerHandler implements ClientListener {
      *
      * @param evt A client event consisting of two Strings: event, argument.
      * @param responseStream A data ouput stream to write data to the client.
-     * @param database The database containing all the users information.
+     * @param server The server for database access
      */
     @Override
-    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Database database) {
+    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) {
 
         if (evt.getEvent().equals("Registreer")) {
             try {
@@ -42,13 +42,13 @@ public class RegistreerHandler implements ClientListener {
                 ImageIO.write(image, "jpg", file);
 
                 final String input = evt.getArguments().replace(email + ":", "");
-                if (database.containsKey(email)) {
+                if (server.getDatabase().containsKey(email)) {
                     responseStream.writeUTF("Email bestaat al");
                 } else {
                     final Gebruiker gebruiker;
                     try {
                         gebruiker = Gebruiker.parse(email, input);
-                        database.add(gebruiker);
+                        server.getDatabase().add(gebruiker);
                         responseStream.writeUTF("Succes");
                     } catch (ParseException e) {
                         e.printStackTrace();

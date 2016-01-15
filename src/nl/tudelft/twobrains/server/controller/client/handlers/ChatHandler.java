@@ -2,6 +2,7 @@ package nl.tudelft.twobrains.server.controller.client.handlers;
 
 import nl.tudelft.twobrains.client.TwoBrains;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
+import nl.tudelft.twobrains.server.Server;
 import nl.tudelft.twobrains.server.model.Database;
 import nl.tudelft.twobrains.server.model.Gebruiker;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
@@ -17,13 +18,13 @@ public class ChatHandler implements ClientListener{
 
 
     @Override
-    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Database database) {
+    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) {
         try {
             if (evt.getEvent().equals("Chat")) {
                 final String[] split = evt.getArguments().split(":");
 
-                if (database.containsKey(split[0])) {
-                    final Gebruiker gebruiker = database.get(split[0]);
+                if (server.getDatabase().containsKey(split[0])) {
+                    final Gebruiker gebruiker = server.getDatabase().get(split[0]);
                     final String message = split[1];
                     if(!message.equals("")){
                         responseStream.writeUTF("Success:" + message);

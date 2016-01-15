@@ -23,13 +23,20 @@ public class MatchFinderTest {
     @Test
     public void testConstructor(){
 
-        MatchFinder m = new MatchFinder(new Database(new JSONObject()));
+        MatchFinder m = null;
+        try {
+            m = new MatchFinder(new Database(new JSONObject()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         assertNotNull(m);
     }
 
     @Test
-    public void testRun(){
+    public void testRun() throws IOException, ParseException {
         try {
             testDb = Database.parse(Server.RESOURCES + "/databasetest.json");
         } catch (IOException e) {

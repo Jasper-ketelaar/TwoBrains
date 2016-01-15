@@ -22,7 +22,7 @@ public class LoginControllerTest {
     public void testLogin() throws Exception {
         TwoBrains twoBrains = new TwoBrains();
         LoginController loginController = new LoginController(twoBrains);
-        twoBrains.getLoginScene().
+        //twoBrains.getLoginScene().
 
     }
 

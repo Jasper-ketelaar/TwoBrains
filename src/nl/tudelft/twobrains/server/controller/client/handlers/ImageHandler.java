@@ -31,7 +31,7 @@ public class ImageHandler implements ClientListener {
      * @param database       The database is not used in this method.
      */
     @Override
-    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Database database) {
+    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) {
         if (evt.getEvent().equals("Image")) {
             final String fileName = evt.getArguments();
             System.out.println(fileName);

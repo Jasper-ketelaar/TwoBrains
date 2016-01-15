@@ -1,5 +1,6 @@
 package nl.tudelft.twobrains.server.model.listeners.client;
 
+import nl.tudelft.twobrains.server.Server;
 import nl.tudelft.twobrains.server.model.Database;
 
 import java.io.DataOutputStream;
@@ -14,8 +15,8 @@ public interface ClientListener {
      *
      * @param evt The client event that needs to be handled.
      * @param responseStream A data ouput stream to write data to the client.
-     * @param database The database containing all the users information.
+     * @param server the server for database access
      */
-    void onClientEvent(final ClientEvent evt, final DataOutputStream responseStream, Database database);
+    void onClientEvent(final ClientEvent evt, final DataOutputStream responseStream, Server server);
 
 }

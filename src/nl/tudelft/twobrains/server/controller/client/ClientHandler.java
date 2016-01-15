@@ -29,18 +29,18 @@ public class ClientHandler extends Thread {
     private final Socket socket;
     private final DataInputStream input;
     private final DataOutputStream output;
-    private final Database database;
+    private final Server server;
 
     /**
      * Class constructor specifying the socket and database. A new input/output
      * stream are connected to the Socket specified by the socket argument.
      *
      * @param socket The socket that will be used by the ClientHandler.
-     * @param database The database that will be used by the ClientHandler.
+     * @param server the server for database access
      * @throws IOException Checks for I/O exceptions.
      */
-    public ClientHandler(final Socket socket, final Database database) throws IOException {
-        this.database = database;
+    public ClientHandler(final Socket socket, final Server server) throws IOException {
+        this.server = server;
         this.socket = socket;
         this.input = new DataInputStream(socket.getInputStream());
         this.output = new DataOutputStream(socket.getOutputStream());
@@ -75,7 +75,7 @@ public class ClientHandler extends Thread {
                     evt.setData(dataB);
                 }
                 for (final ClientListener listener : listeners) {
-                    listener.onClientEvent(evt, output, database);
+                    listener.onClientEvent(evt, output, server);
                 }
             } catch (EOFException | SocketException e) {
                 try {
