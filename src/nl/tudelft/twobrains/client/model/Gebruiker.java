@@ -52,7 +52,7 @@ public class Gebruiker {
             e.printStackTrace();
         }
     }
-    
+
     public static Gebruiker parse(final String email, final String data) {
         final JSONParser parser = new JSONParser();
         try {
