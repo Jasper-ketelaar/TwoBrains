@@ -52,8 +52,5 @@ crashlytics-build.properties
 
 .classpath
 
-.classpath
+.project
 
-.classpath
-
-*.eml
