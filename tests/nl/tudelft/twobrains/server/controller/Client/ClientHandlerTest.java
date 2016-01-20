@@ -1,9 +1,7 @@
-package nl.tudelft.twobrains.server.controller.Client;
+package nl.tudelft.twobrains.server.controller.client;
 
-import com.sun.org.glassfish.external.arc.Taxonomy;
 import junit.framework.TestCase;
 import nl.tudelft.twobrains.server.Server;
-import nl.tudelft.twobrains.server.controller.client.ClientHandler;
 import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.JSONObject;
 import org.junit.Test;
@@ -41,7 +39,7 @@ public class ClientHandlerTest extends TestCase {
             this.testServer = new Server(4444);
             new Socket("127.0.0.1", 4444);
             testSocket = testServer.getSocket().accept();
-            testHandler = new ClientHandler(testSocket, DB);
+            testHandler = new ClientHandler(testSocket, testServer);
         } catch (IOException e) {
             e.printStackTrace();
         }

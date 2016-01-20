@@ -40,12 +40,12 @@ public class ImageHandler implements ClientListener {
     }
 
     /**
-     * Method for getting the Image File of a Client. A file with all URI of the
+     * Method for getting the Image File of a client. A file with all URI of the
      * images is created by getting it from the Server. The pathnames are put
      * in an array. The array is checked for containing a file with to the
      * email argument as name.
      *
-     * @param email The email of the Client, email is used as Client username.
+     * @param email The email of the client, email is used as client username.
      * @return The Image File, Null. Depending on the email (username) existing
      * on the Server.
      */
@@ -61,7 +61,7 @@ public class ImageHandler implements ClientListener {
     }
 
     /**
-     * Method for sending an Image to the Client. The image File is obtained by
+     * Method for sending an Image to the client. The image File is obtained by
      * calling the getFile() method with the fileName argument. The image is loaded
      * from the file. The extension of the image is put in a String.
      * <p>

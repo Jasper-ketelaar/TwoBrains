@@ -40,7 +40,7 @@ public class ImageHandlerTest {
             e.printStackTrace();
         }
 
-        testImageHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
+        testImageHandler.onClientEvent(testClientEvent, dataOutputStream, new Server(testDatabase));
 
 
     }
@@ -69,7 +69,7 @@ public class ImageHandlerTest {
 
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
-        testImageHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
+        testImageHandler.onClientEvent(testClientEvent, dataOutputStream, new Server(testDatabase));
 
 
 

@@ -66,6 +66,11 @@ public class Server {
         }
     }
 
+    public Server(final Database test) {
+        this.database = test;
+        this.server = null;
+    }
+
     /**
      * Als er geen port wordt ingevoerd zal de server port 4444 gebruiken
      *

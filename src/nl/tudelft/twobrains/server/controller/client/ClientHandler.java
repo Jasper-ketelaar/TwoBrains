@@ -83,7 +83,7 @@ public class ClientHandler extends Thread {
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                System.out.println("Client disconnected");
+                System.out.println("client disconnected");
             } catch (IOException e) {
                 e.printStackTrace();
             }
