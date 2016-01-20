@@ -46,6 +46,14 @@ public class ClientHandler extends Thread {
         this.output = new DataOutputStream(socket.getOutputStream());
     }
 
+    public Socket getSocket(){
+        return this.socket;
+    }
+
+    public Server getServer(){
+        return this.server;
+    }
+
     /**
      * Method for listening and responding to all client events. The input
      * from the client is put in a String array by splitting. The first and

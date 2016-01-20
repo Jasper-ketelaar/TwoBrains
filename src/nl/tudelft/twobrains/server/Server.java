@@ -70,6 +70,10 @@ public class Server {
         this.database = test;
         this.server = null;
     }
+    public Server() throws  IOException{
+        this.database = null;
+        this.server = new ServerSocket(8888);
+    }
 
     /**
      * Als er geen port wordt ingevoerd zal de server port 4444 gebruiken

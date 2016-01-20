@@ -1,6 +1,8 @@
 package nl.tudelft.twobrains.server.controller.client;
 
 import junit.framework.TestCase;
+import nl.tudelft.twobrains.client.TwoBrains;
+import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 import nl.tudelft.twobrains.server.Server;
 import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.JSONObject;
@@ -13,45 +15,50 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
+ * TODO: Lukt mij niet
  * Created by Leroy on 30-11-2015.
  */
 public class ClientHandlerTest extends TestCase {
+    Server sr;
 
-    Server testServer;
+    public void initializeServer() {
+        new Thread(() -> {
 
-    {
-        try {
-            testServer = new Server(5555);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            while (true) {
+                try {
+                    sr = new Server(4444);
+                    sr.run();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     @Test
-    public void testHandler() {
-        JSONObject testObj = new JSONObject();
-        Database DB = new Database(testObj);
+    public void testRun() throws IOException {
 
-        Socket testSocket;
-        ClientHandler testHandler = null;
+        initializeServer();
 
-        try {
-            this.testServer = new Server(4444);
-            new Socket("127.0.0.1", 4444);
-            testSocket = testServer.getSocket().accept();
-            testHandler = new ClientHandler(testSocket, testServer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        final ServerSocket testHandler;
+        final ClientHandler[] testHandler2 = new ClientHandler[1];
 
-        testHandler.start();
+        TwoBrainsSocket sk = new TwoBrainsSocket("127.0.0.1", 4444);
 
+        new Thread(() -> {
 
-    }
+            while (true) {
+                try {
+                    testHandler2[0] = sr.getHandler();
 
+                }catch (NullPointerException e){
 
-    @Test
-    public void testRun() {
-        // testServer.run();
+                }
+
+            }
+        }).start();
+        TwoBrainsSocket sk2 = new TwoBrainsSocket("127.0.0.1", 4444);
+
+        assertEquals(testHandler2[0], null);
     }
 }
