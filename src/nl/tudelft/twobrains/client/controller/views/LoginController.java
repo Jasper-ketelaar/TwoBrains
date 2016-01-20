@@ -19,22 +19,13 @@ import java.util.ResourceBundle;
  */
 public class LoginController extends AbstractController {
 
-    /**
-     * Email text field
-     */
+
     @FXML
     private TextField email;
-
-    /**
-     * Wachtwoord password field
-     */
     @FXML
-    private PasswordField password;
-
-    /**
-     * Label waar error komt te staan
-     */
+    private PasswordField password;s
     @FXML
+
     private Label error;
 
     /**

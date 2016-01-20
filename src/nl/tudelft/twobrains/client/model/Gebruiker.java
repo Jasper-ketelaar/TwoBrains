@@ -32,6 +32,27 @@ public class Gebruiker {
         this.data = data;
     }
 
+    /**
+     * Klasse isConnected
+     * @return true als connected
+     */
+
+    public boolean isConnected() {
+        return ((connection != null) && (connection.isConnected()));
+    }
+
+    /**
+     * Klasse disconnect
+     *      Disconnect
+     */
+    public void disconnect() {
+        try {
+            this.connection.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static Gebruiker parse(final String email, final String data) {
         final JSONParser parser = new JSONParser();
         try {
@@ -158,24 +179,5 @@ public class Gebruiker {
         return connection.getImage(this.email);
     }
 
-    /**
-     * Klasse isConnected
-     * @return true als connected
-     */
 
-    public boolean isConnected() {
-        return ((connection != null) && (connection.isConnected()));
-    }
-
-    /**
-     * Klasse disconnect
-     *      Disconnect
-     */
-    public void disconnect() {
-        try {
-            this.connection.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
