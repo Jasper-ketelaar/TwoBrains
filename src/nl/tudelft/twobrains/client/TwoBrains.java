@@ -30,6 +30,7 @@ public class TwoBrains extends Application {
 
     /**
      * Iniliateerst 5 attributen
+     *
      * @attrib Socket
      * @attrib Scenewrapper: scene voor login
      * @attrib Scenewrapper: scene voor matchen
@@ -51,6 +52,7 @@ public class TwoBrains extends Application {
 
     /**
      * De Application wordt gestart.
+     *
      * @param args
      */
     public static void main(final String[] args) {
@@ -58,7 +60,6 @@ public class TwoBrains extends Application {
     }
 
     /**
-     *
      * @return De huidige TwoBrainsSocket wordt geretouneerd
      */
     public TwoBrainsSocket getSocket() {
@@ -69,13 +70,11 @@ public class TwoBrains extends Application {
      *
      * @param socket wordt de nieuwe TwoBrainsSocket
      */
-    public void setSocket(TwoBrainsSocket socket) {
-        this.socket = socket;
-    }
+
 
     /**
-     *  Alle Scene's worden geladen en geinitialiseerd.
-     *  En de LoginScene wordt geshowed.
+     * Alle Scene's worden geladen en geinitialiseerd.
+     * En de LoginScene wordt geshowed.
      *
      * @param primaryStage De ingevoerde Stage zal de primaryStage worden
      * @throws Exception
@@ -96,8 +95,21 @@ public class TwoBrains extends Application {
         primaryStage.show();
     }
 
+    public void TwoBrains() throws Exception {
+
+
+        this.loginScene = new SceneWrapper("login", new LoginController(this));
+        this.matchScene = new SceneWrapper("match", new MatchController(this));
+        this.registerScene = new SceneWrapper("registreer", new RegisterController(this), getClass().getResource("view/registreer/registreer.css").toExternalForm());
+        this.tabScene = new SceneWrapper("tabs", new TabsController(this));
+
+        this.socket = new TwoBrainsSocket("127.0.0.1", 4444);
+
+
+    }
+
+
     /**
-     *
      * @return De MatchScene wordt geretouneerd
      */
     public SceneWrapper getMatchScene() {
@@ -105,7 +117,6 @@ public class TwoBrains extends Application {
     }
 
     /**
-     *
      * @return De RegistreerScene wordt geretouneerd
      */
     public SceneWrapper getRegisterScene() {
@@ -113,7 +124,6 @@ public class TwoBrains extends Application {
     }
 
     /**
-     *
      * @return De LoginScene wordt geretouneerd
      */
     public SceneWrapper getLoginScene() {
@@ -121,7 +131,6 @@ public class TwoBrains extends Application {
     }
 
     /**
-     *
      * @return De TabScene wordt geretouneerd
      */
     public SceneWrapper getTabScene() {
@@ -129,7 +138,6 @@ public class TwoBrains extends Application {
     }
 
     /**
-     *
      * @param scene wordt geshowed op het beeld.
      */
     public void show(final SceneWrapper scene) {
@@ -140,7 +148,6 @@ public class TwoBrains extends Application {
     }
 
     /**
-     *
      * @return Retouneert de huidige Stage
      */
     public Stage getStage() {
@@ -157,6 +164,7 @@ public class TwoBrains extends Application {
 
     /**
      * Verkrijgt de gebruiker
+     *
      * @return de gebruiker
      */
     public Gebruiker getGebruiker() {

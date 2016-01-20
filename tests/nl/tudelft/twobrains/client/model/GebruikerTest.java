@@ -2,6 +2,7 @@ package nl.tudelft.twobrains.client.model;
 
 import junit.framework.TestCase;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
+import nl.tudelft.twobrains.server.Server;
 import org.json.simple.JSONObject;
 import org.junit.Test;
 
@@ -12,9 +13,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
+ * Run Server First
  * Created by Leroy on 25-11-2015.
  */
 public class GebruikerTest {
+
 
     String email = "leroyvelzel@gmail.com";
     JSONObject testdata = new JSONObject();
@@ -33,6 +36,7 @@ public class GebruikerTest {
 
     @Test
     public void testGetAttribuut() {
+
         testdata.put("testAttribuut", "SomeBullshit");
 
 
@@ -151,7 +155,7 @@ public class GebruikerTest {
 
     //TODO: Schrijven
     @Test
-    public void testParse(){
+    public void testParse() {
         testdata.put("Voornaam", "Koen");
         testdata.put("Achternaam", "Zeijl");
         testdata.put("Geslacht", "M");
@@ -162,7 +166,7 @@ public class GebruikerTest {
         testdata.put("Locatie", "Delft");
 
 
-        Gebruiker koen = Gebruiker.parse("kvanzeijl@hotmail.com","{\n" +
+        Gebruiker koen = Gebruiker.parse("kvanzeijl@hotmail.com", "{\n" +
                 "    \"Voornaam\": \"Koen\",\n" +
                 "    \"Achternaam\": \"Zeijl\",\n" +
                 "    \"Geslacht\": \"M\",\n" +

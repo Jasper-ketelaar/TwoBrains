@@ -23,7 +23,7 @@ public class LoginController extends AbstractController {
     @FXML
     private TextField email;
     @FXML
-    private PasswordField password;s
+    private PasswordField password;
     @FXML
 
     private Label error;
