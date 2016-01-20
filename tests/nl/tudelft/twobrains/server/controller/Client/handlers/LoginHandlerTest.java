@@ -40,7 +40,7 @@ public class LoginHandlerTest {
             e.printStackTrace();
         }
 
-        testLoginHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
+        testLoginHandler.onClientEvent(testClientEvent, dataOutputStream, new Server(testDatabase));
 
 
     }
@@ -69,7 +69,7 @@ public class LoginHandlerTest {
 
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
-        testLoginHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
+        testLoginHandler.onClientEvent(testClientEvent, dataOutputStream, new Server(testDatabase));
 
         System.out.println(ByteBuffer.wrap(outputStream.toByteArray()).get(0));
 
@@ -98,7 +98,7 @@ public class LoginHandlerTest {
 
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
-        testLoginHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
+        testLoginHandler.onClientEvent(testClientEvent, dataOutputStream, new Server(testDatabase));
 
         System.out.println(ByteBuffer.wrap(outputStream.toByteArray()).get(0));
 

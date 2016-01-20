@@ -81,7 +81,7 @@ public class ServerTest extends TestCase {
             this.testServer = new Server(4444);
             new Socket("127.0.0.1", 4444);
             testSocket = testServer.getSocket().accept();
-            testHandler = new ClientHandler(testSocket, DB);
+            testHandler = new ClientHandler(testSocket, testServer);
         } catch (IOException e) {
             e.printStackTrace();
         }

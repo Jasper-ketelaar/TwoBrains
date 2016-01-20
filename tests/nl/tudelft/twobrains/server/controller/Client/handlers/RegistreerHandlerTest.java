@@ -42,7 +42,7 @@ public class RegistreerHandlerTest {
             e.printStackTrace();
         }
 
-        testRegistreerHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
+        testRegistreerHandler.onClientEvent(testClientEvent, dataOutputStream, new Server(testDatabase));
 
 
     }
@@ -70,7 +70,7 @@ public class RegistreerHandlerTest {
 
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
-        testRegistreerHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
+        testRegistreerHandler.onClientEvent(testClientEvent, dataOutputStream, new Server(testDatabase));
 
         System.out.println(ByteBuffer.wrap(outputStream.toByteArray()).get(0));
 
@@ -98,7 +98,7 @@ public class RegistreerHandlerTest {
 
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
-        testRegistreerHandler.onClientEvent(testClientEvent, dataOutputStream, testDatabase);
+        testRegistreerHandler.onClientEvent(testClientEvent, dataOutputStream, new Server(testDatabase));
 
         System.out.println(ByteBuffer.wrap(outputStream.toByteArray()).get(0));
 
