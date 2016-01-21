@@ -14,6 +14,7 @@ import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.client.view.match.comp.UserBox;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -27,6 +28,7 @@ public class MatchController extends AbstractController {
     @FXML
     private VBox vBox;
 
+    private final ArrayList<String> matchCache = new ArrayList<>();
 
     private final TwoBrains twoBrains;
 
@@ -100,13 +102,39 @@ public class MatchController extends AbstractController {
 
     }
 
+    public void update(final ArrayList<String> matches) {
+        final String self = twoBrains.getGebruiker().getEmail();
+        for (final String match : matches) {
+            final String extr[] = match.replace(self, "").split(":");
+            final String matchee = extr[0].length() > extr[1].length() ? extr[0] : extr[1];
+            System.out.println(matchee);
+            if (!matchCache.contains(matchee)) {
+                matchCache.add(matchee);
+                vBox.getChildren().add(new UserBox(twoBrains.getSocket().verkrijgInfo(matchee)));
+            }
+        }
+    }
     /**
      * Methode voor het initialiseren van de users in de MatchScene.
      */
     @Override
     public void initItems() {
         vBox.setFocusTraversable(false);
-        vBox.getChildren().addAll(new UserBox(twoBrains.getGebruiker()), new UserBox(twoBrains.getGebruiker()));
+        update(twoBrains.getSocket().getMatches(twoBrains.getGebruiker().getEmail()));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    update(twoBrains.getSocket().getMatches(twoBrains.getGebruiker().getEmail()));
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
 
     }
 }
+

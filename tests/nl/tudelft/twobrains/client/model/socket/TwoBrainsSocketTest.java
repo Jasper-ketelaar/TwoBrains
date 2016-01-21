@@ -1,5 +1,6 @@
 package nl.tudelft.twobrains.client.model.socket;
 
+import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.server.Server;
 import org.json.simple.JSONObject;
 import org.junit.Test;
@@ -64,13 +65,13 @@ public class TwoBrainsSocketTest {
     }
 
     @Test
-    public void testLoginOngeldigeEmail() throws IOException {
+    public void testOngeldigeLogin() throws IOException {
         initializeServer();
 
 
         final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8887);
-        String k = testTwoBrainsSocket.login("testEmail", "testWachtwoord");
-        assertEquals(k, "Email bestaat niet");
+        Gebruiker k = testTwoBrainsSocket.login("testEmail", "testWachtwoord");
+        assertEquals(k, null);
     }
 
     @Test

@@ -1,10 +1,7 @@
 package nl.tudelft.twobrains.server.controller.client;
 
 import nl.tudelft.twobrains.server.Server;
-import nl.tudelft.twobrains.server.controller.client.handlers.ChatHandler;
-import nl.tudelft.twobrains.server.controller.client.handlers.ImageHandler;
-import nl.tudelft.twobrains.server.controller.client.handlers.LoginHandler;
-import nl.tudelft.twobrains.server.controller.client.handlers.RegistreerHandler;
+import nl.tudelft.twobrains.server.controller.client.handlers.*;
 import nl.tudelft.twobrains.server.model.Database;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientListener;
@@ -24,7 +21,7 @@ import java.util.Arrays;
 public class ClientHandler extends Thread {
 
 
-    private final ArrayList<ClientListener> listeners = new ArrayList<>(Arrays.asList(new LoginHandler(), new RegistreerHandler(), new ImageHandler(), new ChatHandler()));
+    private final ArrayList<ClientListener> listeners = new ArrayList<>(Arrays.asList(new InfoHandler(), new RegistreerHandler(), new ImageHandler(), new ChatHandler(), new MatchHandler()));
 
     private final Socket socket;
     private final DataInputStream input;

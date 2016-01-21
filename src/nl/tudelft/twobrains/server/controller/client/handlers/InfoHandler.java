@@ -11,7 +11,7 @@ import java.io.DataOutputStream;
 /**
  * Created by jasperketelaar on 11/23/15.
  */
-public class LoginHandler implements ClientListener {
+public class InfoHandler implements ClientListener {
 
     /**
      * Method for reacting to client login events (overrides interface method).
@@ -30,17 +30,11 @@ public class LoginHandler implements ClientListener {
     @Override
     public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) {
         try {
-            if (evt.getEvent().equals("Login")) {
-                final String[] split = evt.getArguments().split(":");
-
-                if (server.getDatabase().containsKey(split[0])) {
-                    final Gebruiker gebruiker = server.getDatabase().get(split[0]);
-                    final String wachtwoord = gebruiker.getWachtwoord();
-                    if (wachtwoord.equals(split[1])) {
-                        responseStream.writeUTF("Succes:" + gebruiker.getJSONString());
-                    } else {
-                        responseStream.writeUTF("Wachtwoord is verkeerd");
-                    }
+            if (evt.getEvent().equals("Info")) {
+                System.out.println("Info required");
+                if (server.getDatabase().containsKey(evt.getArguments())) {
+                    final Gebruiker gebruiker = server.getDatabase().get(evt.getArguments());
+                    responseStream.writeUTF(gebruiker.getJSONString());
                 } else {
                     responseStream.writeUTF("Email bestaat niet");
                 }

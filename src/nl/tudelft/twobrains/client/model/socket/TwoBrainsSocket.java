@@ -3,6 +3,7 @@ package nl.tudelft.twobrains.client.model.socket;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
+import nl.tudelft.twobrains.client.model.Gebruiker;
 import org.json.simple.JSONObject;
 
 import javax.imageio.ImageIO;
@@ -20,6 +21,7 @@ public class TwoBrainsSocket extends Socket {
 
     /**
      * Maakt 3 attributen aan
+     *
      * @attrib Hashmap
      * @Attrib datainputsteam
      * @attrib Dataoutputstream
@@ -30,7 +32,8 @@ public class TwoBrainsSocket extends Socket {
 
     /**
      * Constructor TwoBrainsSocket
-     *      Creert "Socket-object"? 
+     * Creert "Socket-object"?
+     *
      * @param ip
      * @param port
      * @throws IOException
@@ -43,6 +46,7 @@ public class TwoBrainsSocket extends Socket {
 
     /**
      * 2 get methoden
+     *
      * @method getInputsteam
      * @method getOutputstream
      */
@@ -59,6 +63,7 @@ public class TwoBrainsSocket extends Socket {
 
     /**
      * Methode voor verkrijgen van image
+     *
      * @param file
      * @return image
      * @throws IOException
@@ -88,29 +93,41 @@ public class TwoBrainsSocket extends Socket {
     /**
      * Methode om in te loggen op de server
      * Krijgt  2 inputs
+     *
      * @param email
      * @param password
      * @return
      * @throws IOException
      */
-    public String login(final String email, final String password) {
+    public Gebruiker login(final String email, final String password) {
+        final Gebruiker info = verkrijgInfo(email);
+        if (info != null && verkrijgInfo(email).getWachtwoord().equals(password)) {
+            return info;
+        }
+        return null;
+    }
+
+    public Gebruiker verkrijgInfo(final String email) {
         try {
-            getOutputStream().writeUTF("Login:;" + email + ":" + password);
-            return getInputStream().readUTF();
+            getOutputStream().writeUTF("Info:;" + email);
+            final String response = getInputStream().readUTF();
+            if (!response.equals("Email bestaat niet")) {
+                return Gebruiker.parse(email, response);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "";
+        return null;
     }
 
     /**
      * Methode om een chatmessage te zenden
      *
-     * @param email email van de Gebruiker waar het bericht naar verstuurd wordt
+     * @param email   email van de Gebruiker waar het bericht naar verstuurd wordt
      * @param bericht bericht dat wordt verzonden
      * @return De UTF die terug van de Server komt.
      */
-    public String message(final String email, final String bericht){
+    public String message(final String email, final String bericht) {
         try {
             getOutputStream().writeUTF("Chat:;" + email + ":" + bericht);
             return getInputStream().readUTF();
@@ -124,8 +141,9 @@ public class TwoBrainsSocket extends Socket {
     /**
      * Methode om een account te registeren op de server
      * Verwacht 3 parameters
+     *
      * @param email = userinput emailadress
-     * @param data = userinput wachtwoord
+     * @param data  = userinput wachtwoord
      * @param image = userinput toegevoegde profielfoto
      * @return
      * @throws IOException
@@ -162,14 +180,18 @@ public class TwoBrainsSocket extends Socket {
     }
 
     public ArrayList<String> getMatches(final String user) {
-
+        final ArrayList<String> matches = new ArrayList<>();
         try {
 
             getOutputStream().writeUTF("Match:;" + user);
+            while (getInputStream().available() != 0) {
+                System.out.println("Test");
+                matches.add(getInputStream().readUTF());
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return matches;
     }
 }

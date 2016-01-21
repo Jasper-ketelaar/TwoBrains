@@ -46,6 +46,7 @@ public class UserBox extends HBox {
      *
      */
     public UserBox(final Gebruiker gebruiker) {
+        System.out.println(gebruiker.getEmail());
         this.gebruiker = gebruiker;
         this.setFocusTraversable(false);
         final BufferedImage bImage = gebruiker.getUserImage();

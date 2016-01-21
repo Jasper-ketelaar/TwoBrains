@@ -60,10 +60,10 @@ public class LoginController extends AbstractController {
         }
 
         final TwoBrainsSocket socket = twoBrains.getSocket();
-        final String response = socket.login(email, pw);
+        final Gebruiker response = socket.login(email, pw);
 
-        if (response.contains("Succes")) {
-            twoBrains.setGebruiker(Gebruiker.parse(email, response.replace("Succes:", "")));
+        if (response != null) {
+            twoBrains.setGebruiker(response);
             twoBrains.show(twoBrains.getTabScene());
         } else {
             error.setText("Gegevens verkeerd");

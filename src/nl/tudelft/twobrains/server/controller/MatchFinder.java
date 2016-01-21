@@ -35,9 +35,11 @@ public class MatchFinder extends Thread {
 
         final JSONParser parser = new JSONParser();
         final JSONArray array = (JSONArray) ((JSONObject) parser.parse(new FileReader(Server.RESOURCES + "/matches.json"))).get("matches");
-        for (final Object obj : array) {
-            if (obj instanceof JSONObject) {
-                matches.add(Match.parse((JSONObject) obj));
+        if (array != null) {
+            for (final Object obj : array) {
+                if (obj instanceof JSONObject) {
+                    matches.add(Match.parse((JSONObject) obj));
+                }
             }
         }
     }
