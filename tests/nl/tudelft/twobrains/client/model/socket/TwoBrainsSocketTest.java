@@ -99,7 +99,7 @@ public class TwoBrainsSocketTest {
     }
 
   /*
-  TODO: Bestere Assert NOT NULL
+  TODO: Bestere AssertNULL
    */
 
     @Test
