@@ -2,18 +2,22 @@ package nl.tudelft.twobrains.server;
 
 import com.sun.org.glassfish.external.arc.Taxonomy;
 import junit.framework.TestCase;
+import nl.tudelft.twobrains.server.controller.MatchFinder;
 import nl.tudelft.twobrains.server.controller.client.ClientHandler;
 import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.*;
 import java.nio.ByteBuffer;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -21,76 +25,92 @@ import static org.junit.Assert.assertTrue;
  */
 public class ServerTest extends TestCase {
 
-    Server testServer;
-    {
-        try {
-            testServer = new Server(5555);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    Server testServer1;
+    Server testServer2;
+    Server testServer3;
+    Database db;
 
 
     @Test
-    public void testClose() {
+    public void testGetDatabase() throws IOException, ParseException {
+        db = Database.parse(Server.RESOURCES + "/databasetest.json");
+        // testServer1 = new Server(8887);
+        testServer2 = new Server(db);
+        // testServer3 = new Server();
 
-        try {
-            testServer.close();
+        new Thread(() -> {
+            testServer2.run();
+        }).start();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assertTrue(testServer.getSocket().isClosed());
-    }
 
-    @Test
-    public void test() {
-        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        final DataOutputStream outputStream1 = new DataOutputStream(outputStream);
-        try {
-            outputStream1.writeUTF("Test");
-            System.out.println(outputStream.size());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        assertTrue(testServer2.getDatabase().equals(db));
 
     }
 
     @Test
-    public void testDatabase(){
-        JSONObject testObj = new JSONObject();
-        Database DB = new Database(testObj);
+    public void testSetDatabase() throws IOException, ParseException {
+        db = Database.parse(Server.RESOURCES + "/databasetest.json");
 
-        testServer.setDatabase(DB);
+        testServer3 = new Server();
+        testServer3.setDatabase(db);
 
-        assertEquals(DB, testServer.getDatabase());
+        assertEquals(db, testServer3.getDatabase());
+
     }
-
 
     @Test
-    public void testHandler(){
-        JSONObject testObj = new JSONObject();
-        Database DB = new Database(testObj);
-        System.out.println("TEst");
+    public void testGetSocket() throws IOException {
+        testServer1 = new Server(6543);
 
 
-        Socket testSocket;
-        ClientHandler testHandler = null;
-        try {
-            this.testServer = new Server(4444);
-            new Socket("127.0.0.1", 4444);
-            testSocket = testServer.getSocket().accept();
-            testHandler = new ClientHandler(testSocket, testServer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        testServer.setHandler(testHandler);
-        assertEquals(testHandler, testServer.getHandler());
+        assertTrue(testServer1.getSocket().getLocalPort() == 6543);
     }
+
     @Test
-    public void testRun(){
-       // testServer.run();
+    public void testGetMatchfinder() throws IOException, ParseException {
+
+
+        final File dir = new File(Server.RESOURCES);
+        final File file = new File(dir.getAbsolutePath() + "/databasetest.json");
+        db = Database.parse(file.getPath());
+
+        testServer2 = new Server(db, 1234);
+        new Thread(() -> {
+            testServer2.run();
+
+        }).start();
+        Socket sk = new Socket("127.0.0.1", 1234);
+        MatchFinder k = testServer2.getMatchFinder();
+
+        assertEquals(k.getMatches(), new MatchFinder(db).getMatches());
+
+
     }
+
+    public void testClose() throws IOException {
+        testServer2 = new Server(1234);
+        final ServerSocket testServ = testServer2.getSocket();
+        testServer2.close();
+
+        assertTrue(testServ.isClosed());
+    }
+
+    public void testHandler() throws IOException, ParseException {
+        final File dir = new File(Server.RESOURCES);
+        final File file = new File(dir.getAbsolutePath() + "/databasetest.json");
+        db = Database.parse(file.getPath());
+
+        testServer2 = new Server(null, 1234);
+        new Thread(() -> {
+            testServer2.run();
+
+        }).start();
+        Socket sk = new Socket("127.0.0.1", 1234);
+
+
+        assertNull(testServer2.getHandler());
+
+
+    }
+
 }

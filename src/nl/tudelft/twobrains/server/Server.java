@@ -16,6 +16,7 @@ public class Server {
 
     public static final String RESOURCES;
     public static final String IMAGES;
+
     static {
         RESOURCES = System.getProperty("user.dir") + "/.TwoBrains/resources";
         IMAGES = RESOURCES + "/images/";
@@ -70,9 +71,15 @@ public class Server {
         this.database = test;
         this.server = null;
     }
-    public Server() throws  IOException{
+
+    public Server() throws IOException {
         this.database = null;
         this.server = new ServerSocket(8888);
+    }
+
+    public Server(final Database test, final int port) throws IOException {
+        this.database = test;
+        this.server = new ServerSocket(port);
     }
 
     /**
@@ -150,6 +157,7 @@ public class Server {
             }
         }).start();
         try {
+
             this.matchFinder = new MatchFinder(database);
             this.matchFinder.start();
         } catch (IOException e) {
@@ -160,7 +168,12 @@ public class Server {
         while (true) {
             try {
                 final Socket accept = server.accept();
+                System.out.println(accept.toString());
                 this.handler = new ClientHandler(accept, this);
+                System.out.println("handler created");
+                System.out.println(handler.toString());
+                System.out.println(this.handler.toString());
+                System.out.println(getHandler());
                 handler.start();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -175,18 +188,20 @@ public class Server {
      * @throws IOException
      */
     public void close() throws IOException {
-        database.write(RESOURCES.concat("/database.json"));
+        if(!(this.database.equals(null))) {
+            database.write(RESOURCES.concat("/database.json"));
+        }
         server.close();
     }
 
     /**
      * Verkrijgt de server socket
+     *
      * @return de server socket
      */
     public ServerSocket getSocket() {
         return this.server;
     }
-
 
 
     public MatchFinder getMatchFinder() {
