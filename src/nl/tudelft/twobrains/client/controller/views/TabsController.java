@@ -19,10 +19,12 @@ public class TabsController extends AbstractController {
 
     private final TwoBrains twoBrains;
     private final Tab matches;
+    private final Tab home;
 
 
     public TabsController(final TwoBrains twoBrains) {
         this.matches = new Tab("Matches");
+        this.home = new Tab("Home");
         this.twoBrains = twoBrains;
 
     }
@@ -39,9 +41,12 @@ public class TabsController extends AbstractController {
         tabPane.setTabMinHeight(40);
         tabPane.setTabMinWidth(150);
         twoBrains.getMatchScene().getController().initItems();
+        twoBrains.getHomeScene().getController().initItems();
+
         matches.setContent(twoBrains.getMatchScene().getScene().getRoot());
+        home.setContent(twoBrains.getHomeScene().getScene().getRoot());
 
-
+        tabPane.getTabs().add(home);
         tabPane.getTabs().add(matches);
     }
 }

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="100.0" prefWidth="1280.0">
+         <children>
+            <Label layoutX="567.0" layoutY="22.0" text="Home">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="159.0" prefWidth="1280.0">
+         <children>
+            <ImageView fx:id="image" fitHeight="155.0" fitWidth="210.0" layoutX="43.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+            <TextArea fx:id="text" editable="false" layoutX="299.0" layoutY="38.0" prefHeight="119.0" prefWidth="938.0" />
+         </children>
+      </Pane>
+      <Separator prefHeight="20.0" prefWidth="1280.0">
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" top="25.0" />
+         </VBox.margin>
+      </Separator>
+      <Pane prefHeight="199.0" prefWidth="1280.0">
+         <children>
+            <CheckBox fx:id="opZoek" layoutX="42.0" layoutY="60.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="470.0" text="Ik ben op zoek naar een partner voor mijn huiswerk">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </CheckBox>
+            <ComboBox fx:id="vak" layoutX="897.0" layoutY="46.0" prefHeight="26.0" prefWidth="343.0" />
+            <Button layoutX="897.0" layoutY="82.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="343.0" text="Doe een dringende oproep voor dit vak" />
+         </children>
+      </Pane>
+      <ScrollPane fitToHeight="true" prefViewportHeight="210.0" prefViewportWidth="1280.0">
+         <content>
+            <HBox prefHeight="210.0">
+               <children>
+                  <Pane prefHeight="189.0" prefWidth="273.0">
+                     <children>
+                        <Label layoutX="81.0" layoutY="39.0" text="Budi Han">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="89.0" text="Dringende oproep voor: Calculus">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="122.0" text="Mail Budi naar: ibuddyh@gmail.com">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Pane prefHeight="230.0" prefWidth="273.0">
+                     <children>
+                        <Label layoutX="81.0" layoutY="39.0" text="Budi Han">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="89.0" text="Dringende oproep voor: Calculus">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="122.0" text="Mail Budi naar: ibuddyh@gmail.com">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Pane prefHeight="230.0" prefWidth="273.0">
+                     <children>
+                        <Label layoutX="81.0" layoutY="39.0" text="Budi Han">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="89.0" text="Dringende oproep voor: Calculus">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="122.0" text="Mail Budi naar: ibuddyh@gmail.com">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Pane prefHeight="189.0" prefWidth="273.0">
+                     <children>
+                        <Label layoutX="81.0" layoutY="39.0" text="Budi Han">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="89.0" text="Dringende oproep voor: Calculus">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="122.0" text="Mail Budi naar: ibuddyh@gmail.com">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Pane prefHeight="189.0" prefWidth="273.0">
+                     <children>
+                        <Label layoutX="81.0" layoutY="39.0" text="Budi Han">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="89.0" text="Dringende oproep voor: Calculus">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="6.0" layoutY="122.0" text="Mail Budi naar: ibuddyh@gmail.com">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>
