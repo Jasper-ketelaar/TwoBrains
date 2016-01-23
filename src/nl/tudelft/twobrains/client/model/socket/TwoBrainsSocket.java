@@ -69,23 +69,21 @@ public class TwoBrainsSocket extends Socket {
      * @throws IOException
      */
 
-    public BufferedImage getImage(final String file) {
+    public BufferedImage getImage(final String file) throws IOException {
         if (!images.containsKey(file)) {
-            try {
-                output.writeUTF("Image:;" + file);
-                final byte[] sizeB = new byte[4];
-                input.read(sizeB);
 
-                final int size = ByteBuffer.wrap(sizeB).asIntBuffer().get();
+            output.writeUTF("Image:;" + file);
+            final byte[] sizeB = new byte[4];
+            input.read(sizeB);
 
-                final byte[] imageB = new byte[size];
-                input.read(imageB);
-                final BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageB));
+            final int size = ByteBuffer.wrap(sizeB).asIntBuffer().get();
 
-                images.put(file, image);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            final byte[] imageB = new byte[size];
+            input.read(imageB);
+            final BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageB));
+
+            images.put(file, image);
+
         }
         return images.get(file);
     }
@@ -99,7 +97,7 @@ public class TwoBrainsSocket extends Socket {
      * @return
      * @throws IOException
      */
-    public Gebruiker login(final String email, final String password) {
+    public Gebruiker login(final String email, final String password) throws IOException {
         final Gebruiker info = verkrijgInfo(email);
         if (info != null && verkrijgInfo(email).getWachtwoord().equals(password)) {
             return info;
@@ -107,20 +105,18 @@ public class TwoBrainsSocket extends Socket {
         return null;
     }
 
-    public Gebruiker verkrijgInfo(final String email) {
-        try {
-            getOutputStream().writeUTF("Info:;" + email);
-            final String response = getInputStream().readUTF();
-            if (!response.equals("Email bestaat niet")) {
-                final Gebruiker info = Gebruiker.parse(email, response);
-                info.setConnection(this);
-                return info;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public Gebruiker verkrijgInfo(final String email) throws IOException {
+
+        getOutputStream().writeUTF("Info:;" + email);
+        final String response = getInputStream().readUTF();
+        if (!response.equals("Email bestaat niet")) {
+            final Gebruiker info = Gebruiker.parse(email, response);
+            info.setConnection(this);
+            return info;
         }
         return null;
     }
+
 
     /**
      * Methode om een chatmessage te zenden
@@ -129,14 +125,13 @@ public class TwoBrainsSocket extends Socket {
      * @param bericht bericht dat wordt verzonden
      * @return De UTF die terug van de Server komt.
      */
-    public String message(final String email, final String bericht) {
-        try {
-            getOutputStream().writeUTF("Chat:;" + email + ":" + bericht);
-            return getInputStream().readUTF();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
+
+    public String message(final String email, final String bericht) throws IOException {
+
+        getOutputStream().writeUTF("Chat:;" + email + ":" + bericht);
+        return getInputStream().readUTF();
+
+
     }
 
 
@@ -150,50 +145,48 @@ public class TwoBrainsSocket extends Socket {
      * @return
      * @throws IOException
      */
-    public String register(final String email, final JSONObject data, final BufferedImage image) {
-        try {
-            getOutputStream().writeUTF("Registreer:;" + email + ":" + data);
+    public String register(final String email, final JSONObject data, final BufferedImage image) throws IOException {
+
+        getOutputStream().writeUTF("Registreer:;" + email + ":" + data);
 
 
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", baos);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "jpg", baos);
 
-            final byte[] file = baos.toByteArray();
-            getOutputStream().writeInt(baos.size());
-            getOutputStream().write(file);
-            getOutputStream().flush();
+        final byte[] file = baos.toByteArray();
+        getOutputStream().writeInt(baos.size());
+        getOutputStream().write(file);
+        getOutputStream().flush();
 
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    try {
-                        baos.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            }, 5000);
+            }
+        }, 5000);
 
-            return getInputStream().readUTF();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
+        return getInputStream().readUTF();
+
+
     }
 
-    public ArrayList<String> getMatches(final String user) {
+    public ArrayList<String> getMatches(final String user) throws IOException {
         final ArrayList<String> matches = new ArrayList<>();
-        try {
 
-            getOutputStream().writeUTF("Match:;" + user);
-            while (getInputStream().available() != 0) {
-                System.out.println("Test");
-                matches.add(getInputStream().readUTF());
-            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        getOutputStream().writeUTF("Match:;" + user);
+        while (getInputStream().available() != 0) {
+            System.out.println("Test");
+            matches.add(getInputStream().readUTF());
+
+
+            return matches;
         }
+
         return matches;
     }
 }

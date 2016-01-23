@@ -13,6 +13,7 @@ public class Gebruiker {
 
     /**
      * Initialiseert 3 attributen
+     *
      * @attrib String:email
      * @attrib JSONobject:data
      * @attrib Twobrainsocket:connection
@@ -23,7 +24,8 @@ public class Gebruiker {
 
     /**
      * Constructor Gebruiker
-     *      Creëert Gebruiker-object
+     * Creëert Gebruiker-object
+     *
      * @param email
      * @param data
      */
@@ -34,6 +36,7 @@ public class Gebruiker {
 
     /**
      * Klasse isConnected
+     *
      * @return true als connected
      */
 
@@ -43,30 +46,25 @@ public class Gebruiker {
 
     /**
      * Klasse disconnect
-     *      Disconnect
+     * Disconnect
      */
-    public void disconnect() {
-        try {
-            this.connection.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void disconnect() throws IOException {
+        this.connection.close();
     }
 
-    public static Gebruiker parse(final String email, final String data) {
+    public static Gebruiker parse(final String email, final String data) throws ParseException {
         final JSONParser parser = new JSONParser();
-        try {
-            final JSONObject obj = (JSONObject) parser.parse(data);
-            return new Gebruiker(email, obj);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+
+        final JSONObject obj = (JSONObject) parser.parse(data);
+        return new Gebruiker(email, obj);
+
+
     }
 
     /**
      * Klasse getAttribuut
-     *      retourneert String van data-JSONobject
+     * retourneert String van data-JSONobject
+     *
      * @param attribuut
      * @return String
      */
@@ -76,7 +74,8 @@ public class Gebruiker {
 
     /**
      * Klasse getEmail
-     *      Retourneert Email-attribuut als string
+     * Retourneert Email-attribuut als string
+     *
      * @return String
      */
     public String getEmail() {
@@ -85,7 +84,8 @@ public class Gebruiker {
 
     /**
      * Klasse getVoornaam
-     *      Retourneert Voornaam-JSONobject-attribuut als string
+     * Retourneert Voornaam-JSONobject-attribuut als string
+     *
      * @return String
      */
     public String getVoornaam() {
@@ -94,7 +94,8 @@ public class Gebruiker {
 
     /**
      * Klasse getAchternaam
-     *      Retourneert Achternaam-JSONobject-attribuut als string
+     * Retourneert Achternaam-JSONobject-attribuut als string
+     *
      * @return String
      */
     public String getAchternaam() {
@@ -103,7 +104,8 @@ public class Gebruiker {
 
     /**
      * Klasse getGeslacht
-     *      Retourneert Geslacht-JSONobject-attribuut als string
+     * Retourneert Geslacht-JSONobject-attribuut als string
+     *
      * @return String
      */
     public String getGeslacht() {
@@ -112,7 +114,8 @@ public class Gebruiker {
 
     /**
      * Klasse getLeeftijd
-     *      Retourneert Leeftijd-JSONobject-attribuut als string
+     * Retourneert Leeftijd-JSONobject-attribuut als string
+     *
      * @return String
      */
     public String getLeeftijd() {
@@ -121,7 +124,8 @@ public class Gebruiker {
 
     /**
      * Klasse getWAachtwoord
-     *      Retourneert Wachtwoord-JSONobject-attribuut als string
+     * Retourneert Wachtwoord-JSONobject-attribuut als string
+     *
      * @return String
      */
     public String getWachtwoord() {
@@ -130,7 +134,8 @@ public class Gebruiker {
 
     /**
      * Klasse getOpleiding
-     *      Retourneert Opleiding-JSONobject-attribuut als string
+     * Retourneert Opleiding-JSONobject-attribuut als string
+     *
      * @return String
      */
     public String getOpleiding() {
@@ -139,7 +144,8 @@ public class Gebruiker {
 
     /**
      * klasse getVakken
-     *      Retourneert Vakken-JSONobject-attribuut als string
+     * Retourneert Vakken-JSONobject-attribuut als string
+     *
      * @return String
      */
     public String[] getVakken() {
@@ -148,7 +154,8 @@ public class Gebruiker {
 
     /**
      * Klasse getLocatie
-     *      Retourneert Locatie-JSONobject-attribuut als string
+     * Retourneert Locatie-JSONobject-attribuut als string
+     *
      * @return String
      */
     public String getLocatie() {
@@ -157,6 +164,7 @@ public class Gebruiker {
 
     /**
      * Klasse getConnection
+     *
      * @return connection
      */
     public TwoBrainsSocket getConnection() {
@@ -165,6 +173,7 @@ public class Gebruiker {
 
     /**
      * Klasse setConnection
+     *
      * @param socket
      */
     public void setConnection(final TwoBrainsSocket socket) {
@@ -173,9 +182,10 @@ public class Gebruiker {
 
     /**
      * Klasse getUserImage
+     *
      * @return image
      */
-    public BufferedImage getUserImage() {
+    public BufferedImage getUserImage() throws IOException {
         return connection.getImage(this.email);
     }
 
