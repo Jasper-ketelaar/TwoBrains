@@ -261,4 +261,111 @@ public class GebruikerTest {
 
         assertEquals(7,koen.matchScore(koen2));
     }
+
+    @Test
+    public void TestGetGeslachtPositief() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+        assertEquals("M", Kevin.getGeslacht());
+    }
+
+    @Test
+    public void TestGetGeslachtNegatief() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+        assertEquals("V", Kevin.getGeslacht());
+    }
+
+    @Test
+    public void testLeeftijdPositief() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+        assertEquals(21, Kevin.getLeeftijd());
+    }
+
+    @Test
+    public void testLeeftijfNegatief() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+        assertNotEquals(12, Kevin.getLeeftijd());
+    }
+
+    @Test
+    public void testOpleidingPositief() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+        assertEquals("Informatica", Kevin.getOpleiding());
+    }
+
+    @Test
+    public void testOpleidingNegatief() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+        assertNotEquals("Psychologie", Kevin.getOpleiding());
+    }
+
+    @Test
+    public void testGetVakkenPositief() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+        String alleVakken = "";
+
+        for (int i = 0; i < Kevin.getVakken().length; i++) {
+            alleVakken = alleVakken + Kevin.getVakken()[i];
+        }
+        assertEquals("Redeneren&Logica", alleVakken);
+
+    }
+
+    @Test
+    public void testVakkenNegatief() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel");
+        String alleVakken = "";
+
+        for (int i = 0; i < Kevin.getVakken().length; i++) {
+            alleVakken = alleVakken + Kevin.getVakken()[i];
+        }
+        assertNotEquals("Wiskunde", alleVakken);
+    }
+
+    @Test
+    public void testLocatiePos() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+        assertEquals("Rotterdam", Kevin.getLocatie());
+    }
+
+    @Test
+    public void testLocatieNeg() throws Exception{
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+        assertNotEquals("Delft", Kevin.getLocatie());
+
+    }
+
+    @Test
+    public void testJSONObjectPos() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+
+        assertEquals("{\"Geslacht\":\"M\",\"Leeftijd\":\"21\",\"Voornaam\":\"Kevin\",\"Achternaam\":\"van Heel\",\"Wachtwoord\":\"Test001\",\"Locatie\":\"Rotterdam\",\"Vakken\":\"Redeneren&Logica\",\"Opleiding\":\"Informatica\"}", Kevin.getJSONObject().toJSONString());
+    }
+
+    @Test
+    public void testJSONObjectNEG() throws Exception {
+        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+
+        assertEquals("{\"Geslacht\":\"V\",\"Leeftijd\":\"18\",\"Voornaam\":\"Kevin\",\"Achternaam\":\"van Heel\",\"Wachtwoord\":\"Test001\",\"Locatie\":\"Rotterdam\",\"Vakken\":\"Wiskunde&Logica\",\"Opleiding\":\"Informatica\"}", Kevin.getJSONObject().toJSONString());
+    }
+
+    @Test
+    public void TestEqualspos() throws Exception {
+        Gebruiker K1 = db.get("Kevinvanheel94@hotmail.com");
+        Gebruiker K2 = db.get("Kevinvanheel94@hotmail.com");
+        assertTrue(K1.equals(K2));
+
+
+    }
+
+    @Test
+    public void testEqualsneg() throws Exception {
+        Gebruiker K1 = db.get("Kevinvanheel94@hotmail.com");
+        Gebruiker K2 = db.get("Kevin@hotmail.com");
+        assertFalse(K1.equals(K2));
+    }
+
+
+
+
+
 }
