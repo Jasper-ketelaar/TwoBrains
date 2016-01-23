@@ -2,8 +2,22 @@
 <component inherit-compiler-output="true" inheritJdk="true">
 	<output-test url="file://$MODULE_DIR$/out/test/TwoBrains"/>
 	<exclude-output/>
-	<contentEntry url="file://$MODULE_DIR$"/>
+	<contentEntry url="file://$MODULE_DIR$">
+		<testFolder url="file://$MODULE_DIR$/tests"/>
+	</contentEntry>
+	<lib name="hamcrest-core-1.3.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/resources/hamcrest-core-1.3.jar!/"/>
+	</lib>
+	<lib name="json-simple-1.1.1.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/resources/json-simple-1.1.1.jar!/"/>
+	</lib>
+	<lib name="junit-4.12.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/resources/junit-4.12.jar!/"/>
+	</lib>
 	<levels>
 		<level name="resources" value="project"/>
+		<level name="json-simple-1.1.1" value="project"/>
+		<level name="junit-4.12 (2)" value="project"/>
+		<level name="hamcrest-core-1.3 (2)" value="project"/>
 	</levels>
 </component>
