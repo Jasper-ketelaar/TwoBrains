@@ -7,6 +7,7 @@ import nl.tudelft.twobrains.server.model.listeners.client.ClientEvent;
 import nl.tudelft.twobrains.server.model.listeners.client.ClientListener;
 
 import java.io.DataOutputStream;
+import java.io.IOException;
 
 /**
  * Created by jasperketelaar on 11/23/15.
@@ -22,25 +23,23 @@ public class InfoHandler implements ClientListener {
      * message for the different cases is send to the user. If the username and
      * password are correct the Server returns the users information (JSON).
      *
-     * @param evt A client event consisting of two Strings: event, argument.
-     *            The argument can contain the username and password.
+     * @param evt            A client event consisting of two Strings: event, argument.
+     *                       The argument can contain the username and password.
      * @param responseStream A data ouput stream to write data to the client.
-     * @param server The server for database access
+     * @param server         The server for database access
      */
     @Override
-    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) {
-        try {
-            if (evt.getEvent().equals("Info")) {
-                System.out.println("Info required");
-                if (server.getDatabase().containsKey(evt.getArguments())) {
-                    final Gebruiker gebruiker = server.getDatabase().get(evt.getArguments());
-                    responseStream.writeUTF(gebruiker.getJSONString());
-                } else {
-                    responseStream.writeUTF("Email bestaat niet");
-                }
+    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) throws IOException {
+
+        if (evt.getEvent().equals("Info")) {
+            System.out.println("Info required");
+            if (server.getDatabase().containsKey(evt.getArguments())) {
+                final Gebruiker gebruiker = server.getDatabase().get(evt.getArguments());
+                responseStream.writeUTF(gebruiker.getJSONString());
+            } else {
+                responseStream.writeUTF("Email bestaat niet");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
     }
 }

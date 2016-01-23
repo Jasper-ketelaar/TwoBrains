@@ -16,15 +16,13 @@ import java.util.ArrayList;
 public class MatchHandler implements ClientListener {
 
     @Override
-    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) {
+    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) throws IOException {
         if (evt.getEvent().equals("Match")) {
             final ArrayList<Match> matchArrayList = server.getMatchFinder().getMatchesForUser(evt.getArguments());
             for (final Match match : matchArrayList) {
-                try {
-                    responseStream.writeUTF(match.toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+                responseStream.writeUTF(match.toString());
+
             }
         }
     }

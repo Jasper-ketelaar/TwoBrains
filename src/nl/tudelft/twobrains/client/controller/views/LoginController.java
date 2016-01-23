@@ -50,7 +50,7 @@ public class LoginController extends AbstractController {
      * Als er niks staat, komt de error met voer in beide velden iets in
      *
      */
-    public void login(final ActionEvent evt) {
+    public void login(final ActionEvent evt) throws Exception {
         final String email = this.email.getText();
         final String pw = this.password.getText();
 

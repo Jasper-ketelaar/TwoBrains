@@ -97,7 +97,7 @@ public class TwoBrainsSocket extends Socket {
      * @return
      * @throws IOException
      */
-    public Gebruiker login(final String email, final String password) throws IOException {
+    public Gebruiker login(final String email, final String password) throws Exception {
         final Gebruiker info = verkrijgInfo(email);
         if (info != null && verkrijgInfo(email).getWachtwoord().equals(password)) {
             return info;
@@ -105,7 +105,7 @@ public class TwoBrainsSocket extends Socket {
         return null;
     }
 
-    public Gebruiker verkrijgInfo(final String email) throws IOException {
+    public Gebruiker verkrijgInfo(final String email) throws Exception {
 
         getOutputStream().writeUTF("Info:;" + email);
         final String response = getInputStream().readUTF();

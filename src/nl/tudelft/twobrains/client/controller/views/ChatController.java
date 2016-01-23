@@ -10,6 +10,7 @@ import nl.tudelft.twobrains.client.controller.AbstractController;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -49,7 +50,7 @@ public class ChatController extends AbstractController {
     }
 
 
-    public void verzend(final ActionEvent evt) {
+    public void verzend(final ActionEvent evt) throws IOException {
         final String bericht = message.getText();
 
         if (bericht.equals("")) {
@@ -60,7 +61,7 @@ public class ChatController extends AbstractController {
         final TwoBrainsSocket socket = Verstuurder.getSocket();
         final String response = socket.message(emailOntvanger, bericht);
 
-        if(response.contains("Success")){
+        if (response.contains("Success")) {
             chatWindow.appendText(bericht);
         } else {
             error.setText("Verzenden mislukt, probeer opnieuw of check internet-verbinding");

@@ -10,32 +10,31 @@ import nl.tudelft.twobrains.server.model.listeners.client.ClientListener;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 
 /**
  * Created by Bernard on 13-1-2016.
  */
-public class ChatHandler implements ClientListener{
+public class ChatHandler implements ClientListener {
 
 
     @Override
-    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) {
-        try {
-            if (evt.getEvent().equals("Chat")) {
-                final String[] split = evt.getArguments().split(":");
+    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) throws IOException {
 
-                if (server.getDatabase().containsKey(split[0])) {
-                    final Gebruiker gebruiker = server.getDatabase().get(split[0]);
-                    final String message = split[1];
-                    if(!message.equals("")){
-                        responseStream.writeUTF("Success:" + message);
-                        //TODO:stuur message naar (andere) gebruiker
-                    }
-                } else {
-                    responseStream.writeUTF("Email/Gebruiker bestaat niet");
+        if (evt.getEvent().equals("Chat")) {
+            final String[] split = evt.getArguments().split(":");
+
+            if (server.getDatabase().containsKey(split[0])) {
+                final Gebruiker gebruiker = server.getDatabase().get(split[0]);
+                final String message = split[1];
+                if (!message.equals("")) {
+                    responseStream.writeUTF("Success:" + message);
+                    //TODO:stuur message naar (andere) gebruiker
                 }
+            } else {
+                responseStream.writeUTF("Email/Gebruiker bestaat niet");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
     }
 }

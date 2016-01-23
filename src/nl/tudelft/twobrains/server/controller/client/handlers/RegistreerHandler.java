@@ -26,38 +26,34 @@ public class RegistreerHandler implements ClientListener {
      * String array by splitting. The database is checked for already containing
      * this email (=username). If not the users information is added to the database.
      *
-     * @param evt A client event consisting of two Strings: event, argument.
+     * @param evt            A client event consisting of two Strings: event, argument.
      * @param responseStream A data ouput stream to write data to the client.
-     * @param server The server for database access
+     * @param server         The server for database access
      */
     @Override
-    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) {
+    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) throws Exception {
 
         if (evt.getEvent().equals("Registreer")) {
-            try {
-                final BufferedImage image = ImageIO.read(new ByteArrayInputStream(evt.getData()));
-                final String split[] = evt.getArguments().split(":");
-                final String email = split[0];
-                final File file = new File(Server.IMAGES + email + ".jpg");
-                ImageIO.write(image, "jpg", file);
 
-                final String input = evt.getArguments().replace(email + ":", "");
-                if (server.getDatabase().containsKey(email)) {
-                    responseStream.writeUTF("Email bestaat al");
-                } else {
-                    final Gebruiker gebruiker;
-                    try {
-                        gebruiker = Gebruiker.parse(email, input);
-                        server.getDatabase().add(gebruiker);
-                        server.getDatabase().write(Server.RESOURCES + "/database.json");
-                        responseStream.writeUTF("Succes");
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            final BufferedImage image = ImageIO.read(new ByteArrayInputStream(evt.getData()));
+            final String split[] = evt.getArguments().split(":");
+            final String email = split[0];
+            final File file = new File(Server.IMAGES + email + ".jpg");
+            ImageIO.write(image, "jpg", file);
+
+            final String input = evt.getArguments().replace(email + ":", "");
+            if (server.getDatabase().containsKey(email)) {
+                responseStream.writeUTF("Email bestaat al");
+            } else {
+                final Gebruiker gebruiker;
+
+                gebruiker = Gebruiker.parse(email, input);
+                server.getDatabase().add(gebruiker);
+                server.getDatabase().write(Server.RESOURCES + "/database.json");
+                responseStream.writeUTF("Succes");
+
             }
+
         }
     }
 }

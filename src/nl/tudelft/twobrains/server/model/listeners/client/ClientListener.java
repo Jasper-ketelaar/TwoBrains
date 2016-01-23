@@ -4,6 +4,7 @@ import nl.tudelft.twobrains.server.Server;
 import nl.tudelft.twobrains.server.model.Database;
 
 import java.io.DataOutputStream;
+import java.io.IOException;
 
 /**
  * Created by jasperketelaar on 11/23/15.
@@ -17,6 +18,6 @@ public interface ClientListener {
      * @param responseStream A data ouput stream to write data to the client.
      * @param server the server for database access
      */
-    void onClientEvent(final ClientEvent evt, final DataOutputStream responseStream, Server server);
+    void onClientEvent(final ClientEvent evt, final DataOutputStream responseStream, Server server) throws Exception;
 
 }

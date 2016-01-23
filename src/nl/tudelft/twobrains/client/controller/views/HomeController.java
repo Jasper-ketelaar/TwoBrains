@@ -38,7 +38,7 @@ public class HomeController extends AbstractController {
     }
 
     @Override
-    public void initItems() {
+    public void initItems() throws Exception {
         final Gebruiker gebruiker = twoBrains.getGebruiker();
         final BufferedImage bImage = gebruiker.getUserImage();
         final WritableImage writableImage = new WritableImage(bImage.getWidth(), bImage.getHeight());

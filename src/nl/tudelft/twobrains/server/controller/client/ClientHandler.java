@@ -80,7 +80,12 @@ public class ClientHandler extends Thread {
                     evt.setData(dataB);
                 }
                 for (final ClientListener listener : listeners) {
-                    listener.onClientEvent(evt, output, server);
+                    try {
+                        listener.onClientEvent(evt, output, server);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             } catch (EOFException | SocketException e) {
                 try {

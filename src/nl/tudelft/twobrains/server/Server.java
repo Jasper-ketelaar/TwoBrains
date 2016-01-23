@@ -42,29 +42,25 @@ public class Server {
      * @param port wordt een nieuwe ServerSocket aangemaakt.
      * @throws IOException
      */
-    public Server(final int port) throws IOException {
+    public Server(final int port) throws IOException, ParseException {
         this.server = new ServerSocket(port);
 
-        try {
-            final File dir = new File(Server.RESOURCES);
 
-            final File iDir = new File(dir.getPath() + "/images/");
-            if (!iDir.exists()) {
-                iDir.mkdir();
-            } else {
-                System.out.println(dir.getAbsolutePath());
-            }
-            final File file = new File(dir.getAbsolutePath() + "/database.json");
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            this.database = Database.parse(file.getPath());
-            this.database.write(file.getPath());
-        } catch (final IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+        final File dir = new File(Server.RESOURCES);
+
+        final File iDir = new File(dir.getPath() + "/images/");
+        if (!iDir.exists()) {
+            iDir.mkdir();
+        } else {
+            System.out.println(dir.getAbsolutePath());
         }
+        final File file = new File(dir.getAbsolutePath() + "/database.json");
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        this.database = Database.parse(file.getPath());
+        this.database.write(file.getPath());
+
     }
 
     public Server(final Database test) {
@@ -88,7 +84,8 @@ public class Server {
      * @param args Als eerste arg kan een poort worden ingevoerd waar de Server op runt
      * @throws IOException
      */
-    public static void main(final String[] args) throws IOException {
+
+    public static void main(final String[] args) throws Exception {
         int defaultPort = 4444;
         if (args.length > 0) {
             final String arg1 = args[0];
@@ -139,7 +136,7 @@ public class Server {
     /**
      * Probeert de ClientHandler te starten als er connectie is.
      */
-    public void run() {
+    public void run() throws Exception {
         new Thread(() -> {
             final Scanner scanner = new Scanner(System.in);
             while (true) {
@@ -156,28 +153,22 @@ public class Server {
                 }
             }
         }).start();
-        try {
 
-            this.matchFinder = new MatchFinder(database);
-            this.matchFinder.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+        this.matchFinder = new MatchFinder(database);
+        this.matchFinder.start();
+
         while (true) {
-            try {
-                final Socket accept = server.accept();
-                System.out.println(accept.toString());
-                this.handler = new ClientHandler(accept, this);
-                System.out.println("handler created");
-                System.out.println(handler.toString());
-                System.out.println(this.handler.toString());
-                System.out.println(getHandler());
-                handler.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            final Socket accept = server.accept();
+            System.out.println(accept.toString());
+            this.handler = new ClientHandler(accept, this);
+            System.out.println("handler created");
+            System.out.println(handler.toString());
+            System.out.println(this.handler.toString());
+            System.out.println(getHandler());
+            handler.start();
+
 
         }
     }
@@ -188,7 +179,7 @@ public class Server {
      * @throws IOException
      */
     public void close() throws IOException {
-        if(!(this.database.equals(null))) {
+        if (!(this.database.equals(null))) {
             database.write(RESOURCES.concat("/database.json"));
         }
         server.close();

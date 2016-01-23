@@ -31,11 +31,14 @@ public class ImageHandler implements ClientListener {
      * @param database       The database is not used in this method.
      */
     @Override
-    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) {
+    public void onClientEvent(ClientEvent evt, DataOutputStream responseStream, Server server) throws IOException {
         if (evt.getEvent().equals("Image")) {
             final String fileName = evt.getArguments();
             System.out.println(fileName);
+
             sendImage(fileName, responseStream);
+
+
         }
     }
 
@@ -73,32 +76,30 @@ public class ImageHandler implements ClientListener {
      * @param fileName The name of the Image File.
      * @param output   A data ouput stream to write data to the client.
      */
-    private void sendImage(final String fileName, final DataOutputStream output) {
-        try {
-            final File file = getFile(fileName);
-            final BufferedImage image = ImageIO.read(file);
-            final String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length());
+    private void sendImage(final String fileName, final DataOutputStream output) throws IOException {
 
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(image, ext, baos);
+        final File file = getFile(fileName);
+        final BufferedImage image = ImageIO.read(file);
+        final String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length());
 
-            final byte[] size = ByteBuffer.allocate(4).putInt(baos.size()).array();
-            output.write(size);
-            output.write(baos.toByteArray());
-            output.flush();
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    try {
-                        baos.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, ext, baos);
+
+        final byte[] size = ByteBuffer.allocate(4).putInt(baos.size()).array();
+        output.write(size);
+        output.write(baos.toByteArray());
+        output.flush();
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            }, 5000);
+            }
+        }, 5000);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 }

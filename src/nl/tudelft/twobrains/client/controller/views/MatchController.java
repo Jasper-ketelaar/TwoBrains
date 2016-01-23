@@ -14,6 +14,7 @@ import nl.tudelft.twobrains.client.controller.AbstractController;
 import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.client.view.match.comp.UserBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -103,7 +104,7 @@ public class MatchController extends AbstractController {
 
     }
 
-    public void update(final ArrayList<String> matches) {
+    public void update(final ArrayList<String> matches) throws  Exception{
         final String self = twoBrains.getGebruiker().getEmail();
         for (final String match : matches) {
             final String extr[] = match.replace(self, "").split(":");
@@ -122,14 +123,19 @@ public class MatchController extends AbstractController {
      * Methode voor het initialiseren van de users in de MatchScene.
      */
     @Override
-    public void initItems() {
+    public void initItems() throws Exception{
         vBox.setFocusTraversable(false);
         update(twoBrains.getSocket().getMatches(twoBrains.getGebruiker().getEmail()));
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
-                    update(twoBrains.getSocket().getMatches(twoBrains.getGebruiker().getEmail()));
+                    try {
+                        update(twoBrains.getSocket().getMatches(twoBrains.getGebruiker().getEmail()));
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {

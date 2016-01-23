@@ -6,6 +6,7 @@ import javafx.scene.control.TabPane;
 import nl.tudelft.twobrains.client.TwoBrains;
 import nl.tudelft.twobrains.client.controller.AbstractController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,7 +37,7 @@ public class TabsController extends AbstractController {
     }
 
     @Override
-    public void initItems() {
+    public void initItems() throws Exception{
         tabPane.setFocusTraversable(false);
         tabPane.setTabMinHeight(40);
         tabPane.setTabMinWidth(150);
