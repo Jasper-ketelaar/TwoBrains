@@ -49,6 +49,7 @@ public class RegistreerHandler implements ClientListener {
                     try {
                         gebruiker = Gebruiker.parse(email, input);
                         server.getDatabase().add(gebruiker);
+                        server.getDatabase().write(Server.RESOURCES + "/database.json");
                         responseStream.writeUTF("Succes");
                     } catch (ParseException e) {
                         e.printStackTrace();
