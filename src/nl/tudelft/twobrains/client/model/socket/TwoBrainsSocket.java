@@ -112,7 +112,9 @@ public class TwoBrainsSocket extends Socket {
             getOutputStream().writeUTF("Info:;" + email);
             final String response = getInputStream().readUTF();
             if (!response.equals("Email bestaat niet")) {
-                return Gebruiker.parse(email, response);
+                final Gebruiker info = Gebruiker.parse(email, response);
+                info.setConnection(this);
+                return info;
             }
         } catch (IOException e) {
             e.printStackTrace();

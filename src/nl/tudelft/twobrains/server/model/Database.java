@@ -98,7 +98,13 @@ public class Database extends HashMap<String, Gebruiker> {
      */
     public ArrayList<Gebruiker> filter(final Predicate<Gebruiker> predicate) {
         final ArrayList<Gebruiker> gebruikers = new ArrayList<>();
-        gebruikers.addAll(values().stream().filter(predicate).collect(Collectors.toList()));
+        final Gebruiker[] concGebruikers = this.values().toArray(new Gebruiker[this.values().size()]);
+
+        for (Gebruiker g : concGebruikers) {
+            if (predicate.test(g)) {
+                gebruikers.add(g);
+            }
+        }
         return gebruikers;
     }
 

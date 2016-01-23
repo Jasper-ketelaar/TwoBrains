@@ -3,6 +3,7 @@ package nl.tudelft.twobrains.client.controller.views;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -110,6 +111,9 @@ public class MatchController extends AbstractController {
             System.out.println(matchee);
             if (!matchCache.contains(matchee)) {
                 matchCache.add(matchee);
+                if(vBox.getChildren().size() > 0) {
+                    vBox.getChildren().add(new Separator());
+                }
                 vBox.getChildren().add(new UserBox(twoBrains.getSocket().verkrijgInfo(matchee)));
             }
         }
