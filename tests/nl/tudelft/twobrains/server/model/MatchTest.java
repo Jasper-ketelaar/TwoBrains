@@ -71,7 +71,7 @@ public class MatchTest {
     }
 
     @Test
-    public void testEquals() {
+    public void testEqualsTrue() {
 
         final String email = "ibuddyh@gmail.com";
         final String email2 = "jasperketelaar@kpnmail.nl";
@@ -80,6 +80,21 @@ public class MatchTest {
 
         Match l = new Match(email, email2, score);
         Match k = new Match(email, email2, score);
+
+        assertTrue(k.equals(l));
+    }
+
+    @Test
+    public void testEqualsFalse() {
+
+        final String email = "ibuddyh@gmail.com";
+        final String email2 = "jasperketelaar@kpnmail.nl";
+        final double score1 = 2.2;
+        final double score2 = 3.3;
+
+
+        Match l = new Match(email, email2, score1);
+        Match k = new Match(email, email2, score2);
 
         assertTrue(k.equals(l));
     }
