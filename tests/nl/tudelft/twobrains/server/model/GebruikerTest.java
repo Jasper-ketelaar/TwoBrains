@@ -13,249 +13,218 @@ import static org.junit.Assert.*;
 
 
 public class GebruikerTest {
-    Database db;
+    String email = "test@email.com";
+    JSONObject testdata = new JSONObject();
+    JSONObject testdata2 = new JSONObject();
 
-    public GebruikerTest() throws IOException, ParseException {
-        db = Database.parse(Server.RESOURCES + "/TestDatabase.json");
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker Kevin = db.get("kevinvanheel94@hotmail.com");
-    }
+    Gebruiker testGebruiker = new Gebruiker(email, testdata);
 
-//    public String getelementoutofarray(){
-//
-//
-//    }
+    static Gebruiker test1;
+    static Gebruiker test2;
+    static Gebruiker test3;
+    static Gebruiker test4;
 
-    @Test
-    public void testTostringVakkenpositive() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertEquals("Calculus", koen.toStringVakken(koen.getVakken()));
-    }
-
-
-    @Test
-    public void testTostringVakkennegative() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertNotEquals("Wiskunde", koen.toStringVakken(koen.getVakken()));
-    }
-
-    @Test
-    public void testGetEmailnegative() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertNotEquals("ibuddyh@gmail.com", koen.getEmail());
-    }
-
-
-
-
-    @Test
-    public void testGetVoornaampositive() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertEquals("Koen", koen.getVoornaam());
-    }
-
-
-    @Test
-    public void testGetVoornaamnegative() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertNotEquals("Budi", koen.getVoornaam());
-    }
-
-
-    @Test
-    public void testGetAchternaampositive() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertEquals("Zeijl", koen.getAchternaam());
+    static {
+        try {
+            test1 = Gebruiker.parse("test1", "{\n" +
+                    "    \"Voornaam\": \"testV\",\n" +
+                    "    \"Achternaam\": \"testA\",\n" +
+                    "    \"Geslacht\": \"M\",\n" +
+                    "    \"Leeftijd\": \"18\",\n" +
+                    "    \"Wachtwoord\": \"testW\",\n" +
+                    "    \"Opleiding\": \"testO\",\n" +
+                    "    \"Vakken\": \"testV\",\n" +
+                    "    \"Locatie\": \"testL\"\n" +
+                    "  }");
+            test2 = Gebruiker.parse("test2", "{\n" +
+                    "    \"Voornaam\": \"testV\",\n" +
+                    "    \"Achternaam\": \"testA\",\n" +
+                    "    \"Geslacht\": \"M\",\n" +
+                    "    \"Leeftijd\": \"18\",\n" +
+                    "    \"Wachtwoord\": \"testW\",\n" +
+                    "    \"Opleiding\": \"testO\",\n" +
+                    "    \"Vakken\": \"testV\",\n" +
+                    "    \"Locatie\": \"testL\"\n" +
+                    "  }");
+            test3 = Gebruiker.parse("test3", "{\n" +
+                    "    \"Voornaam\": \"testV\",\n" +
+                    "    \"Achternaam\": \"testA\",\n" +
+                    "    \"Geslacht\": \"M\",\n" +
+                    "    \"Leeftijd\": \"19\",\n" +
+                    "    \"Wachtwoord\": \"testW\",\n" +
+                    "    \"Opleiding\": \"testO\",\n" +
+                    "    \"Vakken\": \"testV\",\n" +
+                    "    \"Locatie\": \"testL\"\n" +
+                    "  }");
+            test4 = Gebruiker.parse("test4", "{\n" +
+                    "    \"Voornaam\": \"testV\",\n" +
+                    "    \"Achternaam\": \"testA\",\n" +
+                    "    \"Geslacht\": \"M\",\n" +
+                    "    \"Leeftijd\": \"22\",\n" +
+                    "    \"Wachtwoord\": \"testW\",\n" +
+                    "    \"Opleiding\": \"testO\",\n" +
+                    "    \"Vakken\": \"testV\",\n" +
+                    "    \"Locatie\": \"testL\"\n" +
+                    "  }");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Test
-    public void testGetAchternaamnegative() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertNotEquals("Han", koen.getAchternaam());
-    }
-
-
-    @Test
-    public void testGetWachtwoordpositive() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertEquals("000000", koen.getWachtwoord());
-    }
-
-
-
-    @Test
-    public void testGetWachtwoordnegative() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-        assertNotEquals("hahah grapje", koen.getWachtwoord());
-    }
-
-
-
-    @Test
-    public void testParse() throws Exception{
-        Gebruiker koen = Gebruiker.parse("kvanzeijl@hotmail.com","{\n" +
-                "    \"Voornaam\": \"Koen\",\n" +
-                "    \"Achternaam\": \"Zeijl\",\n" +
+    public void testParse() throws ParseException {
+        Gebruiker test = Gebruiker.parse(email, "{\n" +
+                "    \"Voornaam\": \"testV\",\n" +
+                "    \"Achternaam\": \"testA\",\n" +
                 "    \"Geslacht\": \"M\",\n" +
                 "    \"Leeftijd\": \"18\",\n" +
-                "    \"Wachtwoord\": \"000000\",\n" +
-                "    \"Opleiding\": \"Informatica\",\n" +
-                "    \"Vakken\": \"Calculus\",\n" +
-                "    \"Locatie\": \"Delft\"\n" +
+                "    \"Wachtwoord\": \"testW\",\n" +
+                "    \"Opleiding\": \"testO\",\n" +
+                "    \"Vakken\": \"testV\",\n" +
+                "    \"Locatie\": \"testL\"\n" +
                 "  }");
-        Gebruiker koen2 = db.get("kvanzeijl@hotmail.com");
-        assertEquals(koen,koen2);
-    }
 
-    @Test(expected=ParseException.class)
-    public void testParsefail() throws ParseException {
-        Gebruiker gebruiker = Gebruiker.parse("", "sdafs");
-
-
-    }
-
-
-    @Test
-    public void testMatches(){
+        assertEquals(test.toString(), "Gebruiker[Voornaam=testV, Achternaam=testA, E-mail=test@email.com, Wachtwoord=testW, Geslacht=M, Leeftijd=18, Opleiding=testO, Vakken=testV, Locatie=testL]");
     }
 
     @Test
-    public void testMatchScore() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
+    public void testEmail() {
 
-        assertEquals(7,koen.matchScore(budi));
-    }
-    @Test
-    public void testMatchScore2() throws Exception {
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
 
-        assertEquals(9,koen.matchScore(koen));
-    }
-    @Test
-    public void testMatchScore3() throws Exception {
-        Gebruiker koen2 = db.get("kvanzeijl2@hotmail.com");
-        Gebruiker koen = db.get("kvanzeijl@hotmail.com");
-        Gebruiker budi = db.get("ibuddyh@gmail.com");
-
-        assertEquals(7,koen.matchScore(koen2));
+        assertEquals(testGebruiker.getEmail(), email);
     }
 
     @Test
-    public void TestGetGeslachtPositief() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
-        assertEquals("M", Kevin.getGeslacht());
+    public void testGetVoornaam() {
+        testdata.put("Voornaam", "Leroy");
+
+        assertEquals(testGebruiker.getVoornaam(), "Leroy");
     }
 
     @Test
-    public void TestGetGeslachtNegatief() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
-        assertEquals("V", Kevin.getGeslacht());
+    public void testGetAchternaam() {
+        testdata.put("Achternaam", "Velzel");
+
+        assertEquals(testGebruiker.getAchternaam(), "Velzel");
     }
 
     @Test
-    public void testLeeftijdPositief() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
-        assertEquals(21, Kevin.getLeeftijd());
+    public void testGetGeslacht() {
+
+        testdata.put("Geslacht", "M");
+
+        assertEquals(testGebruiker.getGeslacht(), "M");
     }
 
     @Test
-    public void testLeeftijfNegatief() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
-        assertNotEquals(12, Kevin.getLeeftijd());
+    public void testGetLeeftijd() {
+
+        testdata.put("Leeftijd", "19");
+
+        assertEquals(testGebruiker.getLeeftijd(), 19);
     }
 
     @Test
-    public void testOpleidingPositief() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
-        assertEquals("Informatica", Kevin.getOpleiding());
+    public void testGetWachtwoord() {
+
+        testdata.put("Wachtwoord", "123456");
+
+
+        assertEquals(testGebruiker.getWachtwoord(), "123456");
     }
 
     @Test
-    public void testOpleidingNegatief() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
-        assertNotEquals("Psychologie", Kevin.getOpleiding());
+    public void testGetOpleiding() {
+        testdata.put("Opleiding", "Informatica");
+
+
+        assertEquals(testGebruiker.getOpleiding(), "Informatica");
     }
 
     @Test
-    public void testGetVakkenPositief() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
+    public void testGetVakken() {
+        testdata.put("Vakken", "Calculus, Web en Database Technology, OOP");
+
+
         String alleVakken = "";
 
-        for (int i = 0; i < Kevin.getVakken().length; i++) {
-            alleVakken = alleVakken + Kevin.getVakken()[i];
+        for (int i = 0; i < testGebruiker.getVakken().length; i++) {
+            alleVakken = alleVakken + testGebruiker.getVakken()[i];
         }
-        assertEquals("Redeneren&Logica", alleVakken);
+        assertEquals(alleVakken, "Calculus Web en Database Technology OOP");
 
     }
 
     @Test
-    public void testVakkenNegatief() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel");
-        String alleVakken = "";
+    public void testGetLocatie() {
+        testdata.put("Locatie", "23.23.48,34.87.02");
 
-        for (int i = 0; i < Kevin.getVakken().length; i++) {
-            alleVakken = alleVakken + Kevin.getVakken()[i];
-        }
-        assertNotEquals("Wiskunde", alleVakken);
+
+        assertEquals(testGebruiker.getLocatie(), "23.23.48,34.87.02");
     }
 
     @Test
-    public void testLocatiePos() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
-        assertEquals("Rotterdam", Kevin.getLocatie());
+    public void testJSONString() throws ParseException {
+
+        testGebruiker = Gebruiker.parse(email, "{\n" +
+                "    \"Voornaam\": \"testV\",\n" +
+                "    \"Achternaam\": \"testA\",\n" +
+                "    \"Geslacht\": \"M\",\n" +
+                "    \"Leeftijd\": \"18\",\n" +
+                "    \"Wachtwoord\": \"testW\",\n" +
+                "    \"Opleiding\": \"testO\",\n" +
+                "    \"Vakken\": \"testV\",\n" +
+                "    \"Locatie\": \"testL\"\n" +
+                "  }");
+        System.out.println(testGebruiker.getJSONString());
+        assertEquals(testGebruiker.getJSONString(), "{\"Geslacht\":\"M\",\"Leeftijd\":\"18\",\"Voornaam\":\"testV\",\"Achternaam\":\"testA\",\"Wachtwoord\":\"testW\",\"Locatie\":\"testL\",\"Vakken\":\"testV\",\"Opleiding\":\"testO\"}");
     }
 
     @Test
-    public void testLocatieNeg() throws Exception{
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
-        assertNotEquals("Delft", Kevin.getLocatie());
+    public void testJSONObject() {
+        testdata.put("Voornaam", "Leroy");
+        testdata.put("Achternaam", "Velzel");
+        testdata.put("Geslacht", "M");
+        testdata.put("Leeftijd", "19");
+        testdata.put("Wachtwoord", "123456");
+        testdata.put("Opleiding", "Informatica");
+        testdata.put("Vakken", "Calculus, Web en Database Technology, OOP");
 
-    }
-
-    @Test
-    public void testJSONObjectPos() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
-
-        assertEquals("{\"Geslacht\":\"M\",\"Leeftijd\":\"21\",\"Voornaam\":\"Kevin\",\"Achternaam\":\"van Heel\",\"Wachtwoord\":\"Test001\",\"Locatie\":\"Rotterdam\",\"Vakken\":\"Redeneren&Logica\",\"Opleiding\":\"Informatica\"}", Kevin.getJSONObject().toJSONString());
-    }
-
-    @Test
-    public void testJSONObjectNEG() throws Exception {
-        Gebruiker Kevin = db.get("Kevinvanheel94@hotmail.com");
-
-        assertEquals("{\"Geslacht\":\"V\",\"Leeftijd\":\"18\",\"Voornaam\":\"Kevin\",\"Achternaam\":\"van Heel\",\"Wachtwoord\":\"Test001\",\"Locatie\":\"Rotterdam\",\"Vakken\":\"Wiskunde&Logica\",\"Opleiding\":\"Informatica\"}", Kevin.getJSONObject().toJSONString());
-    }
-
-    @Test
-    public void TestEqualspos() throws Exception {
-        Gebruiker K1 = db.get("Kevinvanheel94@hotmail.com");
-        Gebruiker K2 = db.get("Kevinvanheel94@hotmail.com");
-        assertTrue(K1.equals(K2));
-
+        assertEquals(testGebruiker.getJSONObject(), testdata);
 
     }
 
     @Test
-    public void testEqualsneg() throws Exception {
-        Gebruiker K1 = db.get("Kevinvanheel94@hotmail.com");
-        Gebruiker K2 = db.get("Kevin@hotmail.com");
-        assertFalse(K1.equals(K2));
+    public void testMatcher0() {
+        System.out.println(test1.matchScore(test2));
+        assertTrue(9 == test1.matchScore(test2));
+
     }
 
+    @Test
+    public void testMatcher1() {
+        System.out.println(test1.matchScore(test3));
+        assertTrue(7 == test1.matchScore(test3));
 
+    }
 
+    @Test
+    public void testMatcher3() {
+        System.out.println(test1.matchScore(test4));
+        assertTrue(7 == test1.matchScore(test4));
+
+    }
+
+    @Test
+    public void testEqualsTrue() {
+        assertTrue(test1.equals(test1));
+    }
+
+    @Test
+    public void testEqualsFalse() {
+        assertFalse(test1.equals(test2));
+    }
 
 
 }
