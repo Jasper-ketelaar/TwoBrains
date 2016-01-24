@@ -49,7 +49,7 @@ public class TwoBrainsSocketTest {
             while (true) {
                 try {
 
-                    server = new Server(testDatabase, 8111);
+                    server = new Server(testDatabase, 7001);
                     server.run();
                 } catch (BindException e) {
                     System.out.println("Port in use");
@@ -66,7 +66,7 @@ public class TwoBrainsSocketTest {
     public void testConstructor() throws IOException {
 
 
-        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8111);
+        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7001);
         assertTrue(testTwoBrainsSocket.isBound());
     }
 
@@ -74,7 +74,7 @@ public class TwoBrainsSocketTest {
     public void testImage() throws IOException {
 
 
-        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8111);
+        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7001);
         BufferedImage k = testTwoBrainsSocket.getImage("kvanzeijl@hotmail.com.jpg");
         File fl = new File(Server.IMAGES + "/kvanzeijl@hotmail.com.jpg");
         BufferedImage g = ImageIO.read(fl);
@@ -85,7 +85,7 @@ public class TwoBrainsSocketTest {
     public void testOngeldigeLogin() throws Exception {
 
 
-        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8111);
+        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7001);
         Gebruiker k = null;
         k = testTwoBrainsSocket.login("blbla", "testWachtwoord");
 
@@ -96,7 +96,7 @@ public class TwoBrainsSocketTest {
     public void testGeldigeLogin() throws Exception {
 
 
-        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8111);
+        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7001);
         Gebruiker k = testTwoBrainsSocket.login("testEmail", "testWachtwoord");
 
 
@@ -106,7 +106,7 @@ public class TwoBrainsSocketTest {
     @Test
     public void testVerkrijgInfo() throws Exception {
 
-        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8111);
+        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7001);
         Gebruiker k = testTwoBrainsSocket.verkrijgInfo("testEmail");
 
 
@@ -115,7 +115,7 @@ public class TwoBrainsSocketTest {
 
     @Test
     public void testMessage() throws IOException {
-        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8111);
+        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7001);
 
 
         assertEquals(testTwoBrainsSocket.message("testMail", "testBericht"), "Email/Gebruiker bestaat niet");
@@ -139,7 +139,7 @@ public class TwoBrainsSocketTest {
         File fl = new File(Server.IMAGES + "/kvanzeijl@hotmail.com.jpg");
         BufferedImage g = ImageIO.read(fl);
 
-        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8111);
+        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7001);
         String k = testTwoBrainsSocket.register("testEmail", user, g);
 
         assertTrue(k.equals("Email bestaat al"));
@@ -149,7 +149,7 @@ public class TwoBrainsSocketTest {
     @Test
     public void testOproep() throws IOException {
 
-        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8111);
+        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7001);
         String k = testTwoBrainsSocket.oproep("testVakken", "testEmail", "testLeroy");
 
         assertEquals(k, "{\"Jasperketelaar@kpnmail.nl\":{\"Vak\":\"Calculus\",\"Naam\":\"Jasper Ketelaar\"},\"testEmail\":{\"Vak\":\"testVakken\",\"Naam\":\"testLeroy\"}}");
@@ -160,7 +160,7 @@ public class TwoBrainsSocketTest {
     public void testMatches() throws IOException {
 
 
-        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8111);
+        final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7001);
         ArrayList<String> k = testTwoBrainsSocket.getMatches("kvanzeijl@hotmail.com");
 
         assertTrue(k.toString().equals("[]"));

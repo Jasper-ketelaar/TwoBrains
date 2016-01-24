@@ -3,11 +3,14 @@ package nl.tudelft.twobrains.client.model;
 import junit.framework.TestCase;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 import nl.tudelft.twobrains.server.Server;
+import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.BindException;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
@@ -20,18 +23,41 @@ import static org.junit.Assert.assertTrue;
 public class GebruikerTest {
 
 
-    String email = "leroyvelzel@gmail.com";
+    String email = "testGebruiker";
     JSONObject testdata = new JSONObject();
     Gebruiker testGebruiker = new Gebruiker(email, testdata);
-    private TwoBrainsSocket testTwoBrainsSocket;
+    static String ClientTestDatabases;
+    static Database testDatabase;
+    static Server server;
+    static TwoBrainsSocket testTwoBrainsSocket;
 
-    {
+    static {
+        ClientTestDatabases = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/client/model/TestFiles/DatabaseTestFiles/TestDatabase.json";
+
+
+        final File file = new File(ClientTestDatabases);
         try {
-            testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 4444);
-        } catch (IOException e) {
-            System.out.print("NoConnect");
+            testDatabase = Database.parse(file.getPath());
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        new Thread(() -> {
+
+            while (true) {
+                try {
+
+                    server = new Server(testDatabase, 7002);
+                    server.run();
+                } catch (BindException e) {
+                    System.out.println("Port in use");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
 
@@ -120,47 +146,40 @@ public class GebruikerTest {
     }
 
     @Test
-    public void testSetConnection() {
+    public void testGetConnection() throws IOException {
 
+        testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7002);
         testGebruiker.setConnection(testTwoBrainsSocket);
-    }
 
-    @Test
-    public void testGetConnection() {
-
-        testGebruiker.setConnection(testTwoBrainsSocket);
-        assertTrue(testGebruiker.getConnection().equals(testTwoBrainsSocket));
+        assertTrue(testGebruiker.getConnection().getLocalPort() == testTwoBrainsSocket.getLocalPort());
 
 
     }
 
-    @Test
-    public void testIsConnected() {
 
+    @Test
+    public void testIsConnected() throws IOException {
+        testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7002);
         testGebruiker.setConnection(testTwoBrainsSocket);
         assertTrue(testGebruiker.isConnected());
 
     }
 
     @Test
-    public void testDisconnect() {
-
+    public void testDisconnect() throws IOException {
+        testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7002);
         testGebruiker.setConnection(testTwoBrainsSocket);
 
-        try {
-            testGebruiker.disconnect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        testGebruiker.disconnect();
+
         assertTrue(testGebruiker.isConnected());
 
 
     }
 
-
-    //TODO: Schrijven
     @Test
-    public void testParse() {
+    public void testParse() throws ParseException {
         testdata.put("Voornaam", "Koen");
         testdata.put("Achternaam", "Zeijl");
         testdata.put("Geslacht", "M");
@@ -172,28 +191,30 @@ public class GebruikerTest {
 
 
         Gebruiker koen = null;
-        try {
-            koen = Gebruiker.parse("kvanzeijl@hotmail.com", "{\n" +
-                    "    \"Voornaam\": \"Koen\",\n" +
-                    "    \"Achternaam\": \"Zeijl\",\n" +
-                    "    \"Geslacht\": \"M\",\n" +
-                    "    \"Leeftijd\": \"18\",\n" +
-                    "    \"Wachtwoord\": \"000000\",\n" +
-                    "    \"Opleiding\": \"Informatica\",\n" +
-                    "    \"Vakken\": \"Calculus\",\n" +
-                    "    \"Locatie\": \"Delft\"\n" +
-                    "  }");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+        koen = Gebruiker.parse("kvanzeijl@hotmail.com", "{\n" +
+                "    \"Voornaam\": \"Koen\",\n" +
+                "    \"Achternaam\": \"Zeijl\",\n" +
+                "    \"Geslacht\": \"M\",\n" +
+                "    \"Leeftijd\": \"18\",\n" +
+                "    \"Wachtwoord\": \"000000\",\n" +
+                "    \"Opleiding\": \"Informatica\",\n" +
+                "    \"Vakken\": \"Calculus\",\n" +
+                "    \"Locatie\": \"Delft\"\n" +
+                "  }");
+
 
         assertFalse(koen.equals(testGebruiker));
     }
 
-    //TODO: Schrijven
-    @Test
-    public void testGetUserImage() {
 
+    @Test
+    public void testGetUserImage() throws IOException {
+        testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7002);
+        Gebruiker testGeb = new Gebruiker("kvanzeijl@hotmail.com.jpg", testdata);
+        testGeb.setConnection(testTwoBrainsSocket);
+
+        assertTrue(testTwoBrainsSocket.getImage("kvanzeijl@hotmail.com.jpg").getColorModel().equals(testGeb.getUserImage().getColorModel()));
 
     }
 

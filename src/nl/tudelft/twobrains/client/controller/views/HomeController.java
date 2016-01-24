@@ -19,6 +19,7 @@ import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.client.view.home.comp.Oproep;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -58,7 +59,7 @@ public class HomeController extends AbstractController {
         ((TabsController)twoBrains.getTabScene().getController()).getMatches().disableProperty().setValue(!opZoek.isSelected());
     }
 
-    public void oproep(final ActionEvent e) {
+    public void oproep(final ActionEvent e) throws IOException {
         final String vak = this.vak.getSelectionModel().getSelectedItem().toString();
         final String email = twoBrains.getGebruiker().getEmail();
         final String naam = twoBrains.getGebruiker().getVoornaam() + " " + twoBrains.getGebruiker().getAchternaam();
