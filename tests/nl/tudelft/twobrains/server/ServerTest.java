@@ -25,18 +25,28 @@ import static org.junit.Assert.assertTrue;
  */
 public class ServerTest extends TestCase {
 
+    static String testDatabaseFile = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/server/model/DatabaseTestFiles/TestDatabaseServer.json";
+
     Server testServer1;
     Server testServer2;
     Server testServer3;
-    Database db;
+    static Database db;
+
+    static {
+        try {
+            db = Database.parse(testDatabaseFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Test
     public void testGetDatabase() throws IOException, ParseException {
-        db = Database.parse(Server.RESOURCES + "/databasetest.json");
-        // testServer1 = new Server(8887);
+
+
         testServer2 = new Server(db);
-        // testServer3 = new Server();
+
 
         new Thread(() -> {
             try {
@@ -53,7 +63,6 @@ public class ServerTest extends TestCase {
 
     @Test
     public void testSetDatabase() throws IOException, ParseException {
-        db = Database.parse(Server.RESOURCES + "/databasetest.json");
 
         testServer3 = new Server();
         testServer3.setDatabase(db);
@@ -64,21 +73,16 @@ public class ServerTest extends TestCase {
 
     @Test
     public void testGetSocket() throws IOException, ParseException {
-        testServer1 = new Server(6543);
+        testServer1 = new Server(6002);
 
 
-        assertTrue(testServer1.getSocket().getLocalPort() == 6543);
+        assertTrue(testServer1.getSocket().getLocalPort() == 6002);
     }
 
     @Test
     public void testGetMatchfinder() throws IOException, ParseException {
 
-
-        final File dir = new File(Server.RESOURCES);
-        final File file = new File(dir.getAbsolutePath() + "/databasetest.json");
-        db = Database.parse(file.getPath());
-
-        testServer2 = new Server(db, 1234);
+        testServer2 = new Server(db, 6003);
         new Thread(() -> {
             try {
                 testServer2.run();
@@ -87,7 +91,9 @@ public class ServerTest extends TestCase {
             }
 
         }).start();
-        Socket sk = new Socket("127.0.0.1", 1234);
+        Socket sk = new Socket("127.0.0.1", 6003);
+
+        
         MatchFinder k = testServer2.getMatchFinder();
 
         assertEquals(k.getMatches(), new MatchFinder(db).getMatches());
@@ -97,7 +103,7 @@ public class ServerTest extends TestCase {
 
     public void testClose() throws IOException {
         try {
-            testServer2 = new Server(1234);
+            testServer2 = new Server(6004);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -108,11 +114,8 @@ public class ServerTest extends TestCase {
     }
 
     public void testHandler() throws IOException, ParseException {
-        final File dir = new File(Server.RESOURCES);
-        final File file = new File(dir.getAbsolutePath() + "/databasetest.json");
-        db = Database.parse(file.getPath());
 
-        testServer2 = new Server(null, 1234);
+        testServer2 = new Server(null, 6005);
         new Thread(() -> {
             try {
                 testServer2.run();
@@ -121,7 +124,7 @@ public class ServerTest extends TestCase {
             }
 
         }).start();
-        Socket sk = new Socket("127.0.0.1", 1234);
+        Socket sk = new Socket("127.0.0.1", 6005);
 
 
         assertNull(testServer2.getHandler());

@@ -73,7 +73,7 @@ public class Server {
 
     public Server() throws IOException {
         this.database = null;
-        this.server = new ServerSocket(8888);
+        this.server = new ServerSocket(6001);
     }
 
     public Server(final Database test, final int port) throws IOException {
@@ -127,14 +127,6 @@ public class Server {
         return this.handler;
     }
 
-    /**
-     * Setter voor Test
-     *
-     * @param handler wordt de nieuwe ClientHandler.
-     */
-    public void setHandler(ClientHandler handler) {
-        this.handler = handler;
-    }
 
     /**
      * Probeert de ClientHandler te starten als er connectie is.

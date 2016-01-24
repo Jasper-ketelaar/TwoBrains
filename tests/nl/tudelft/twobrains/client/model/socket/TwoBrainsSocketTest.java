@@ -152,7 +152,7 @@ public class TwoBrainsSocketTest {
         final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 7001);
         String k = testTwoBrainsSocket.oproep("testVakken", "testEmail", "testLeroy");
 
-        assertEquals(k, "{\"Jasperketelaar@kpnmail.nl\":{\"Vak\":\"Calculus\",\"Naam\":\"Jasper Ketelaar\"},\"testEmail\":{\"Vak\":\"testVakken\",\"Naam\":\"testLeroy\"}}");
+        assertEquals(k, "{\"Jasperketelaar@kpnmail.nl\":{\"Vak\":\"Calculus\",\"Naam\":\"Jasper Ketelaar\"},\"testEmail\":{\"Vak\":\"testVakken\",\"Naam\":\"testLeroy\"},\"ibuddyh@gmail.com\":{\"Vak\":\"Calculus\",\"Naam\":\"Budi Han\"}}");
     }
 
 
