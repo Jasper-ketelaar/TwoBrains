@@ -8,15 +8,5 @@
     "Locatie": "TestDelft",
     "Vakken": "TestCalculus",
     "Opleiding": "TestInformatica"
-  },
-  "kevinvanheel94@hotmail.com": {
-    "Geslacht": "M",
-    "Leeftijd": "21",
-    "Voornaam": "Kevin",
-    "Achternaam": "van Heel",
-    "Wachtwoord": "Test001",
-    "Locatie": "Rotterdam",
-    "Vakken": "Redeneren&Logica",
-    "Opleiding": "Informatica"
   }
 }

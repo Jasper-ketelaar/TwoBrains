@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Predicate;
 
 import static org.junit.Assert.*;
@@ -18,6 +19,43 @@ import static org.junit.Assert.*;
  * Created by koen on 2-12-2015.
  */
 public class DatabaseTest {
+    String testDatabaseFile = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/server/model/DatabaseTestFiles/TestDatabase.json";
+    String testDatabaseFile2 = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/server/model/DatabaseTestFiles/TestDatabase2.json";
+    String testDatabaseFile3 = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/server/model/DatabaseTestFiles/TestDatabase3.json";
+    String testEmptyFile = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/server/model/DatabaseTestFiles/TestWriteBase.json";
+
+    static JSONObject testObj1 = new JSONObject();
+    static JSONObject testObj2 = new JSONObject();
+    static JSONObject testDataBaseObj1 = new JSONObject();
+    static JSONObject testDataBaseObj2 = new JSONObject();
+
+
+    static {
+        testObj1.put("Geslacht", "M");
+        testObj1.put("Leeftijd", "18");
+        testObj1.put("Voornaam", "TestVoornaam");
+        testObj1.put("Achternaam", "TestAchternaam");
+        testObj1.put("Wachtwoord", "000000");
+        testObj1.put("Locatie", "TestDelft");
+        testObj1.put("Vakken", "TestCalculus");
+        testObj1.put("Opleiding", "TestInformatica");
+
+
+        testDataBaseObj1.put("testMail@hotmail.com", testObj1);
+
+        testObj2.put("Geslacht", "M");
+        testObj2.put("Leeftijd", "21");
+        testObj2.put("Voornaam", "Kevin");
+        testObj2.put("Achternaam", "van Heel");
+        testObj2.put("Wachtwoord", "Test001");
+        testObj2.put("Locatie", "Rotterdam");
+        testObj2.put("Vakken", "Redeneren&Logica");
+        testObj2.put("Opleiding", "Informatica");
+
+
+        testDataBaseObj2.put("testMail@hotmail.com", testObj2);
+    }
+
 
     Database db;
     Gebruiker koen;
@@ -25,83 +63,73 @@ public class DatabaseTest {
     Gebruiker jan = new Gebruiker("jan@hotmail.com", new JSONObject());
     Database dbEmpty = new Database(new JSONObject());
 
-    public DatabaseTest() throws IOException, org.json.simple.parser.ParseException {
-        db = Database.parse(Server.RESOURCES + "/databasetest.json");
-        koen = db.get("kvanzeijl@hotmail.com");
-        buddy = db.get("ibuddyh@gmail.com");
+
+    @Test
+    public void testParse() throws IOException, org.json.simple.parser.ParseException {
+        Database testDatabase = Database.parse(testDatabaseFile2);
+
+
+        assertEquals(testDatabase, new Database(testDataBaseObj1));
+
     }
 
     @Test
-    public void testWrite_Empty() throws Exception {
-//      dbEmpty.write("");
-        assertEquals(dbEmpty.size(), 0);
+    public void testParse0() throws IOException, org.json.simple.parser.ParseException {
+        Database testDatabase = Database.parse(testDatabaseFile3);
+
+        assertTrue(testDatabase.equals(new Database(new JSONObject())));
+
+
     }
 
     @Test
-    public void testParse_FileLengthZero() throws Exception {
-        assertEquals(new Database(new JSONObject()), Database.parse(
-                "tests\\nl\\tudelft\\twobrains\\server\\model\\DatabaseTestFiles\\fileLengthZero"));
+    public void testGetAlleGebruikers() throws IOException, org.json.simple.parser.ParseException {
+        Database testDatabase = Database.parse(testDatabaseFile);
+
+        Gebruiker[] RetArray = testDatabase.getAlleGebruikers();
+        Gebruiker[] NewArray = {new Gebruiker("testMail@hotmail.com", testObj1), new Gebruiker("kevinvanheel94@hotmail.com", testObj2)};
+
+
+        assertArrayEquals(RetArray, NewArray);
     }
 
     @Test
-    public void testParse_Empty() throws Exception {
-        dbEmpty.write("tests\\nl\\tudelft\\twobrains\\server\\model\\DatabaseTestFiles\\parseFileTest");
-        assertEquals(dbEmpty, Database.parse(
-                "tests\\nl\\tudelft\\twobrains\\server\\model\\DatabaseTestFiles\\parseFileTest"));
-    }
-    @Test
-    public void testGetAlleGebruikers_WithTwo() throws Exception {
-        Gebruiker[] gebruikerArray = {koen, buddy};
-        assertEquals(gebruikerArray, db.getAlleGebruikers());
-    }
-    @Test
-    public void testGetAlleGebruikers_Empty() throws Exception {
-        Gebruiker[] gebruikerArray = {};
-        assertEquals(gebruikerArray, dbEmpty.getAlleGebruikers());
-    }
-    //gebruiker wordt [0] van de arraylist gepleurd met add + getAlleGebruikers
-    @Test
-    public void testAdd_TwoGebruiker() throws Exception {
-        dbEmpty.add(koen);
-        dbEmpty.add(buddy);
-        assertEquals(db, dbEmpty);
-    }
-    @Test
-    public void testWrite_Parse() throws Exception {
-        db.write("tests\\nl\\tudelft\\twobrains\\server\\model\\DatabaseTestFiles\\writeFileTest");
-        assertEquals(db, Database.parse(
-                "tests\\nl\\tudelft\\twobrains\\server\\model\\DatabaseTestFiles\\writeFileTest"));
-    }
-    //gebruik een labda expression voor het krijgen van de juiste gebruikers
-    @Test
-    public void testFilter_OneOut() throws Exception {
-        ArrayList<Gebruiker> filterList = new ArrayList<>();
-        filterList.add(koen);
-        assertEquals(filterList, db.filter(p -> p.getEmail().equals("kvanzeijl@hotmail.com")));
-    }
-    @Test
-    public void testFilter_EmptyDatabase() throws Exception {
-        assertEquals(new ArrayList<>(),
-                dbEmpty.filter(p -> p.getEmail().equals("example@hotmail.com")));
-    }
-    @Test
-    public void testFilter_EmptyResult() throws Exception {
-        assertEquals(new ArrayList<>(),
-                db.filter(p -> p.getEmail().equals("notexist@hotmail.com")));
-    }
-    @Test
-    public void testToString_EmptyDatabase() throws Exception {
-        assertEquals("Database[]", dbEmpty.toString());
+    public void testAdd() throws IOException, org.json.simple.parser.ParseException {
+        Gebruiker testGeb = new Gebruiker("testNew", testObj2);
+
+        Database testDatabase = Database.parse(testDatabaseFile);
+        testDatabase.add(testGeb);
+
+        testDatabase.getAlleGebruikers()[2].equals(testGeb);
+
     }
 
     @Test
-    public void testToString_TwoGebruikerDatabase() throws Exception {
-        assertEquals("Database[kvanzeijl@hotmail.com=Gebruiker[Voornaam=Koen, Achternaam=Zeijl," +
-                " E-mail=kvanzeijl@hotmail.com, Wachtwoord=000000, Geslacht=M, Leeftijd=18," +
-                " Opleiding=Informatica, Vakken=Calculus, Locatie=Delft], ibuddyh@gmail.com=Gebruiker[Voornaam=Budi," +
-                " Achternaam=Han, E-mail=ibuddyh@gmail.com, Wachtwoord=000000, Geslacht=M, Leeftijd=21," +
-                " Opleiding=Informatica, Vakken=Calculus, Locatie=Delft]]", db.toString());
+    public void testWrite() throws IOException, org.json.simple.parser.ParseException {
+        File EmptyFile = new File(testEmptyFile, " ");
+
+        Database testDatabase = Database.parse(testDatabaseFile);
+
+        testDatabase.write(testEmptyFile);
+
+        File modifiedFile = new File(testEmptyFile);
+
+        assertFalse(modifiedFile.equals(EmptyFile));
+
     }
+
+    @Test
+    public void testFilter() {
+        //TODO: Schrijven
+    }
+
+    @Test
+    public void testToString() throws IOException, org.json.simple.parser.ParseException {
+        Database testDatabase = Database.parse(testDatabaseFile);
+
+        assertEquals(testDatabase.toString(), "Database[testMail@hotmail.com=Gebruiker[Voornaam=TestVoornaam, Achternaam=TestAchternaam, E-mail=testMail@hotmail.com, Wachtwoord=000000, Geslacht=M, Leeftijd=18, Opleiding=TestInformatica, Vakken=TestCalculus, Locatie=TestDelft], kevinvanheel94@hotmail.com=Gebruiker[Voornaam=Kevin, Achternaam=van Heel, E-mail=kevinvanheel94@hotmail.com, Wachtwoord=Test001, Geslacht=M, Leeftijd=21, Opleiding=Informatica, Vakken=Redeneren&Logica, Locatie=Rotterdam]]");
+    }
+
 
 }
 

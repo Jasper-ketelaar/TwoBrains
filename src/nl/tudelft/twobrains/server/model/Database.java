@@ -39,14 +39,14 @@ public class Database extends HashMap<String, Gebruiker> {
      *
      * @param file The name of the File where the database is created from.
      * @return A database containing all the information read from the file.
-     * @throws IOException Checks if the File with name 'file' exists.
+     * @throws IOException    Checks if the File with name 'file' exists.
      * @throws ParseException Checks if the JSON parser reached an error.
      */
     public static Database parse(final String file) throws IOException, ParseException {
         final JSONParser parser = new JSONParser();
         final File f = new File(file);
         final FileReader reader = new FileReader(f);
-        if(f.length() == 0) {
+        if (f.length() == 0) {
             return new Database(new JSONObject());
         }
         return new Database((JSONObject) parser.parse(reader));
@@ -80,7 +80,7 @@ public class Database extends HashMap<String, Gebruiker> {
     public void write(final String file) throws IOException {
         final FileWriter writer = new FileWriter(file);
         //Need to cover this branch in Test --> Jasper
-        if (database.size() < this.size()) {
+        if (database.size() <= this.size()) {
             for (final Object key : this.keySet()) {
                 database.put(key, this.get(key).getJSONObject());
             }
@@ -106,6 +106,10 @@ public class Database extends HashMap<String, Gebruiker> {
             }
         }
         return gebruikers;
+    }
+
+    public JSONObject getJSONObject() {
+        return this.database;
     }
 
     /**
