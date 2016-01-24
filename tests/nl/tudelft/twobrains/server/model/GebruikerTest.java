@@ -99,7 +99,7 @@ public class GebruikerTest {
         assertNotEquals("hahah grapje", koen.getWachtwoord());
     }
 
-    
+
 
     @Test
     public void testParse() throws Exception{

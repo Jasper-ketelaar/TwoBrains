@@ -153,6 +153,9 @@ public class TwoBrains extends Application {
         scene.getController().initItems();
         this.stage.setScene(scene.getScene());
         this.stage.centerOnScreen();
+        if (scene.getController() instanceof TabsController) {
+            ((MatchController) getMatchScene().getController()).update();
+        }
 
     }
 

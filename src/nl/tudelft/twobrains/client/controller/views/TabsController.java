@@ -45,9 +45,14 @@ public class TabsController extends AbstractController {
         twoBrains.getHomeScene().getController().initItems();
 
         matches.setContent(twoBrains.getMatchScene().getScene().getRoot());
+        matches.disableProperty().setValue(true);
         home.setContent(twoBrains.getHomeScene().getScene().getRoot());
 
         tabPane.getTabs().add(home);
         tabPane.getTabs().add(matches);
+    }
+
+    public Tab getMatches() {
+        return matches;
     }
 }

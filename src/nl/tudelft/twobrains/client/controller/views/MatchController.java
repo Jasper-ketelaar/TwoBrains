@@ -1,9 +1,10 @@
 package nl.tudelft.twobrains.client.controller.views;
 
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -100,21 +101,34 @@ public class MatchController extends AbstractController {
 
     }
 
-   /* public void update(final ArrayList<String> matches) throws Exception {
-        final String self = twoBrains.getGebruiker().getEmail();
-        for (final String match : matches) {
-            final String extr[] = match.replace(self, "").split(":");
-            final String matchee = extr[0].length() > extr[1].length() ? extr[0] : extr[1];
-            if (!matchCache.contains(matchee)) {
-                matchCache.add(matchee);
-                if (vBox.getChildren().size() > 0) {
-                    vBox.getChildren().add(new Separator());
+    public void update() throws Exception {
+        try {
+            while (matchCache.size() == 0) {
+                final ArrayList<String> matches = twoBrains.getSocket().getMatches(twoBrains.getGebruiker().getEmail());
+                System.out.println(matches.size());
+                for (final String string : matches) {
+
+                    final String email = string.split(":")[0];
+                    if (!matchCache.contains(email)) {
+                        final String data = string.replace(email + ":", "");
+                        System.out.println(email);
+                        System.out.println(data);
+                        final Gebruiker gebruiker = Gebruiker.parse(email, data);
+                        gebruiker.setConnection(twoBrains.getSocket());
+                        vBox.getChildren().add(new UserBox(gebruiker));
+                        matchCache.add(email);
+                        if (matchCache.size() > 0) {
+                            final Separator separator = new Separator();
+                            separator.setPadding(new Insets(10, 0, 10, 0));
+                            vBox.getChildren().add(new Separator());
+                        }
+                    }
                 }
-                System.out.println(matchee + "X");
-                vBox.getChildren().add(new UserBox(twoBrains.getSocket().verkrijgInfo(matchee)));
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }*/
+    }
 
     /**
      * Methode voor het initialiseren van de users in de MatchScene.
@@ -122,31 +136,7 @@ public class MatchController extends AbstractController {
     @Override
     public void initItems() throws Exception {
         vBox.setFocusTraversable(false);
-        new Thread(() -> {
-            while (true) {
-                try {
-                    final ArrayList<String> matches = twoBrains.getSocket().getMatches(twoBrains.getGebruiker().getEmail());
-                    System.out.println(matches.size());
-                    for (final String string : matches) {
 
-                        final String email = string.split(":")[0];
-                        if (!matchCache.contains(email)) {
-                            final String data = string.replace(email + ":", "");
-                            System.out.println(email);
-                            System.out.println(data);
-                            final Gebruiker gebruiker = Gebruiker.parse(email, data);
-                            gebruiker.setConnection(twoBrains.getSocket());
-                            Platform.runLater(() -> vBox.getChildren().add(new UserBox(gebruiker)));
-                            matchCache.add(email);
-                        }
-                    }
-                    Thread.sleep(5000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }).start();
 
     }
 }

@@ -44,13 +44,11 @@ public class UserBox extends HBox {
      *                  Aan het einde wordt de pane (met daarin de informatie) en de imagine van de gebruiker in een userbox gezet
      */
     public UserBox(final Gebruiker gebruiker) {
-        System.out.println(gebruiker.getEmail());
         this.gebruiker = gebruiker;
         this.setFocusTraversable(false);
 
         try {
             final BufferedImage bImage = gebruiker.getUserImage();
-
             final WritableImage writableImage = new WritableImage(bImage.getWidth(), bImage.getHeight());
             final Image image = SwingFXUtils.toFXImage(bImage, writableImage);
             final ImageView imgView = new ImageView(image);

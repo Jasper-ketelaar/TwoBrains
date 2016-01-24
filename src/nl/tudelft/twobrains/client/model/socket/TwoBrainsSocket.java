@@ -76,6 +76,7 @@ public class TwoBrainsSocket extends Socket {
 
             final int size = ByteBuffer.wrap(sizeB).asIntBuffer().get();
 
+
             final byte[] imageB = new byte[size];
             input.read(imageB);
             final BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageB));
@@ -167,6 +168,14 @@ public class TwoBrainsSocket extends Socket {
         }, 5000);
 
         return getInputStream().readUTF();
+    }
+
+    public void oproep(final String vak, final String email, final String naam) {
+        try {
+            getOutputStream().writeUTF("Oproep:;" + vak + ":" + email + ":" + naam);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<String> getMatches(final String user) throws IOException {
