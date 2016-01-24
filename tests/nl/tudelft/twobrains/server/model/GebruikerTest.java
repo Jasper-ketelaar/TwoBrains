@@ -16,7 +16,7 @@ public class GebruikerTest {
     Database db;
 
     public GebruikerTest() throws IOException, ParseException {
-        db = Database.parse(Server.RESOURCES + "/database.json");
+        db = Database.parse(Server.RESOURCES + "/TestDatabase.json");
         Gebruiker koen = db.get("kvanzeijl@hotmail.com");
         Gebruiker Kevin = db.get("kevinvanheel94@hotmail.com");
     }
