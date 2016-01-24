@@ -172,8 +172,14 @@ public class TwoBrainsSocket extends Socket {
 
     public String oproep(final String vak, final String email, final String naam) {
         try {
-            getOutputStream().writeUTF("Oproep:;" + vak + ":" + email + ":" + naam);
-            return getInputStream().readUTF();
+            if(vak.equals("")) {
+                getOutputStream().writeUTF("Oproep:; ");
+            } else {
+                getOutputStream().writeUTF("Oproep:;" + vak + ":" + email + ":" + naam);
+            }
+            final String output =  getInputStream().readUTF();
+            System.out.println(output);
+            return output;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -188,6 +194,11 @@ public class TwoBrainsSocket extends Socket {
         while (getInputStream().available() != 0) {
             matches.add(getInputStream().readUTF());
         }
+        clear();
         return matches;
+    }
+
+    private void clear() throws IOException {
+        input.skipBytes(input.available());
     }
 }

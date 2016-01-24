@@ -111,17 +111,16 @@ public class MatchController extends AbstractController {
                     final String email = string.split(":")[0];
                     if (!matchCache.contains(email)) {
                         final String data = string.replace(email + ":", "");
-                        System.out.println(email);
-                        System.out.println(data);
                         final Gebruiker gebruiker = Gebruiker.parse(email, data);
                         gebruiker.setConnection(twoBrains.getSocket());
-                        vBox.getChildren().add(new UserBox(gebruiker));
-                        matchCache.add(email);
+
                         if (matchCache.size() > 0) {
                             final Separator separator = new Separator();
-                            separator.setPadding(new Insets(10, 0, 10, 0));
-                            vBox.getChildren().add(new Separator());
+                            separator.setPadding(new Insets(30, 0, 30, 0));
+                            vBox.getChildren().add(separator);
                         }
+                        matchCache.add(email);
+                        vBox.getChildren().add(new UserBox(gebruiker));
                     }
                 }
             }
