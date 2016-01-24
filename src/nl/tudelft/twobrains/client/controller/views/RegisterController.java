@@ -291,6 +291,7 @@ public class RegisterController extends AbstractController implements EventHandl
     public void initItems() {
         this.geslacht.getItems().clear();
         this.geslacht.getItems().addAll("Man", "Vrouw");
+        this.geboorte.setValue(LocalDate.of(2000, 1, 1));
     }
 
     public void validate(final TooltipTextField node, final Validation validation) {

@@ -186,7 +186,7 @@ public class TwoBrainsSocket extends Socket {
         }
         return "";
     }
-    
+
 
     public ArrayList<String> getMatches(final String user) throws IOException {
         final ArrayList<String> matches = new ArrayList<>();

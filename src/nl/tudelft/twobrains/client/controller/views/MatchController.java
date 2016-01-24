@@ -69,15 +69,16 @@ public class MatchController extends AbstractController {
                 final UserBox userBox = (UserBox) child;
                 final Gebruiker gebruiker = userBox.getGebruiker();
                 final String naam = gebruiker.getVoornaam() + " " + gebruiker.getAchternaam();
+                System.out.println(naam);
                 if ((naam).toLowerCase().contains(input.toLowerCase())) {
-                    if (userBox.getOpacity() == 1) return;
+                    if (userBox.getOpacity() == 1) continue;
                     final FadeTransition ft = new FadeTransition(Duration.millis(500), userBox);
                     ft.setToValue(1);
                     ft.setByValue(0.1);
                     ft.setFromValue(0);
                     ft.playFromStart();
                 } else {
-                    if (userBox.getOpacity() < 1) return;
+                    if (userBox.getOpacity() < 1) continue;
                     final FadeTransition ft = new FadeTransition(Duration.millis(500), userBox);
                     ft.setToValue(0);
                     ft.setByValue(0.1);
