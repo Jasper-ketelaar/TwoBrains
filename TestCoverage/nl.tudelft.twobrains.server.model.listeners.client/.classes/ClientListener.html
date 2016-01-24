@@ -1,0 +1,70 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ClientListener</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">nl.tudelft.twobrains.server.model.listeners.client</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ClientListener (nl.tudelft.twobrains.server.model.listeners.client)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ClientListener</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package nl.tudelft.twobrains.server.model.listeners.client;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import nl.tudelft.twobrains.server.Server;
+<i>4</i>&nbsp;import nl.tudelft.twobrains.server.model.Database;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.io.DataOutputStream;
+<i>7</i>&nbsp;import java.io.IOException;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/**
+<i>10</i>&nbsp; * Created by jasperketelaar on 11/23/15.
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;public interface ClientListener {
+<i>13</i>&nbsp;    /**
+<i>14</i>&nbsp;     * Interface specifying the method for reacting to client events for
+<i>15</i>&nbsp;     * different handlers.
+<i>16</i>&nbsp;     *
+<i>17</i>&nbsp;     * @param evt The client event that needs to be handled.
+<i>18</i>&nbsp;     * @param responseStream A data ouput stream to write data to the client.
+<i>19</i>&nbsp;     * @param server the server for database access
+<i>20</i>&nbsp;     */
+<i>21</i>&nbsp;    void onClientEvent(final ClientEvent evt, final DataOutputStream responseStream, Server server) throws Exception;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-01-24 22:06</div>
+</div>
+</body>
+</html>

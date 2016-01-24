@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Database</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">nl.tudelft.twobrains.server.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Database (nl.tudelft.twobrains.server.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Database</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (28/ 30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package nl.tudelft.twobrains.server.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.json.simple.JSONObject;
+<i>4</i>&nbsp;import org.json.simple.parser.JSONParser;
+<i>5</i>&nbsp;import org.json.simple.parser.ParseException;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.io.File;
+<i>8</i>&nbsp;import java.io.FileReader;
+<i>9</i>&nbsp;import java.io.FileWriter;
+<i>10</i>&nbsp;import java.io.IOException;
+<i>11</i>&nbsp;import java.util.ArrayList;
+<i>12</i>&nbsp;import java.util.Collection;
+<i>13</i>&nbsp;import java.util.HashMap;
+<i>14</i>&nbsp;import java.util.function.Predicate;
+<i>15</i>&nbsp;import java.util.stream.Collectors;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;public class Database extends HashMap&lt;String, Gebruiker&gt; {
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    private final JSONObject database;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * Class constructer specifying the JSON databuse to use. The JSON database
+<i>23</i>&nbsp;     * is read. Users are created and added to the &#39;other&#39; database.
+<i>24</i>&nbsp;     *
+<i>25</i>&nbsp;     * @param database A JSON object containing all the database information.
+<i>26</i>&nbsp;     */
+<b class="fc"><i>27</i>&nbsp;    public Database(final JSONObject database) {</b>
+<b class="fc"><i>28</i>&nbsp;        this.database = database;</b>
+<b class="fc"><i>29</i>&nbsp;        for (final Object key : database.keySet()) {</b>
+<b class="fc"><i>30</i>&nbsp;            final Gebruiker gebruiker = new Gebruiker(key.toString(), (JSONObject) database.get(key));</b>
+<b class="fc"><i>31</i>&nbsp;            this.put(key.toString(), gebruiker);</b>
+<b class="fc"><i>32</i>&nbsp;        }</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    /**
+<i>36</i>&nbsp;     * Method for creating a database from a File. A parser and a reader
+<i>37</i>&nbsp;     * are created. The File is checked for containing information. If the
+<i>38</i>&nbsp;     * File is empty an empty database is created.
+<i>39</i>&nbsp;     *
+<i>40</i>&nbsp;     * @param file The name of the File where the database is created from.
+<i>41</i>&nbsp;     * @return A database containing all the information read from the file.
+<i>42</i>&nbsp;     * @throws IOException    Checks if the File with name &#39;file&#39; exists.
+<i>43</i>&nbsp;     * @throws ParseException Checks if the JSON parser reached an error.
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    public static Database parse(final String file) throws IOException, ParseException {
+<b class="fc"><i>46</i>&nbsp;        final JSONParser parser = new JSONParser();</b>
+<b class="fc"><i>47</i>&nbsp;        final File f = new File(file);</b>
+<b class="fc"><i>48</i>&nbsp;        final FileReader reader = new FileReader(f);</b>
+<b class="pc"><i>49</i>&nbsp;        if (f.length() == 0) {</b>
+<b class="nc"><i>50</i>&nbsp;            return new Database(new JSONObject());</b>
+<i>51</i>&nbsp;        }
+<b class="fc"><i>52</i>&nbsp;        return new Database((JSONObject) parser.parse(reader));</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    /**
+<i>56</i>&nbsp;     * Method for getting an array with all the users.
+<i>57</i>&nbsp;     *
+<i>58</i>&nbsp;     * @return An array containing all the users.
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    public Gebruiker[] getAlleGebruikers() {
+<b class="fc"><i>61</i>&nbsp;        final Collection&lt;Gebruiker&gt; gebruikers = this.values();</b>
+<b class="fc"><i>62</i>&nbsp;        return gebruikers.toArray(new Gebruiker[gebruikers.size()]);</b>
+<i>63</i>&nbsp;    }
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    /**
+<i>66</i>&nbsp;     * Method for adding a user to the database
+<i>67</i>&nbsp;     *
+<i>68</i>&nbsp;     * @param gebruiker A user that is added to the database.
+<i>69</i>&nbsp;     */
+<i>70</i>&nbsp;    public void add(final Gebruiker gebruiker) {
+<b class="fc"><i>71</i>&nbsp;        this.put(gebruiker.getEmail(), gebruiker);</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    /**
+<i>75</i>&nbsp;     * Method for writing database to a File.
+<i>76</i>&nbsp;     *
+<i>77</i>&nbsp;     * @param file The name of the File that the database is written to.
+<i>78</i>&nbsp;     * @throws IOException
+<i>79</i>&nbsp;     */
+<i>80</i>&nbsp;    public void write(final String file) throws IOException {
+<b class="fc"><i>81</i>&nbsp;        final FileWriter writer = new FileWriter(file);</b>
+<i>82</i>&nbsp;        //Need to cover this branch in Test --&gt; Jasper
+<b class="pc"><i>83</i>&nbsp;        if (database.size() &lt;= this.size()) {</b>
+<b class="fc"><i>84</i>&nbsp;            for (final Object key : this.keySet()) {</b>
+<b class="fc"><i>85</i>&nbsp;                database.put(key, this.get(key).getJSONObject());</b>
+<b class="fc"><i>86</i>&nbsp;            }</b>
+<i>87</i>&nbsp;        }
+<b class="fc"><i>88</i>&nbsp;        writer.write(database.toJSONString().replaceAll(&quot;\\{&quot;, &quot;{\n&quot;).replaceAll(&quot;}&quot;, &quot;}\n&quot;));</b>
+<b class="fc"><i>89</i>&nbsp;        writer.close();</b>
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    /**
+<i>93</i>&nbsp;     * Method for filtering users with a predicate. Create an empty array
+<i>94</i>&nbsp;     * and add the users that satisfy the predicate.
+<i>95</i>&nbsp;     *
+<i>96</i>&nbsp;     * @param predicate A predicate the users are filtered with.
+<i>97</i>&nbsp;     * @return An array containing all the filtered users.
+<i>98</i>&nbsp;     */
+<i>99</i>&nbsp;    public ArrayList&lt;Gebruiker&gt; filter(final Predicate&lt;Gebruiker&gt; predicate) {
+<b class="fc"><i>100</i>&nbsp;        final ArrayList&lt;Gebruiker&gt; gebruikers = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>101</i>&nbsp;        final Gebruiker[] concGebruikers = this.values().toArray(new Gebruiker[this.values().size()]);</b>
+<i>102</i>&nbsp;
+<b class="fc"><i>103</i>&nbsp;        for (Gebruiker g : concGebruikers) {</b>
+<b class="fc"><i>104</i>&nbsp;            if (predicate.test(g)) {</b>
+<b class="fc"><i>105</i>&nbsp;                gebruikers.add(g);</b>
+<i>106</i>&nbsp;            }
+<i>107</i>&nbsp;        }
+<b class="fc"><i>108</i>&nbsp;        return gebruikers;</b>
+<i>109</i>&nbsp;    }
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    public JSONObject getJSONObject() {
+<b class="nc"><i>112</i>&nbsp;        return this.database;</b>
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;    /**
+<i>116</i>&nbsp;     * Method for converting the database to a String.
+<i>117</i>&nbsp;     *
+<i>118</i>&nbsp;     * @return A string of the database.
+<i>119</i>&nbsp;     */
+<i>120</i>&nbsp;    @Override
+<i>121</i>&nbsp;    public String toString() {
+<b class="fc"><i>122</i>&nbsp;        return super.toString().replace(&quot;{&quot;, &quot;Database[&quot;).replace(&quot;}&quot;, &quot;]&quot;);</b>
+<i>123</i>&nbsp;    }
+<i>124</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-01-24 22:06</div>
+</div>
+</body>
+</html>

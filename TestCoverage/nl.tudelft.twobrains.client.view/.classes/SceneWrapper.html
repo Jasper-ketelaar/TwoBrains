@@ -1,0 +1,172 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SceneWrapper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">nl.tudelft.twobrains.client.view</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SceneWrapper (nl.tudelft.twobrains.client.view)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SceneWrapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.8%
+  </span>
+  <span class="absValue">
+    (7/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package nl.tudelft.twobrains.client.view;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import javafx.fxml.FXMLLoader;
+<i>4</i>&nbsp;import javafx.scene.Parent;
+<i>5</i>&nbsp;import javafx.scene.Scene;
+<i>6</i>&nbsp;import nl.tudelft.twobrains.client.controller.AbstractController;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.io.IOException;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * Created by Jasper on 12/1/2015.
+<i>12</i>&nbsp; * Deze klasse zorgt ervoor dat dat we een controller aan een scene kunnen hangen
+<i>13</i>&nbsp; * Ook vermakkelijkt deze klasse het maken van een scene
+<i>14</i>&nbsp; * Een scene is de javaFX display, hier staan alle componenten op (GUI)
+<i>15</i>&nbsp; * Klasse wordt aangemaakt met 3 constructors verschillend van parameter.
+<i>16</i>&nbsp; * Reden hiervoor is dat niet alle scene&#39;s een controller en/of een sheet nodig heeft
+<i>17</i>&nbsp; */
+<i>18</i>&nbsp;public class SceneWrapper {
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    /**
+<i>21</i>&nbsp;     * Initialiseert 2 attributen:
+<i>22</i>&nbsp;     * @attrib Abstractcontroller:controller
+<i>23</i>&nbsp;     * @attrib Scene:scene
+<i>24</i>&nbsp;     */
+<i>25</i>&nbsp;    private final AbstractController controller;
+<i>26</i>&nbsp;    private final Scene scene;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    /**
+<i>30</i>&nbsp;     * Situatie waarin een scene een controller en een sheet nodig heeft
+<i>31</i>&nbsp;     * Creëert de eerste constructor Scenewrappen met 3 parameters:
+<i>32</i>&nbsp;     * @param name
+<i>33</i>&nbsp;     * @param controller
+<i>34</i>&nbsp;     * @param sheets
+<i>35</i>&nbsp;     * @throws IOException
+<i>36</i>&nbsp;     * @param controller : wordt geinitialiseert op attribuut
+<i>37</i>&nbsp;     * @param name wordt meteen uitgeprint
+<i>38</i>&nbsp;     */
+<b class="fc"><i>39</i>&nbsp;    public SceneWrapper(final String name, final AbstractController controller, final String... sheets) throws IOException {</b>
+<b class="fc"><i>40</i>&nbsp;        this.controller = controller;</b>
+<b class="fc"><i>41</i>&nbsp;        final FXMLLoader loader = new FXMLLoader(getClass().getResource(name + &quot;/&quot; + name + &quot;.fxml&quot;));</b>
+<b class="pc"><i>42</i>&nbsp;        if (controller != null)</b>
+<b class="fc"><i>43</i>&nbsp;            loader.setController(controller);</b>
+<i>44</i>&nbsp;
+<b class="fc"><i>45</i>&nbsp;        final Parent parent = loader.load();</b>
+<b class="nc"><i>46</i>&nbsp;        this.scene = new Scene(parent);</b>
+<i>47</i>&nbsp;
+<b class="nc"><i>48</i>&nbsp;        if (sheets.length &gt; 0 &amp;&amp; sheets[0].length() &gt; 0)</b>
+<b class="nc"><i>49</i>&nbsp;            this.scene.getStylesheets().addAll(sheets);</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    /**
+<i>53</i>&nbsp;     * Situatie waarin de scene alleen de controller nodig heeft en geen sheets
+<i>54</i>&nbsp;     * Tweede constructor wordt aangemaakt met 2 param:
+<i>55</i>&nbsp;     * @param name
+<i>56</i>&nbsp;     * @param controller
+<i>57</i>&nbsp;     * @throws IOException
+<i>58</i>&nbsp;     */
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public SceneWrapper(final String name, final AbstractController controller) throws IOException {
+<b class="fc"><i>61</i>&nbsp;        this(name, controller, &quot;&quot;);</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;/**
+<i>65</i>&nbsp; * Situatie waarbij een scene geen controller én geen sheet nodig heeft
+<i>66</i>&nbsp; * Laatste constructor wordt aangemaakt met alleen name parameter
+<i>67</i>&nbsp; * @param name
+<i>68</i>&nbsp; */
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    public SceneWrapper(final String name) throws IOException {
+<b class="nc"><i>71</i>&nbsp;        this(name, null);</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    /**
+<i>75</i>&nbsp;     * getMethode voor de scene
+<i>76</i>&nbsp;     * @return scene
+<i>77</i>&nbsp;     */
+<i>78</i>&nbsp;    public Scene getScene() {
+<b class="nc"><i>79</i>&nbsp;        return this.scene;</b>
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    /**
+<i>83</i>&nbsp;     * Getmethode voor de controller
+<i>84</i>&nbsp;     * @return controller
+<i>85</i>&nbsp;     */
+<i>86</i>&nbsp;    public AbstractController getController() {
+<b class="nc"><i>87</i>&nbsp;        return this.controller;</b>
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-01-24 22:06</div>
+</div>
+</body>
+</html>

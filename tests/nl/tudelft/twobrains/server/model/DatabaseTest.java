@@ -25,7 +25,7 @@ public class DatabaseTest {
     String testEmptyFile = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/server/model/DatabaseTestFiles/TestWriteBase.json";
 
     static JSONObject testObj1 = new JSONObject();
-    static JSONObject testObj2 = new JSONObject();
+    static JSONObject testObj2 =  new JSONObject();
     static JSONObject testDataBaseObj1 = new JSONObject();
     static JSONObject testDataBaseObj2 = new JSONObject();
 
@@ -119,8 +119,14 @@ public class DatabaseTest {
     }
 
     @Test
-    public void testFilter() {
-        //TODO: Schrijven
+    public void testFilter() throws IOException, org.json.simple.parser.ParseException {
+        Database testDatabase = Database.parse(testDatabaseFile);
+        assertEquals(1, testDatabase.filter(new Predicate<Gebruiker>() {
+            @Override
+            public boolean test(Gebruiker gebruiker) {
+                return gebruiker.getEmail().contains("evin");
+            }
+        }).size());
     }
 
     @Test
