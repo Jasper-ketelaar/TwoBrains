@@ -20,38 +20,45 @@ import static org.junit.Assert.*;
 public class MatchFinderTest {
 
     Database testDb;
+    String testDatabaseFile = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/server/model/DatabaseTestFiles/TestDatabase.json";
+    String testDatabaseFile2 = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/server/model/DatabaseTestFiles/TestDatabase2.json";
+    String testMatches = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/server/model/DatabaseTestFiles/TestMatches.json";
+    String testEmptyFile = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/server/model/DatabaseTestFiles/EmptyDatabase.json";
 
 
     @Test
+    public void testGetDatabase() throws IOException, ParseException {
+        MatchFinder testMatchFinder = new MatchFinder(Database.parse(testDatabaseFile));
+
+        assertEquals(testMatchFinder.getDatabase(), Database.parse(testDatabaseFile));
+    }
+
+    @Test
     public void testGetMatches() throws ParseException, IOException {
-        final File dir = new File(Server.RESOURCES);
-        final File file = new File(dir.getAbsolutePath() + "/databasetest.json");
-        testDb = Database.parse(file.getPath());
+        Match m = new Match("ff", "ff", 3.3);
 
-        MatchFinder testMatch = new MatchFinder(testDb);
+        MatchFinder testMatch = new MatchFinder(Database.parse(testDatabaseFile), testMatches);
 
-        assertTrue(testMatch.getMatches().equals("[ibuddyh@gmail.com:jasperketelaar@kpnmail.nl:2.2]"));
+        assertEquals(testMatch.getMatches().toString(), "[testMail@hotmail.com:kevinvanheel94@hotmail.com:3.3]");
     }
 
     @Test
     public void testGetMatchesFromUser() throws IOException, ParseException {
-        final File dir = new File(Server.RESOURCES);
-        final File file = new File(dir.getAbsolutePath() + "/databasetest.json");
-        testDb = Database.parse(file.getPath());
 
-        MatchFinder testMatch = new MatchFinder(testDb);
+
+        MatchFinder testMatch = new MatchFinder(Database.parse(testDatabaseFile), testMatches);
 
         testMatch.getMatchesForUser("ibuddyh@gmail.com");
 
-        final String email = "ibuddyh@gmail.com";
-        final String email2 = "Jasperketelaar@kpnmail.nl";
-        final double score = 2.2;
+        final String email = "testMail@hotmail.com";
+        final String email2 = "kevinvanheel94@hotmail.com";
+        final double score = 3.3;
 
         Match l = new Match(email, email2, score);
         ArrayList<Match> am = new ArrayList<>();
         am.add(l);
 
-        assertEquals(testMatch.getMatchesForUser("ibuddyh@gmail.com"), am);
+        assertEquals(testMatch.getMatchesForUser("testMail@hotmail.com"), am);
 
     }
 }

@@ -44,6 +44,20 @@ public class MatchFinder extends Thread {
         }
     }
 
+    public MatchFinder(final Database database, final String file) throws IOException, ParseException {
+        this.database = database;
+
+        final JSONParser parser = new JSONParser();
+        final JSONArray array = (JSONArray) ((JSONObject) parser.parse(new FileReader(file))).get("matches");
+        if (array != null) {
+            for (final Object obj : array) {
+                if (obj instanceof JSONObject) {
+                    matches.add(Match.parse((JSONObject) obj));
+                }
+            }
+        }
+    }
+
     /**
      * Method for matching a user with other users.
      */
@@ -65,8 +79,12 @@ public class MatchFinder extends Thread {
         }
     }
 
+    public Database getDatabase(){
+        return this.database;
+    }
+
     public ArrayList<Match> getMatches() {
-        return matches;
+        return this.matches;
     }
 
     public ArrayList<Match> getMatchesForUser(final String email) {
