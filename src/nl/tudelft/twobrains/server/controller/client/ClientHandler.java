@@ -21,7 +21,7 @@ import java.util.Arrays;
 public class ClientHandler extends Thread {
 
 
-    private final ArrayList<ClientListener> listeners = new ArrayList<>(Arrays.asList(new InfoHandler(), new RegistreerHandler(), new ImageHandler(), new ChatHandler(), new MatchHandler()));
+    private final ArrayList<ClientListener> listeners = new ArrayList<>(Arrays.asList(new InfoHandler(), new RegistreerHandler(), new ImageHandler(), new ChatHandler(), new MatchHandler(), new OproepHandler()));
 
     private final Socket socket;
     private final DataInputStream input;

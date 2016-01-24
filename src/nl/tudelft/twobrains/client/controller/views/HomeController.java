@@ -68,7 +68,7 @@ public class HomeController extends AbstractController {
             hbox.getChildren().add(separator);
         }
         hbox.getChildren().add(new Oproep(naam, vak, email));
-        twoBrains.getSocket().oproep(vak, email, naam);
+        final String all = twoBrains.getSocket().oproep(vak, email, naam);
     }
 
     @Override

@@ -170,12 +170,14 @@ public class TwoBrainsSocket extends Socket {
         return getInputStream().readUTF();
     }
 
-    public void oproep(final String vak, final String email, final String naam) {
+    public String oproep(final String vak, final String email, final String naam) {
         try {
             getOutputStream().writeUTF("Oproep:;" + vak + ":" + email + ":" + naam);
+            return getInputStream().readUTF();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "";
     }
 
     public ArrayList<String> getMatches(final String user) throws IOException {
