@@ -52,7 +52,7 @@ public class InfoHandlerTest {
         LoginHandler testLoginHandler = new LoginHandler();
         Database testDatabase = null;
         try {
-            testDatabase = Database.parse(Server.RESOURCES + "/database.json");
+            testDatabase = Database.parse(Server.RESOURCES + "/TestDatabase.json");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -81,7 +81,7 @@ public class InfoHandlerTest {
         LoginHandler testLoginHandler = new LoginHandler();
         Database testDatabase = null;
         try {
-            testDatabase = Database.parse(Server.RESOURCES + "/database.json");
+            testDatabase = Database.parse(Server.RESOURCES + "/TestDatabase.json");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {

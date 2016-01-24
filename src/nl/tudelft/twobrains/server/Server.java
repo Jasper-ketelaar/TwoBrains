@@ -20,6 +20,8 @@ public class Server {
     static {
         RESOURCES = System.getProperty("user.dir") + "/.TwoBrains/resources";
         IMAGES = RESOURCES + "/images/";
+
+
     }
 
     private final ServerSocket server;
@@ -62,6 +64,7 @@ public class Server {
         this.database.write(file.getPath());
 
     }
+
 
     public Server(final Database test) {
         this.database = test;

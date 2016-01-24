@@ -2,6 +2,7 @@ package nl.tudelft.twobrains.client.model.socket;
 
 import nl.tudelft.twobrains.client.model.Gebruiker;
 import org.json.simple.JSONObject;
+import org.omg.IOP.IOR;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -170,14 +171,10 @@ public class TwoBrainsSocket extends Socket {
         return getInputStream().readUTF();
     }
 
-    public String oproep(final String vak, final String email, final String naam) {
-        try {
-            getOutputStream().writeUTF("Oproep:;" + vak + ":" + email + ":" + naam);
-            return getInputStream().readUTF();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
+    public String oproep(final String vak, final String email, final String naam) throws IOException {
+
+        getOutputStream().writeUTF("Oproep:;" + vak + ":" + email + ":" + naam);
+        return getInputStream().readUTF();
     }
 
     public ArrayList<String> getMatches(final String user) throws IOException {
