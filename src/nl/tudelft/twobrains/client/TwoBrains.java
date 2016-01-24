@@ -2,6 +2,7 @@ package nl.tudelft.twobrains.client;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -79,6 +80,7 @@ public class TwoBrains extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Platform.setImplicitExit(false);
         this.stage = primaryStage;
 
 

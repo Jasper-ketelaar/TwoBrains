@@ -54,7 +54,6 @@ public class Gebruiker {
 
     public static Gebruiker parse(final String email, final String data) throws ParseException {
         final JSONParser parser = new JSONParser();
-
         final JSONObject obj = (JSONObject) parser.parse(data);
         return new Gebruiker(email, obj);
 

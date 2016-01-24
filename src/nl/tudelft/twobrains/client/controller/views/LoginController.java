@@ -72,7 +72,7 @@ public class LoginController extends AbstractController {
         password.requestFocus();
     }
 
-    public void register(final ActionEvent evt) {
+    public void register(final ActionEvent evt) throws Exception {
         twoBrains.show(twoBrains.getRegisterScene());
     }
 

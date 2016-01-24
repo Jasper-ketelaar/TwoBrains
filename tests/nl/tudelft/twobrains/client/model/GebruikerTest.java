@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 import nl.tudelft.twobrains.server.Server;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -146,7 +147,11 @@ public class GebruikerTest {
 
         testGebruiker.setConnection(testTwoBrainsSocket);
 
-        testGebruiker.disconnect();
+        try {
+            testGebruiker.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         assertTrue(testGebruiker.isConnected());
 
 
@@ -166,16 +171,21 @@ public class GebruikerTest {
         testdata.put("Locatie", "Delft");
 
 
-        Gebruiker koen = Gebruiker.parse("kvanzeijl@hotmail.com", "{\n" +
-                "    \"Voornaam\": \"Koen\",\n" +
-                "    \"Achternaam\": \"Zeijl\",\n" +
-                "    \"Geslacht\": \"M\",\n" +
-                "    \"Leeftijd\": \"18\",\n" +
-                "    \"Wachtwoord\": \"000000\",\n" +
-                "    \"Opleiding\": \"Informatica\",\n" +
-                "    \"Vakken\": \"Calculus\",\n" +
-                "    \"Locatie\": \"Delft\"\n" +
-                "  }");
+        Gebruiker koen = null;
+        try {
+            koen = Gebruiker.parse("kvanzeijl@hotmail.com", "{\n" +
+                    "    \"Voornaam\": \"Koen\",\n" +
+                    "    \"Achternaam\": \"Zeijl\",\n" +
+                    "    \"Geslacht\": \"M\",\n" +
+                    "    \"Leeftijd\": \"18\",\n" +
+                    "    \"Wachtwoord\": \"000000\",\n" +
+                    "    \"Opleiding\": \"Informatica\",\n" +
+                    "    \"Vakken\": \"Calculus\",\n" +
+                    "    \"Locatie\": \"Delft\"\n" +
+                    "  }");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         assertFalse(koen.equals(testGebruiker));
     }

@@ -6,6 +6,7 @@ import nl.tudelft.twobrains.client.model.socket.TwoBrainsSocket;
 import nl.tudelft.twobrains.server.Server;
 import nl.tudelft.twobrains.server.model.Database;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -29,6 +30,10 @@ public class ClientHandlerTest extends TestCase {
                     sr = new Server(4444);
                     sr.run();
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

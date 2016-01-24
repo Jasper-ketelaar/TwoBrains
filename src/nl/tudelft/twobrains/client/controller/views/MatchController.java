@@ -1,11 +1,10 @@
 package nl.tudelft.twobrains.client.controller.views;
 
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -14,7 +13,6 @@ import nl.tudelft.twobrains.client.controller.AbstractController;
 import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.client.view.match.comp.UserBox;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -24,19 +22,17 @@ import java.util.ResourceBundle;
  */
 public class MatchController extends AbstractController {
 
+    private final ArrayList<String> matchCache = new ArrayList<>();
+    private final TwoBrains twoBrains;
     @FXML
     private TextField filter;
-
     @FXML
     private VBox vBox;
-
-    private final ArrayList<String> matchCache = new ArrayList<>();
-
-    private final TwoBrains twoBrains;
 
     /**
      * Class constructor specificeren welke TwoBrains. De MatchController
      * wordt zo aan een specifieke TwoBrains app gekoppeld.
+     *
      * @param twoBrains
      */
     public MatchController(final TwoBrains twoBrains) {
@@ -95,8 +91,8 @@ public class MatchController extends AbstractController {
      * Methode die de URL en de ResourceBundle specificeerd voor
      * het opstarten van deze controller.
      *
-     * @param location De locatie URL waarna de controller moet
-     *                 reageren.
+     * @param location  De locatie URL waarna de controller moet
+     *                  reageren.
      * @param resources De resources die worden door de controller.
      */
     @Override
@@ -104,44 +100,51 @@ public class MatchController extends AbstractController {
 
     }
 
-    public void update(final ArrayList<String> matches) throws  Exception{
+   /* public void update(final ArrayList<String> matches) throws Exception {
         final String self = twoBrains.getGebruiker().getEmail();
         for (final String match : matches) {
             final String extr[] = match.replace(self, "").split(":");
             final String matchee = extr[0].length() > extr[1].length() ? extr[0] : extr[1];
-            System.out.println(matchee);
             if (!matchCache.contains(matchee)) {
                 matchCache.add(matchee);
-                if(vBox.getChildren().size() > 0) {
+                if (vBox.getChildren().size() > 0) {
                     vBox.getChildren().add(new Separator());
                 }
+                System.out.println(matchee + "X");
                 vBox.getChildren().add(new UserBox(twoBrains.getSocket().verkrijgInfo(matchee)));
             }
         }
-    }
+    }*/
+
     /**
      * Methode voor het initialiseren van de users in de MatchScene.
      */
     @Override
-    public void initItems() throws Exception{
+    public void initItems() throws Exception {
         vBox.setFocusTraversable(false);
-        update(twoBrains.getSocket().getMatches(twoBrains.getGebruiker().getEmail()));
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        update(twoBrains.getSocket().getMatches(twoBrains.getGebruiker().getEmail()));
+        new Thread(() -> {
+            while (true) {
+                try {
+                    final ArrayList<String> matches = twoBrains.getSocket().getMatches(twoBrains.getGebruiker().getEmail());
+                    System.out.println(matches.size());
+                    for (final String string : matches) {
+
+                        final String email = string.split(":")[0];
+                        if (!matchCache.contains(email)) {
+                            final String data = string.replace(email + ":", "");
+                            System.out.println(email);
+                            System.out.println(data);
+                            final Gebruiker gebruiker = Gebruiker.parse(email, data);
+                            gebruiker.setConnection(twoBrains.getSocket());
+                            Platform.runLater(() -> vBox.getChildren().add(new UserBox(gebruiker)));
+                            matchCache.add(email);
+                        }
                     }
-                    catch(Exception e){
-                        e.printStackTrace();
-                    }
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Thread.sleep(5000);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
             }
         }).start();
 

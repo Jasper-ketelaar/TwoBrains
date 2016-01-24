@@ -1,8 +1,5 @@
 package nl.tudelft.twobrains.client.model.socket;
 
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.image.ImageView;
 import nl.tudelft.twobrains.client.model.Gebruiker;
 import org.json.simple.JSONObject;
 
@@ -18,6 +15,7 @@ import java.util.TimerTask;
 
 //TODO: Bepaalde server utils schrijven zoals gebruikers gegevens aanvragen
 public class TwoBrainsSocket extends Socket {
+
 
     /**
      * Maakt 3 attributen aan
@@ -81,7 +79,6 @@ public class TwoBrainsSocket extends Socket {
             final byte[] imageB = new byte[size];
             input.read(imageB);
             final BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageB));
-
             images.put(file, image);
 
         }
@@ -106,7 +103,6 @@ public class TwoBrainsSocket extends Socket {
     }
 
     public Gebruiker verkrijgInfo(final String email) throws Exception {
-
         getOutputStream().writeUTF("Info:;" + email);
         final String response = getInputStream().readUTF();
         if (!response.equals("Email bestaat niet")) {
@@ -115,6 +111,7 @@ public class TwoBrainsSocket extends Socket {
             return info;
         }
         return null;
+
     }
 
 
@@ -170,8 +167,6 @@ public class TwoBrainsSocket extends Socket {
         }, 5000);
 
         return getInputStream().readUTF();
-
-
     }
 
     public ArrayList<String> getMatches(final String user) throws IOException {
@@ -180,13 +175,8 @@ public class TwoBrainsSocket extends Socket {
 
         getOutputStream().writeUTF("Match:;" + user);
         while (getInputStream().available() != 0) {
-            System.out.println("Test");
             matches.add(getInputStream().readUTF());
-
-
-            return matches;
         }
-
         return matches;
     }
 }

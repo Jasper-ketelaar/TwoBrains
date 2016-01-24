@@ -40,7 +40,11 @@ public class ImageHandlerTest {
             e.printStackTrace();
         }
 
-        testImageHandler.onClientEvent(testClientEvent, dataOutputStream, new Server(testDatabase));
+        try {
+            testImageHandler.onClientEvent(testClientEvent, dataOutputStream, new Server(testDatabase));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }

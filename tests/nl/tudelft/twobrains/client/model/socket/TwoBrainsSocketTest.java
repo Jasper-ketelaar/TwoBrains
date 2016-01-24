@@ -3,6 +3,7 @@ package nl.tudelft.twobrains.client.model.socket;
 import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.server.Server;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
@@ -30,9 +31,15 @@ public class TwoBrainsSocketTest {
 
             while (true) {
                 try {
-                    server = new Server(8887);
+                    try {
+                        server = new Server(8887);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     server.run();
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -70,7 +77,12 @@ public class TwoBrainsSocketTest {
 
 
         final TwoBrainsSocket testTwoBrainsSocket = new TwoBrainsSocket("127.0.0.1", 8887);
-        Gebruiker k = testTwoBrainsSocket.login("testEmail", "testWachtwoord");
+        Gebruiker k = null;
+        try {
+            k = testTwoBrainsSocket.login("testEmail", "testWachtwoord");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertEquals(k, null);
     }
 

@@ -36,6 +36,7 @@ public class InfoHandler implements ClientListener {
             if (server.getDatabase().containsKey(evt.getArguments())) {
                 final Gebruiker gebruiker = server.getDatabase().get(evt.getArguments());
                 responseStream.writeUTF(gebruiker.getJSONString());
+                responseStream.flush();
             } else {
                 responseStream.writeUTF("Email bestaat niet");
             }

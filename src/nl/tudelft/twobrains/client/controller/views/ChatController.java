@@ -71,7 +71,7 @@ public class ChatController extends AbstractController {
         message.requestFocus();
     }
 
-    public void goMatchPage(ActionEvent evt) {
+    public void goMatchPage(ActionEvent evt) throws Exception {
         Verstuurder.show(Verstuurder.getRegisterScene());
     }
 

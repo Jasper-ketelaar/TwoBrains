@@ -39,7 +39,11 @@ public class ServerTest extends TestCase {
         // testServer3 = new Server();
 
         new Thread(() -> {
-            testServer2.run();
+            try {
+                testServer2.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }).start();
 
 
@@ -59,7 +63,7 @@ public class ServerTest extends TestCase {
     }
 
     @Test
-    public void testGetSocket() throws IOException {
+    public void testGetSocket() throws IOException, ParseException {
         testServer1 = new Server(6543);
 
 
@@ -76,7 +80,11 @@ public class ServerTest extends TestCase {
 
         testServer2 = new Server(db, 1234);
         new Thread(() -> {
-            testServer2.run();
+            try {
+                testServer2.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }).start();
         Socket sk = new Socket("127.0.0.1", 1234);
@@ -88,7 +96,11 @@ public class ServerTest extends TestCase {
     }
 
     public void testClose() throws IOException {
-        testServer2 = new Server(1234);
+        try {
+            testServer2 = new Server(1234);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         final ServerSocket testServ = testServer2.getSocket();
         testServer2.close();
 
@@ -102,7 +114,11 @@ public class ServerTest extends TestCase {
 
         testServer2 = new Server(null, 1234);
         new Thread(() -> {
-            testServer2.run();
+            try {
+                testServer2.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }).start();
         Socket sk = new Socket("127.0.0.1", 1234);

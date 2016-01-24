@@ -125,7 +125,7 @@ public class RegisterController extends AbstractController implements EventHandl
      * Indien het object geinitialiseerd is, krijgt de user te zien dat het gelukt is dmv de string "succes"
      */
     @FXML
-    public void register(final ActionEvent evt) throws IOException {
+    public void register(final ActionEvent evt) throws Exception {
         final String emailText = textFields.get("Email").getTextField().getText();
         final String voornaamText = textFields.get("Voornaam").getTextField().getText();
         final String achternaamText = textFields.get("Achternaam").getTextField().getText();
@@ -214,7 +214,7 @@ public class RegisterController extends AbstractController implements EventHandl
      *
      * @param evt
      */
-    public void annuleer(final ActionEvent evt) {
+    public void annuleer(final ActionEvent evt) throws Exception {
         twoBrains.show(twoBrains.getLoginScene());
     }
 
