@@ -38,11 +38,15 @@
             </CheckBox>
             <ComboBox fx:id="vak" layoutX="897.0" layoutY="46.0" prefHeight="26.0" prefWidth="343.0" />
             <Button layoutX="897.0" layoutY="82.0" mnemonicParsing="false" onAction="#oproep" prefHeight="26.0" prefWidth="343.0" text="Doe een dringende oproep voor dit vak" />
+            <Button layoutX="950.0" layoutY="160.0" mnemonicParsing="false" onAction="#ververs" prefHeight="26.0" prefWidth="250.0" text="Ververs oproepen" />
          </children>
       </Pane>
       <ScrollPane fitToHeight="true" prefViewportHeight="210.0" prefViewportWidth="1280.0">
          <content>
             <HBox fx:id="hbox" prefHeight="210.0">
+               <children>
+                  
+               </children>
             </HBox>
          </content>
       </ScrollPane>

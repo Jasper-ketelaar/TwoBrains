@@ -23,7 +23,7 @@ public class OproepHandler implements ClientListener {
             final JSONParser parser = new JSONParser();
             final File oproepen = new File(Server.RESOURCES + "/oproep.json");
             final JSONObject object = (JSONObject) parser.parse(new FileReader(oproepen));
-            if (args.equals("")) {
+            if (args.equals(" ")) {
                 responseStream.writeUTF(object.toJSONString());
             } else {
                 final JSONObject nieuw = new JSONObject();
