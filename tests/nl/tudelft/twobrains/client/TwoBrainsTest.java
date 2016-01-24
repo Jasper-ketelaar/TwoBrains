@@ -29,11 +29,8 @@ public class TwoBrainsTest {
 
     static {
         ClientTestDatabases = System.getProperty("user.dir") + "/tests/nl/tudelft/twobrains/client/model/TestFiles/DatabaseTestFiles/TestDatabase.json";
-
-
-        final File file = new File(ClientTestDatabases);
         try {
-            testDatabase = Database.parse(file.getPath());
+            testDatabase = Database.parse(ClientTestDatabases);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,19 +51,16 @@ public class TwoBrainsTest {
             }
         }).start();
 
-        try {
-            testTwoBrains = new TwoBrains(7003);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
 
     @Test
-    public void testMatchScene() throws IOException {
-
+    public void testMatchScene() throws Exception {
+        TwoBrains testTwoBrains = new TwoBrains(7003);
 
         SceneWrapper testRet = new SceneWrapper("match", new MatchController(testTwoBrains));
+        testTwoBrains.getSocket().close();
         assertTrue(testTwoBrains.getMatchScene().getScene().equals(testRet.getScene()));
     }
 
@@ -75,42 +69,55 @@ public class TwoBrainsTest {
 
 
         SceneWrapper testRet = new SceneWrapper("registreer", new MatchController(testTwoBrains));
+        testTwoBrains.getSocket().close();
         assertTrue(testTwoBrains.getRegisterScene().getScene().equals(testRet.getScene()));
     }
 
     @Test
-    public void testLoginScene() throws IOException {
-
+    public void testLoginScene() throws Exception {
+        TwoBrains testTwoBrains = new TwoBrains(7003);
 
         SceneWrapper testRet = new SceneWrapper("login", new MatchController(testTwoBrains));
+        testTwoBrains.getSocket().close();
         assertTrue(testTwoBrains.getLoginScene().getScene().equals(testRet.getScene()));
     }
 
     @Test
-    public void testTabScene() throws IOException {
-
+    public void testTabScene() throws Exception {
+        TwoBrains testTwoBrains = new TwoBrains(7003);
 
         SceneWrapper testRet = new SceneWrapper("tabs", new MatchController(testTwoBrains));
+        testTwoBrains.getSocket().close();
         assertTrue(testTwoBrains.getTabScene().getScene().equals(testRet.getScene()));
     }
 
     @Test
-    public void testHomeScene() throws IOException {
-
+    public void testHomeScene() throws Exception {
+        TwoBrains testTwoBrains = new TwoBrains(7003);
 
         SceneWrapper testRet = new SceneWrapper("home", new MatchController(testTwoBrains));
+
+        testTwoBrains.getSocket().close();
         assertTrue(testTwoBrains.getHomeScene().getScene().equals(testRet.getScene()));
     }
 
     @Test
-    public void testStage() {
+    public void testStage() throws Exception {
+        TwoBrains testTwoBrains = new TwoBrains(7003);
+
+
         Stage testStage = new Stage();
         testTwoBrains.setStage(testStage);
+
+        testTwoBrains.getSocket().close();
         assertTrue(testTwoBrains.getStage().equals(testStage));
+
+
     }
 
     @Test
-    public void testGebruiker() {
+    public void testGebruiker() throws Exception {
+        TwoBrains testTwoBrains = new TwoBrains(7003);
 
         final JSONObject user = new JSONObject();
         user.put("Voornaam", "testLeroy");
@@ -126,7 +133,27 @@ public class TwoBrainsTest {
 
 
         testTwoBrains.setGebruiker(testGebruiker);
+
+        testTwoBrains.getSocket().close();
         assertTrue(testTwoBrains.getGebruiker().equals(testGebruiker));
+    }
+
+    @Test
+    public void testSocket() throws Exception {
+        TwoBrains testTwoBrains = new TwoBrains(7003);
+
+        TwoBrainsSocket testSocket = new TwoBrainsSocket("127.0.0.1", 7003);
+
+        TwoBrainsSocket testReturn = testTwoBrains.getSocket();
+
+        int IDReturn = testReturn.getPort();
+        int IDTest = testSocket.getPort();
+
+        testSocket.close();
+        testTwoBrains.getSocket().close();
+        testReturn.close();
+        assertTrue(IDReturn == IDTest);
+
     }
 
 

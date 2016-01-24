@@ -66,10 +66,11 @@ public class TwoBrains extends Application {
     }
 
     /**
-     *
      * @param socket wordt de nieuwe TwoBrainsSocket
      */
-
+    public void setSocket(TwoBrainsSocket Socket) {
+        this.socket = Socket;
+    }
 
     /**
      * Alle Scene's worden geladen en geinitialiseerd.
