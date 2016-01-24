@@ -96,7 +96,7 @@ public class MatchTest {
         Match l = new Match(email, email2, score1);
         Match k = new Match(email, email2, score2);
 
-        assertTrue(k.equals(l));
+        assertFalse(k.equals(l));
     }
 
     @Test
