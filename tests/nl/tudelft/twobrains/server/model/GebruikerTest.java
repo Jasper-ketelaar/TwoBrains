@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -225,6 +227,7 @@ public class GebruikerTest {
     public void testEqualsFalse() {
         assertFalse(test1.equals(test2));
     }
+
 
 
 }

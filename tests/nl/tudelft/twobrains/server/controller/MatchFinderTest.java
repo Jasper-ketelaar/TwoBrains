@@ -44,11 +44,11 @@ public class MatchFinderTest {
         testMatch.getMatchesForUser("ibuddyh@gmail.com");
 
         final String email = "ibuddyh@gmail.com";
-        final String email2 = "jasperketelaar@kpnmail.nl";
+        final String email2 = "Jasperketelaar@kpnmail.nl";
         final double score = 2.2;
 
         Match l = new Match(email, email2, score);
-        ArrayList<Match> am = new ArrayList<Match>();
+        ArrayList<Match> am = new ArrayList<>();
         am.add(l);
 
         assertEquals(testMatch.getMatchesForUser("ibuddyh@gmail.com"), am);
