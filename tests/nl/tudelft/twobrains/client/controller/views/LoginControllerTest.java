@@ -9,12 +9,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * GUI
  * Created by Budi on 09/12/2015.
  */
 public class LoginControllerTest {
 
     @Test
-    public void loginControllerTest(){
+    public void loginControllerTest() throws Exception{
         LoginController loginController = new LoginController(new TwoBrains());
     }
 

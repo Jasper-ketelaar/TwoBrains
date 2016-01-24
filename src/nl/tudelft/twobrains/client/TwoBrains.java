@@ -96,17 +96,28 @@ public class TwoBrains extends Application {
         primaryStage.show();
     }
 
-    public void TwoBrains() throws Exception {
+    public TwoBrains() throws Exception {
 
 
         this.loginScene = new SceneWrapper("login", new LoginController(this));
         this.matchScene = new SceneWrapper("match", new MatchController(this));
         this.registerScene = new SceneWrapper("registreer", new RegisterController(this), getClass().getResource("view/registreer/registreer.css").toExternalForm());
         this.tabScene = new SceneWrapper("tabs", new TabsController(this));
+        this.homeScene = new SceneWrapper("home", new HomeController(this));
 
         this.socket = new TwoBrainsSocket("127.0.0.1", 4444);
 
 
+    }
+
+    public TwoBrains(int port) throws Exception {
+        this.loginScene = new SceneWrapper("login", new LoginController(this));
+        this.matchScene = new SceneWrapper("match", new MatchController(this));
+        this.registerScene = new SceneWrapper("registreer", new RegisterController(this), getClass().getResource("view/registreer/registreer.css").toExternalForm());
+        this.tabScene = new SceneWrapper("tabs", new TabsController(this));
+        this.homeScene = new SceneWrapper("home", new HomeController(this));
+
+        this.socket = new TwoBrainsSocket("127.0.0.1", port);
     }
 
 
@@ -164,6 +175,10 @@ public class TwoBrains extends Application {
      */
     public Stage getStage() {
         return this.stage;
+    }
+
+    public void setStage(Stage Stage) {
+        this.stage = Stage;
     }
 
     /**
