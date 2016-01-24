@@ -171,28 +171,22 @@ public class TwoBrainsSocket extends Socket {
         return getInputStream().readUTF();
     }
 
-<<<<<<< HEAD
     public String oproep(final String vak, final String email, final String naam) {
         try {
-            if(vak.equals("")) {
+            if (vak.equals("")) {
                 getOutputStream().writeUTF("Oproep:; ");
             } else {
                 getOutputStream().writeUTF("Oproep:;" + vak + ":" + email + ":" + naam);
             }
-            final String output =  getInputStream().readUTF();
+            final String output = getInputStream().readUTF();
             System.out.println(output);
             return output;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return "";
-=======
-    public String oproep(final String vak, final String email, final String naam) throws IOException {
-
-        getOutputStream().writeUTF("Oproep:;" + vak + ":" + email + ":" + naam);
-        return getInputStream().readUTF();
->>>>>>> origin/master
     }
+    
 
     public ArrayList<String> getMatches(final String user) throws IOException {
         final ArrayList<String> matches = new ArrayList<>();
