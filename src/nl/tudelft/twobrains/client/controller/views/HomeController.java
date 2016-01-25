@@ -17,6 +17,9 @@ import nl.tudelft.twobrains.client.TwoBrains;
 import nl.tudelft.twobrains.client.controller.AbstractController;
 import nl.tudelft.twobrains.client.model.Gebruiker;
 import nl.tudelft.twobrains.client.view.home.comp.Oproep;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -59,17 +62,41 @@ public class HomeController extends AbstractController {
         ((TabsController)twoBrains.getTabScene().getController()).getMatches().disableProperty().setValue(!opZoek.isSelected());
     }
 
-    public void oproep(final ActionEvent e) throws IOException {
+    public void oproep(final ActionEvent e) throws IOException, ParseException {
+        hbox.getChildren().clear();
         final String vak = this.vak.getSelectionModel().getSelectedItem().toString();
         final String email = twoBrains.getGebruiker().getEmail();
         final String naam = twoBrains.getGebruiker().getVoornaam() + " " + twoBrains.getGebruiker().getAchternaam();
-        if(hbox.getChildren().size() > 0) {
-            final Separator separator = new Separator(Orientation.VERTICAL);
-            separator.setPadding(new Insets(0, 20, 0, 20));
-            hbox.getChildren().add(separator);
-        }
-        hbox.getChildren().add(new Oproep(naam, vak, email));
         final String all = twoBrains.getSocket().oproep(vak, email, naam);
+        final JSONParser parser = new JSONParser();
+        final JSONObject object = (JSONObject) parser.parse(all);
+        for (final Object key: object.keySet()) {
+            final JSONObject data = (JSONObject) object.get(key);
+            final Oproep oproep = new Oproep(data.get("Naam").toString(), data.get("Vak").toString(), key.toString());
+            if(hbox.getChildren().size() > 0) {
+                final Separator separator = new Separator(Orientation.VERTICAL);
+                separator.setPadding(new Insets(0, 50, 0, 50));
+                hbox.getChildren().add(separator);
+            }
+            hbox.getChildren().add(oproep);
+        }
+    }
+
+    public void ververs(final ActionEvent e) throws ParseException {
+        hbox.getChildren().clear();
+        final String all = twoBrains.getSocket().oproep("", "", "");
+        final JSONParser parser = new JSONParser();
+        final JSONObject object = (JSONObject) parser.parse(all);
+        for (final Object key: object.keySet()) {
+            final JSONObject data = (JSONObject) object.get(key);
+            final Oproep oproep = new Oproep(data.get("Naam").toString(), data.get("Vak").toString(), key.toString());
+            if(hbox.getChildren().size() > 0) {
+                final Separator separator = new Separator(Orientation.VERTICAL);
+                separator.setPadding(new Insets(0, 50, 0, 50));
+                hbox.getChildren().add(separator);
+            }
+            hbox.getChildren().add(oproep);
+        }
     }
 
     @Override
@@ -80,7 +107,7 @@ public class HomeController extends AbstractController {
         final WritableImage writableImage = new WritableImage(bImage.getWidth(), bImage.getHeight());
         final Image image = SwingFXUtils.toFXImage(bImage, writableImage);
         this.image.setImage(image);
-
+        this.ververs(null);
         text.setText("Welkom op de home pagina, " + gebruiker.getVoornaam() + "!\r\n" +
                     "Hier kun je aangeven dat je op zoek bent naar een huiswerk maatje en je kunt dringende opzoeken doen \r\n" +
                 "voor het geval je snel een partner nodig hebt! ");

@@ -3,10 +3,10 @@
 "Geslacht":"M","Leeftijd":"18","Voornaam":"Koen","Achternaam":"Zeijl","Wachtwoord":"000000","Locatie":"Delft","Vakken":"Calculus","Opleiding":"Informatica"}
 ,"kevinvanheel94@hotmail.com ":{
 "Geslacht":"M","Leeftijd":"21","Voornaam":"Kevin","Achternaam":"van Heel","Wachtwoord":"Test001","Locatie":"Rotterdam","Vakken":"Redeneren&Logica","Opleiding":"Informatica"}
-,"Jasperketelaar@kpnmail.nl":{
-"Geslacht":"Man","Leeftijd":"-1","Voornaam":"Jasper","Achternaam":"Ketelaar","Wachtwoord":"Jasper01","Locatie":"Delft","Vakken":"Calculus","Opleiding":"Technische Informatica"}
+,"Test@hotmail.com":{
+"Geslacht":"Man","Leeftijd":"18","Voornaam":"Test","Achternaam":"Test","Wachtwoord":"Test123","Locatie":"Delft","Vakken":"R&L","Opleiding":"Technische Informatica"}
 ,"Jasper.ketelaar@hotmail.com":{
-"Geslacht":"Man","Leeftijd":"18","Voornaam":"Jasper","Achternaam":"Ketelaar","Wachtwoord":"Jasper01","Locatie":"Delft","Vakken":"Calculus","Opleiding":"Technische Informatica"}
+"Geslacht":"Man","Leeftijd":"18","Voornaam":"Jasper","Achternaam":"Ketelaar","Wachtwoord":"Jasper01","Locatie":"Delft","Vakken":"Calculus, OOP","Opleiding":"Technische Informatica"}
 ,"ibuddyh@gmail.com":{
 "Geslacht":"M","Leeftijd":"21","Voornaam":"Budi","Achternaam":"Han","Wachtwoord":"000000","Locatie":"Delft","Vakken":"Calculus","Opleiding":"Informatica"}
 }

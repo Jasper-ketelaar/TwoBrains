@@ -20,12 +20,12 @@ public class Oproep extends Pane {
         final Label oproepLabel = new Label("Dringende oproep voor: " + vak);
         oproepLabel.setLayoutX(6);
         oproepLabel.setLayoutY(89);
-        oproepLabel.setFont(Font.font(17));
+        oproepLabel.setFont(Font.font(16));
 
         final Label emailLabel = new Label("Email adres: " + email);
         emailLabel.setLayoutX(6);
         emailLabel.setLayoutY(122);
-        emailLabel.setFont(Font.font(17));
+        emailLabel.setFont(Font.font(16));
 
         this.getChildren().addAll(naamLabel, oproepLabel, emailLabel);
     }
